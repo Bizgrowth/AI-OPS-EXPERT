@@ -10,6 +10,7 @@ import Contact from './Contact';
 import ServiceDetail from './ServiceDetail';
 import BlogSection from './BlogSection';
 import NewsletterAdmin from './NewsletterAdmin';
+import ChatbotToggle from './ChatbotToggle';
 
 const Router = () => {
   const [currentRoute, setCurrentRoute] = useState('home');
@@ -101,6 +102,7 @@ const Router = () => {
       <Results />
       <CTA />
       <Contact />
+      <ChatbotToggle />
     </div>
   );
 };
