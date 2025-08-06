@@ -27,10 +27,7 @@ const ChatbotToggle: React.FC = () => {
           {isOpen ? (
             <X className="w-6 h-6 transition-transform duration-300 group-hover:rotate-90" />
           ) : (
-            <>
-              <MessageCircle className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
-              <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-spin" />
-            </>
+            <MessageCircle className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
           )}
         </button>
       </div>
