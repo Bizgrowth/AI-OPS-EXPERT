@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form - Hidden for Netlify</title>
+</head>
+<body>
+    <!-- This form is hidden and used only for Netlify form detection -->
+    <form name="ai-consultation" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="firstName" />
+        <input type="text" name="lastName" />
+        <input type="email" name="email" />
+        <input type="text" name="company" />
+        <select name="service">
+            <option value="">Select an AI solution...</option>
+            <option value="ai-strategy">AI Strategy & Implementation</option>
+            <option value="intelligent-automation">Intelligent Process Automation</option>
+            <option value="ai-analytics">AI Analytics & Insights</option>
+            <option value="custom-ai">Custom AI Development</option>
+            <option value="ai-consultation">General AI Consultation</option>
+            <option value="other">Other</option>
+        </select>
+        <textarea name="message"></textarea>
+        <div netlify-recaptcha></div>
+    </form>
+</body>
+</html>
