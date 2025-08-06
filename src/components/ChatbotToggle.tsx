@@ -14,25 +14,25 @@ const ChatbotToggle: React.FC = () => {
       {/* Floating Chat Button */}
       <div className="fixed bottom-6 right-6 z-40">
         {/* Pulsing ring animation */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-ping opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-pulse opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-ping opacity-20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-pulse opacity-30 pointer-events-none"></div>
         
-      <button
-        onClick={toggleChatbot}
+        <button
+          onClick={toggleChatbot}
           className={`relative w-14 h-14 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 flex items-center justify-center hover:scale-125 group ${
             isOpen ? 'rotate-180 scale-110' : 'animate-bounce'
-        }`}
+          }`}
           title="Chat with ARIA - AI Assistant"
-      >
-        {isOpen ? (
+        >
+          {isOpen ? (
             <X className="w-6 h-6 transition-transform duration-300 group-hover:rotate-90" />
-        ) : (
+          ) : (
             <>
               <MessageCircle className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
               <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-spin" />
             </>
-        )}
-      </button>
+          )}
+        </button>
       </div>
 
       {/* Chatbot Component */}
