@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Bot, User, Minimize2 } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Minimize2, Zap, Heart, Star } from 'lucide-react';
 
 interface Message {
   id: string;
   text: string;
   sender: 'user' | 'bot';
   timestamp: Date;
+  emotion?: 'happy' | 'thinking' | 'excited' | 'helpful';
 }
 
 interface ChatbotProps {
@@ -17,13 +18,16 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I'm Daniel's AI assistant. I can help answer questions about AI operations, services, pricing, and implementation. What would you like to know?",
+      text: "Hi there! I'm ARIA, Daniel's AI Operations Assistant! 🤖✨ I'm here to help you discover how AI can transform your business. What would you like to explore today?",
       sender: 'bot',
-      timestamp: new Date()
+      timestamp: new Date(),
+      emotion: 'happy'
     }
   ]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [robotEmotion, setRobotEmotion] = useState<'idle' | 'happy' | 'thinking' | 'excited' | 'talking'>('happy');
+  const [showParticles, setShowParticles] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -34,70 +38,99 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
     scrollToBottom();
   }, [messages]);
 
-  const getAIResponse = (userMessage: string): string => {
+  // Robot animation cycle
+  useEffect(() => {
+    if (!isTyping && robotEmotion !== 'thinking') {
+      const emotions: Array<'idle' | 'happy' | 'excited'> = ['idle', 'happy', 'excited'];
+      const interval = setInterval(() => {
+        setRobotEmotion(emotions[Math.floor(Math.random() * emotions.length)]);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isTyping, robotEmotion]);
+
+  const triggerParticles = () => {
+    setShowParticles(true);
+    setTimeout(() => setShowParticles(false), 2000);
+  };
+
+  const getAIResponse = (userMessage: string): { text: string; emotion: 'happy' | 'thinking' | 'excited' | 'helpful' } => {
     const message = userMessage.toLowerCase();
     
     // Pricing questions
     if (message.includes('price') || message.includes('cost') || message.includes('pricing') || message.includes('how much')) {
-      return "Great question! My AI solutions are priced based on complexity and value delivered:\n\n• AI Strategy & Implementation: $2,500-$15,000\n• Process Automation: $1,500-$8,000\n• Custom AI Development: $5,000-$25,000\n• AI Analytics & Insights: $3,000-$12,000\n• AI Customer Experience: $2,000-$8,000\n• AI-Enhanced Web Solutions: $1,500-$10,000\n\nMost clients see 300-500% ROI within 90 days. Would you like to schedule a free consultation to get a personalized quote?";
+      return {
+        text: "💰 Excellent question! Daniel's AI solutions are investment-focused with guaranteed ROI:\n\n🎯 **AI Strategy & Implementation:** $2,500-$15,000\n🤖 **Process Automation:** $1,500-$8,000\n🔧 **Custom AI Development:** $5,000-$25,000\n📊 **AI Analytics & Insights:** $3,000-$12,000\n💬 **AI Customer Experience:** $2,000-$8,000\n🌐 **AI-Enhanced Web Solutions:** $1,500-$10,000\n\n✨ **Most clients see 300-500% ROI within 90 days!** Ready for a personalized quote? Let's schedule your free consultation! 🚀",
+        emotion: 'excited'
+      };
     }
     
     // Services questions
     if (message.includes('service') || message.includes('what do you do') || message.includes('help')) {
-      return "Daniel specializes in 8 core AI solution areas:\n\n1. **AI Strategy & Implementation** - Comprehensive roadmaps and strategic plans\n2. **Intelligent Process Automation** - AI-driven automation systems\n3. **AI Analytics & Insights** - Advanced analytics and business intelligence\n4. **AI Customer Experience Systems** - Intelligent customer service solutions\n5. **AI-Enhanced Web Solutions** - Smart websites with AI capabilities\n6. **Custom AI Development** - Bespoke AI applications\n7. **AI Performance Optimization** - Continuous system optimization\n8. **AI-Powered Workflow Optimization** - Eliminate bottlenecks and maximize efficiency\n\nEach solution is custom-implemented with ongoing support. Which area interests you most?";
+      return {
+        text: "🎉 Daniel specializes in 8 powerful AI solution areas:\n\n1. 🧠 **AI Strategy & Implementation** - Comprehensive roadmaps\n2. ⚡ **Intelligent Process Automation** - Smart automation systems\n3. 📈 **AI Analytics & Insights** - Advanced business intelligence\n4. 💬 **AI Customer Experience Systems** - Intelligent support\n5. 🌐 **AI-Enhanced Web Solutions** - Smart websites with AI\n6. 🔧 **Custom AI Development** - Bespoke applications\n7. 🎯 **AI Performance Optimization** - Continuous improvement\n8. 🔄 **AI-Powered Workflow Optimization** - Eliminate bottlenecks\n\n✨ Each solution is custom-built with ongoing support! Which area excites you most? 🤔",
+        emotion: 'helpful'
+      };
     }
     
     // Timeline questions
     if (message.includes('time') || message.includes('long') || message.includes('timeline') || message.includes('when')) {
-      return "Implementation timelines vary by solution complexity:\n\n• **Simple AI tools:** 1-3 days\n• **Process automation:** 1-2 weeks\n• **Custom AI systems:** 2-8 weeks\n• **Full AI transformation:** 2-3 months\n• **AI Strategy & Planning:** 1-2 weeks\n\nMost clients start seeing measurable results within the first week! Daniel personally manages every implementation. What type of solution are you considering?";
+      return {
+        text: "⏰ Great question! Implementation timelines vary by complexity:\n\n🚀 **Simple AI tools:** 1-3 days\n⚙️ **Process automation:** 1-2 weeks\n🔧 **Custom AI systems:** 2-8 weeks\n🏢 **Full AI transformation:** 2-3 months\n📋 **AI Strategy & Planning:** 1-2 weeks\n\n🎯 **Most clients start seeing results within the first week!** Daniel personally manages every implementation. What type of solution are you considering? 🤖✨",
+        emotion: 'excited'
+      };
     }
     
     // ROI questions
     if (message.includes('roi') || message.includes('return') || message.includes('results') || message.includes('benefit')) {
-      return "Daniel's clients typically see impressive results:\n\n• **70% average process automation**\n• **35+ hours saved weekly**\n• **90% error reduction**\n• **300-500% ROI within 90 days**\n• **$50K+ in cost savings** (average client)\n\n**Real examples:**\n• Manufacturing client: $50K saved in 6 months\n• SaaS company: 70% process automation, 60% efficiency increase\n• Marketing agency: 34% revenue increase, 12 hours saved weekly\n\nWhat's your biggest operational challenge?";
-    }
-    
-    // Industry questions
-    if (message.includes('industry') || message.includes('business') || message.includes('company')) {
-      return "Daniel works with businesses across all industries:\n\n• **Manufacturing & Supply Chain** - Inventory optimization, quality control\n• **Professional Services** - Client management, workflow automation\n• **E-commerce & Retail** - Customer experience, inventory management\n• **Healthcare & Medical** - Patient management, data analysis\n• **Real Estate & Property** - Lead management, market analysis\n• **Technology & SaaS** - Process automation, customer analytics\n• **Financial Services** - Risk analysis, customer insights\n• **Consulting & Agencies** - Client workflows, reporting automation\n\nEvery solution is customized for your specific industry needs and challenges. What industry are you in?";
+      return {
+        text: "📊 Daniel's clients achieve incredible results:\n\n🎯 **70% average process automation**\n⏰ **35+ hours saved weekly**\n✅ **90% error reduction**\n💰 **300-500% ROI within 90 days**\n💎 **$50K+ in cost savings** (average client)\n\n🏆 **Real Success Stories:**\n• Manufacturing client: $50K saved in 6 months\n• SaaS company: 70% automation, 60% efficiency boost\n• Marketing agency: 34% revenue increase, 12 hours saved weekly\n\n🤔 What's your biggest operational challenge? Let's solve it with AI! 🚀",
+        emotion: 'excited'
+      };
     }
     
     // Getting started questions
     if (message.includes('start') || message.includes('begin') || message.includes('first step') || message.includes('consultation')) {
-      return "Getting started with Daniel is easy! Here's the proven process:\n\n1. **Free 60-minute AI Strategy Session** - Comprehensive needs assessment\n2. **Custom AI Roadmap** - Detailed implementation plan with ROI projections\n3. **Solution Development** - Build and deploy your AI systems\n4. **Training & Support** - Ensure your team is fully prepared\n5. **Ongoing Optimization** - Continuous improvement and scaling\n\n**What you get in the free consultation:**\n• AI readiness assessment\n• Custom strategy roadmap\n• ROI projections\n• Implementation timeline\n• No-obligation discussion\n\nReady to schedule? Email dschley@aiopsexpert.com or call 904-955-3905";
+      return {
+        text: "🚀 Getting started with Daniel is super easy! Here's the proven process:\n\n1. 🎯 **Free 60-minute AI Strategy Session** - Comprehensive assessment\n2. 📋 **Custom AI Roadmap** - Detailed plan with ROI projections\n3. 🔧 **Solution Development** - Build and deploy your AI systems\n4. 🎓 **Training & Support** - Ensure your team is ready\n5. 📈 **Ongoing Optimization** - Continuous improvement\n\n✨ **Your free consultation includes:**\n• AI readiness assessment\n• Custom strategy roadmap\n• ROI projections\n• Implementation timeline\n• No-obligation discussion\n\n📧 Ready to transform your business? Email: dschley@aiopsexpert.com\n📞 Call: 904-955-3905 🎉",
+        emotion: 'helpful'
+      };
+    }
+    
+    // About Daniel
+    if (message.includes('daniel') || message.includes('about') || message.includes('experience') || message.includes('background')) {
+      return {
+        text: "👨‍💼 Daniel Schley is an AI Operations Expert with an amazing track record:\n\n🏆 **Experience:**\n• 20+ years business operations leadership\n• Former COO with proven scale results\n• Managed $1B+ portfolios across industries\n• 100+ successful AI implementations\n\n🎯 **Notable Achievements:**\n• Scaled Align Networks: $0 to $265M revenue in 5 years\n• Achieved 12X EBITDA exit to General Atlantic\n• Grew One Call Care: $15M to $75M in under a year\n• Enhanced GO T&T: 50% efficiency, 96% YoY revenue increase\n\n🤖 **AI Expertise:**\n• 90-day ROI delivery specialist\n• $50M+ in client value creation\n• Operations-first AI approach\n• Real results, not just technology! ✨",
+        emotion: 'happy'
+      };
     }
     
     // Contact/booking
     if (message.includes('book') || message.includes('schedule') || message.includes('consultation') || message.includes('call') || message.includes('meeting')) {
-      return "Perfect! Daniel would love to discuss your AI transformation. Here's how to book:\n\n📧 **Email:** dschley@aiopsexpert.com\n📞 **Phone:** 904-955-3905\n🌐 **Website:** aiopsexpert.com\n\n**What to expect in your free consultation:**\n• 60-minute AI strategy session\n• Comprehensive business assessment\n• Custom AI roadmap with ROI projections\n• Implementation timeline\n• Personalized recommendations\n• No-obligation, no-pressure discussion\n\n**Response time:** Daniel personally responds within 24 hours\n**Usually booked:** 2-3 weeks out due to high demand\n\nWhat's the best way to reach you?";
+      return {
+        text: "🎉 Perfect! Daniel would love to discuss your AI transformation:\n\n📧 **Email:** dschley@aiopsexpert.com\n📞 **Phone:** 904-955-3905\n🌐 **Website:** aiopsexpert.com\n\n✨ **Your free consultation includes:**\n• 60-minute AI strategy session\n• Comprehensive business assessment\n• Custom AI roadmap with ROI projections\n• Implementation timeline\n• Personalized recommendations\n• No-obligation, pressure-free discussion\n\n⏰ **Response time:** Daniel responds within 24 hours\n📅 **Availability:** Usually booked 2-3 weeks out\n\n🚀 What's the best way to reach you? Let's make AI magic happen! ✨",
+        emotion: 'excited'
+      };
     }
     
-    // About Daniel
-    if (message.includes('daniel') || message.includes('about you') || message.includes('experience') || message.includes('background')) {
-      return "Daniel Schley is an AI Operations Expert with an impressive track record:\n\n**Experience:**\n• 20+ years business operations leadership\n• Former COO with proven scale results\n• Managed $1B+ portfolios across industries\n• 100+ successful AI implementations\n\n**Notable Achievements:**\n• Scaled Align Networks from $0 to $265M revenue in 5 years\n• Achieved 12X EBITDA exit to General Atlantic\n• Increased One Call Care Management from $15M to $75M in under a year\n• Enhanced GO T&T efficiency by 50%, achieved 96% YoY revenue increase\n\n**AI Expertise:**\n• Specialized in 90-day ROI delivery\n• $50M+ in client value creation\n• Operations-first AI implementation approach\n• Proven results across 8 core AI solution areas\n\nDaniel's unique combination of deep operations expertise and cutting-edge AI knowledge delivers real, measurable results - not just technology.";
-    }
-    
-    // AI concerns
-    if (message.includes('impersonal') || message.includes('human') || message.includes('personal') || message.includes('cold')) {
-      return "That's the #1 concern Daniel hears from business owners! Here's the truth:\n\n**AI doesn't make businesses impersonal - it creates MORE time for personal relationships.**\n\n**Real Example:** Jennifer's marketing agency gained 12 hours weekly through AI automation, allowing 34% revenue growth by focusing on client strategy instead of admin work.\n\n**The Daniel Schley Approach:**\n• AI handles routine tasks and data processing\n• Humans focus on relationships and strategic decisions\n• More time for meaningful customer interactions\n• Better service through intelligent insights\n\n**Result:** Clients get MORE personal attention, not less.\n\nWould you like to see how this human + AI approach works for your specific business?";
-    }
-    
-    // Portfolio/case studies
-    if (message.includes('portfolio') || message.includes('case study') || message.includes('examples') || message.includes('work')) {
-      return "Daniel has an impressive portfolio of AI solutions:\n\n**Featured AI Applications:**\n• **ConversaBot** - 24/7 customer service (80% reduced interruptions)\n• **PersonaGen** - Smart marketing automation (15% cart recovery)\n• **FinSight** - Cash flow predictor (87% time saved)\n• **CreatorSpark** - AI content engine (200% traffic increase)\n• **AdOptimo** - Smart ad manager (4.0x ROAS)\n• **StockWise** - Inventory predictor (40% overstock reduction)\n\n**Client Results:**\n• $50K+ average cost savings\n• 70% process automation\n• 90% error reduction\n• 30-60 day ROI\n\nEach solution includes interactive demos and detailed case studies. Would you like to see specific examples for your industry?";
-    }
-    
-    // Specific AI tools
-    if (message.includes('chatbot') || message.includes('automation') || message.includes('analytics') || message.includes('tools')) {
-      return "Daniel offers comprehensive AI tools across all business functions:\n\n**Customer Experience:**\n• AI chatbots and virtual assistants\n• Intelligent customer service systems\n• Personalized marketing automation\n\n**Operations:**\n• Process automation and workflow optimization\n• Inventory management and forecasting\n• Financial analysis and cash flow prediction\n\n**Analytics & Insights:**\n• Business intelligence dashboards\n• Predictive analytics and trend analysis\n• Performance optimization systems\n\n**Custom Development:**\n• Bespoke AI applications\n• Industry-specific solutions\n• Integration with existing systems\n\nAll tools are custom-implemented with training and ongoing support. What specific challenge would you like to solve with AI?";
-    }
-    
-    // Default responses
+    // Default responses with personality
     const defaultResponses = [
-      "That's a great question! I specialize in AI operations and can help with strategy, implementation, automation, and custom solutions. What specific challenge are you facing?",
-      "I'd be happy to help! My expertise covers AI strategy, process automation, and custom development. What aspect of AI operations interests you most?",
-      "Interesting question! With 20+ years of operations experience and 100+ AI implementations, I can provide detailed insights. Could you be more specific about what you'd like to know?",
-      "Thanks for asking! I help businesses transform their operations with AI. Whether it's automation, analytics, or custom solutions, I'd love to discuss your needs. What's your biggest operational challenge?"
+      {
+        text: "🤖 That's a fantastic question! I specialize in AI operations and love helping with strategy, implementation, and automation. What specific challenge can we solve together? ✨",
+        emotion: 'happy' as const
+      },
+      {
+        text: "✨ I'd be thrilled to help! With expertise in AI strategy, process automation, and custom development, there's so much we can explore. What aspect of AI operations interests you most? 🚀",
+        emotion: 'excited' as const
+      },
+      {
+        text: "🎯 Interesting question! With 20+ years of operations experience and 100+ AI implementations, I have lots of insights to share. Could you be more specific about what you'd like to know? 🤔",
+        emotion: 'helpful' as const
+      },
+      {
+        text: "🌟 Thanks for asking! I help businesses transform with AI - whether it's automation, analytics, or custom solutions. What's your biggest operational challenge? Let's solve it together! 💪",
+        emotion: 'happy' as const
+      }
     ];
     
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
@@ -116,19 +149,27 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
     setIsTyping(true);
+    setRobotEmotion('thinking');
 
     // Simulate AI thinking time
     setTimeout(() => {
+      const response = getAIResponse(inputText);
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: getAIResponse(inputText),
+        text: response.text,
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: new Date(),
+        emotion: response.emotion
       };
 
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
-    }, 1000 + Math.random() * 2000); // 1-3 seconds delay
+      setRobotEmotion(response.emotion === 'excited' ? 'excited' : 'happy');
+      
+      if (response.emotion === 'excited') {
+        triggerParticles();
+      }
+    }, 1500 + Math.random() * 2000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -139,68 +180,143 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   };
 
   const quickQuestions = [
-    "What are your AI services?",
-    "How much does it cost?",
-    "How long does implementation take?",
-    "What ROI can I expect?",
-    "Book a consultation"
+    "What are your AI services? 🤖",
+    "How much does it cost? 💰",
+    "How long does it take? ⏰",
+    "What ROI can I expect? 📈",
+    "Book a consultation 📅"
   ];
 
   const handleQuickQuestion = (question: string) => {
-    setInputText(question);
+    const cleanQuestion = question.replace(/[🤖💰⏰📈📅]/g, '').trim();
+    setInputText(cleanQuestion);
     setTimeout(() => handleSendMessage(), 100);
+  };
+
+  // Robot Avatar Component
+  const RobotAvatar = ({ emotion, size = 'normal' }: { emotion: string; size?: 'small' | 'normal' | 'large' }) => {
+    const sizeClasses = {
+      small: 'w-8 h-8',
+      normal: 'w-12 h-12',
+      large: 'w-16 h-16'
+    };
+
+    return (
+      <div className={`${sizeClasses[size]} relative`}>
+        {/* Robot Body */}
+        <div className={`${sizeClasses[size]} bg-gradient-to-br from-cyan-400 to-purple-500 rounded-2xl flex items-center justify-center relative overflow-hidden transition-all duration-300 ${
+          emotion === 'excited' ? 'animate-bounce' : emotion === 'thinking' ? 'animate-pulse' : ''
+        }`}>
+          
+          {/* Animated Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-300/30 to-purple-400/30 animate-pulse"></div>
+          
+          {/* Robot Face */}
+          <div className="relative z-10 flex flex-col items-center justify-center">
+            {/* Eyes */}
+            <div className="flex space-x-1 mb-1">
+              <div className={`w-1.5 h-1.5 bg-white rounded-full transition-all duration-300 ${
+                emotion === 'thinking' ? 'animate-ping' : emotion === 'excited' ? 'bg-yellow-300' : ''
+              }`}></div>
+              <div className={`w-1.5 h-1.5 bg-white rounded-full transition-all duration-300 ${
+                emotion === 'thinking' ? 'animate-ping delay-100' : emotion === 'excited' ? 'bg-yellow-300' : ''
+              }`}></div>
+            </div>
+            
+            {/* Mouth */}
+            <div className={`w-2 h-1 rounded-full transition-all duration-300 ${
+              emotion === 'happy' || emotion === 'excited' ? 'bg-white' : 
+              emotion === 'thinking' ? 'bg-gray-300' : 'bg-white'
+            }`}></div>
+          </div>
+          
+          {/* Sparkles for excited state */}
+          {emotion === 'excited' && (
+            <>
+              <Star className="absolute -top-1 -right-1 w-3 h-3 text-yellow-300 animate-spin" />
+              <Zap className="absolute -bottom-1 -left-1 w-3 h-3 text-yellow-300 animate-bounce" />
+            </>
+          )}
+        </div>
+        
+        {/* Particles */}
+        {showParticles && (
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-ping"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${i * 0.1}s`
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    );
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-slate-800 rounded-2xl shadow-2xl border border-slate-600 flex flex-col z-50 animate-scale-in">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-2xl flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-            <Bot className="w-6 h-6 text-white" />
-          </div>
+    <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-slate-800 rounded-2xl shadow-2xl border border-slate-600 flex flex-col z-50 animate-scale-in overflow-hidden">
+      {/* Header with animated robot */}
+      <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-2xl flex items-center justify-between relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-500/20 animate-pulse"></div>
+        
+        <div className="flex items-center space-x-3 relative z-10">
+          <RobotAvatar emotion={robotEmotion} size="normal" />
           <div>
-            <h3 className="text-white font-semibold">AI Operations Assistant</h3>
-            <p className="text-white/80 text-sm">Ask me anything about AI services</p>
+            <h3 className="text-white font-bold text-lg">ARIA 🤖</h3>
+            <p className="text-white/90 text-sm font-medium">AI Operations Assistant</p>
+            <div className="flex items-center space-x-1 mt-1">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-white/80 text-xs">Online & Ready to Help!</span>
+            </div>
           </div>
         </div>
+        
         <button
           onClick={onToggle}
-          className="text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+          className="text-white/80 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-110 relative z-10"
         >
           <X className="w-5 h-5" />
         </button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-slate-800 to-slate-900">
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}
           >
-            <div className={`flex items-start space-x-2 max-w-[80%] ${message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                message.sender === 'user' 
-                  ? 'bg-cyan-500' 
-                  : 'bg-gradient-to-r from-purple-500 to-pink-500'
-              }`}>
+            <div className={`flex items-start space-x-2 max-w-[85%] ${message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+              <div className={`flex-shrink-0 ${message.sender === 'user' ? '' : 'animate-bounce'}`}>
                 {message.sender === 'user' ? (
-                  <User className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-white" />
+                  </div>
                 ) : (
-                  <Bot className="w-4 h-4 text-white" />
+                  <RobotAvatar emotion={message.emotion || 'happy'} size="small" />
                 )}
               </div>
-              <div className={`p-3 rounded-2xl ${
+              
+              <div className={`p-3 rounded-2xl transition-all duration-300 hover:scale-105 ${
                 message.sender === 'user'
-                  ? 'bg-cyan-500 text-white'
-                  : 'bg-slate-700 text-gray-100'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg'
+                  : 'bg-gradient-to-r from-slate-700 to-slate-600 text-gray-100 border border-slate-500 shadow-lg'
               }`}>
-                <p className="text-sm whitespace-pre-line">{message.text}</p>
-                <p className="text-xs opacity-70 mt-1">
-                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                <p className="text-sm whitespace-pre-line leading-relaxed">{message.text}</p>
+                <p className="text-xs opacity-70 mt-2 flex items-center space-x-1">
+                  <span>{message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                  {message.sender === 'bot' && message.emotion === 'excited' && (
+                    <Heart className="w-3 h-3 text-red-400 animate-pulse" />
+                  )}
                 </p>
               </div>
             </div>
@@ -208,16 +324,17 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
         ))}
 
         {isTyping && (
-          <div className="flex justify-start">
+          <div className="flex justify-start animate-fade-in-up">
             <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                <Bot className="w-4 h-4 text-white" />
-              </div>
-              <div className="bg-slate-700 p-3 rounded-2xl">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+              <RobotAvatar emotion="thinking" size="small" />
+              <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-3 rounded-2xl border border-slate-500 shadow-lg">
+                <div className="flex items-center space-x-2">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce delay-200"></div>
+                  </div>
+                  <span className="text-xs text-gray-400">ARIA is thinking...</span>
                 </div>
               </div>
             </div>
@@ -229,14 +346,14 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
 
       {/* Quick Questions */}
       {messages.length === 1 && (
-        <div className="px-4 pb-2">
-          <p className="text-gray-400 text-xs mb-2">Quick questions:</p>
+        <div className="px-4 pb-2 bg-slate-900">
+          <p className="text-gray-400 text-xs mb-2 font-medium">✨ Quick questions to get started:</p>
           <div className="flex flex-wrap gap-2">
             {quickQuestions.map((question, index) => (
               <button
                 key={index}
                 onClick={() => handleQuickQuestion(question)}
-                className="text-xs bg-slate-700 text-gray-300 px-3 py-1 rounded-full hover:bg-slate-600 transition-colors"
+                className="text-xs bg-gradient-to-r from-slate-700 to-slate-600 text-gray-300 px-3 py-2 rounded-full hover:from-cyan-500 hover:to-purple-500 hover:text-white transition-all duration-300 border border-slate-600 hover:border-transparent hover:scale-105 shadow-sm"
               >
                 {question}
               </button>
@@ -246,24 +363,29 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
       )}
 
       {/* Input */}
-      <div className="p-4 border-t border-slate-600">
+      <div className="p-4 border-t border-slate-600 bg-slate-900">
         <div className="flex space-x-2">
           <input
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask about AI services, pricing, ROI..."
-            className="flex-1 bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:ring-2 focus:ring-cyan-400 focus:border-transparent text-sm"
+            placeholder="Ask ARIA anything about AI services... ✨"
+            className="flex-1 bg-slate-700 text-white px-4 py-3 rounded-xl border border-slate-600 focus:ring-2 focus:ring-cyan-400 focus:border-transparent text-sm transition-all duration-300 hover:border-cyan-500/50"
             disabled={isTyping}
           />
           <button
             onClick={handleSendMessage}
             disabled={!inputText.trim() || isTyping}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white p-2 rounded-lg hover:from-cyan-600 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white p-3 rounded-xl hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 shadow-lg"
           >
             <Send className="w-4 h-4" />
           </button>
+        </div>
+        
+        <div className="flex items-center justify-center mt-2 space-x-2">
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <span className="text-xs text-gray-400">Powered by AI • Instant responses</span>
         </div>
       </div>
     </div>
