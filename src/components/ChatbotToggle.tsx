@@ -13,21 +13,17 @@ const ChatbotToggle: React.FC = () => {
     <>
       {/* Floating Chat Button */}
       <div className="fixed bottom-6 right-6 z-40">
-        {/* Pulsing ring animation */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-ping opacity-20 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-pulse opacity-30 pointer-events-none"></div>
-        
         <button
           onClick={toggleChatbot}
-          className={`relative w-14 h-14 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 flex items-center justify-center hover:scale-125 group ${
-            isOpen ? 'rotate-180 scale-110' : 'animate-bounce'
+          className={`w-14 h-14 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 flex items-center justify-center hover:scale-110 ${
+            isOpen ? 'rotate-180' : ''
           }`}
           title="Chat with ARIA - AI Assistant"
         >
           {isOpen ? (
-            <X className="w-6 h-6 transition-transform duration-300 group-hover:rotate-90" />
+            <X className="w-6 h-6" />
           ) : (
-            <MessageCircle className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+            <MessageCircle className="w-6 h-6" />
           )}
         </button>
       </div>
