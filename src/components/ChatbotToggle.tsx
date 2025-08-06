@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, X, Sparkles } from 'lucide-react';
+import { MessageCircle, X } from 'lucide-react';
 import Chatbot from './Chatbot';
 
 const ChatbotToggle: React.FC = () => {
@@ -11,13 +11,11 @@ const ChatbotToggle: React.FC = () => {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Single Floating Chat Button */}
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={toggleChatbot}
-          className={`w-14 h-14 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 flex items-center justify-center hover:scale-110 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 flex items-center justify-center hover:scale-110"
           title="Chat with ARIA - AI Assistant"
         >
           {isOpen ? (
@@ -30,20 +28,6 @@ const ChatbotToggle: React.FC = () => {
 
       {/* Chatbot Component */}
       <Chatbot isOpen={isOpen} onToggle={toggleChatbot} />
-
-      {/* Animated Notification Badge */}
-      {!isOpen && (
-        <div className="fixed bottom-16 right-2 z-30">
-          <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs px-3 py-2 rounded-full animate-bounce shadow-lg border-2 border-white/20 backdrop-blur-sm">
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-              <span className="font-medium">Hi! I'm ARIA 🤖</span>
-            </div>
-          </div>
-          {/* Speech bubble tail */}
-          <div className="absolute -bottom-1 right-4 w-3 h-3 bg-gradient-to-br from-pink-500 to-rose-500 rotate-45 border-r border-b border-white/20"></div>
-        </div>
-      )}
     </>
   );
 };
