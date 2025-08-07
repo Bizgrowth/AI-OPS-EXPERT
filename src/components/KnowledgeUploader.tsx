@@ -37,7 +37,8 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     setIsLoading(true);
     try {
       if (!supabase) {
-        console.warn('Supabase not configured. Please add your Supabase credentials.');
+        console.warn('Supabase not configured. Please add your VITE_SUPABASE_ANON_KEY to the .env file.');
+        setDocuments([]);
         return;
       }
       if (!supabase) {
@@ -48,6 +49,17 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
       setDocuments(docs);
     } catch (error) {
       console.error('Failed to load documents:', error);
+      // Show user-friendly error message
+      if (error instanceof Error) {
+        if (error.message.includes('Cannot connect to database')) {
+          alert('Cannot connect to database. Please check your internet connection and try again.');
+        } else if (error.message.includes('Database error')) {
+          alert('Database configuration error. Please check your Supabase setup.');
+        } else {
+          alert('Failed to load documents. Please try again later.');
+        }
+      }
+      setDocuments([]);
     } finally {
       setIsLoading(false);
     }

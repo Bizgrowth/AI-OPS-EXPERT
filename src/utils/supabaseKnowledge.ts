@@ -2,9 +2,11 @@ import { createClient } from '@supabase/supabase-js';
 
 // Supabase configuration
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://kenofrqgfchujhjdinmg.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your_anon_key_here';
 
-export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
+export const supabase = supabaseUrl && supabaseAnonKey && supabaseAnonKey !== 'your_anon_key_here' 
+  ? createClient(supabaseUrl, supabaseAnonKey) 
+  : null;
 
 export interface KnowledgeDocument {
   id: string;
@@ -73,7 +75,7 @@ export class SupabaseKnowledgeManager {
   static async getAllDocuments(includePrivate: boolean = false): Promise<KnowledgeDocument[]> {
     try {
       if (!supabase) {
-        console.error('Supabase not configured');
+        console.warn('Supabase not configured. Please add your VITE_SUPABASE_ANON_KEY to the .env file.');
         return [];
       }
       
@@ -86,13 +88,19 @@ export class SupabaseKnowledgeManager {
       const { data, error } = await query.order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Error fetching documents:', error);
+        console.error('Error fetching documents:', error.message);
+        throw new Error(`Database error: ${error.message}`);
         return [];
       }
 
       return data || [];
     } catch (error) {
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        console.error('Network error: Cannot connect to Supabase. Please check your internet connection and Supabase configuration.');
+        throw new Error('Cannot connect to database. Please check your internet connection.');
+      }
       console.error('Fetch failed:', error);
+      throw error;
       return [];
     }
   }
