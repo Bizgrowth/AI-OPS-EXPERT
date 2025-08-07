@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Target, DollarSign, BarChart3, Globe, Users, TrendingUp, Settings, Zap, Clock, AlertTriangle, Search, Cog, ClipboardList, Monitor, FileText, RotateCcw, Headphones, Package, Italic as Crystal, Activity, UserCheck, Wrench, MessageSquare, Bot, Crosshair, Eye, Mic, Edit, ShoppingCart, GraduationCap, PieChart, Factory, Calculator, Link, BarChart, DollarSign as CostIcon, RefreshCw, TrendingUp as PerformanceIcon } from 'lucide-react';
 import { downloadCaseStudy, CaseStudyData } from '../utils/downloadUtils';
 import SchedulingModal from './SchedulingModal';
+import SEOHead from './SEOHead';
 
-interface ServiceDetailProps {
-  serviceId: string;
-  onBack: () => void;
-}
-
-const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
+const ServiceDetail: React.FC = () => {
+  const { serviceId } = useParams<{ serviceId: string }>();
+  const navigate = useNavigate();
   const [showScheduling, setShowScheduling] = useState(false);
   
   // Scroll to top when component mounts
@@ -900,10 +899,15 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
   if (!service) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <SEOHead 
+          title="Service Not Found"
+          description="The requested AI service could not be found."
+          canonicalUrl={`/service/${serviceId}`}
+        />
         <div className="text-center">
           <h2 className="text-2xl font-bold text-white mb-4">Service Not Found</h2>
           <button 
-            onClick={onBack}
+            onClick={() => navigate('/services')}
             className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all"
           >
             Back to Services
@@ -915,11 +919,17 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
 
   return (
     <div className="min-h-screen bg-slate-900">
+      <SEOHead 
+        title={service.title}
+        description={service.coreValue}
+        keywords={`${service.title}, AI Services, ${service.category}, Business Automation, AI Implementation`}
+        canonicalUrl={`/service/${serviceId}`}
+      />
       {/* Header */}
       <div className="bg-slate-800 border-b border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <button 
-            onClick={onBack}
+            onClick={() => navigate('/services')}
             className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors mb-4"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
