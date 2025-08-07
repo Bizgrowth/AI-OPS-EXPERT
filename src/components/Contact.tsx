@@ -77,7 +77,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-6 sm:space-y-8 px-4">
             <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">Get In Touch</h3>
               
@@ -88,7 +88,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-white font-semibold text-sm sm:text-base">Email</div>
-                    <div className="text-gray-300 text-xs sm:text-base break-all">dschley@aiopsexpert.com</div>
+                    <div className="text-gray-300 text-sm sm:text-base">dschley@aiopsexpert.com</div>
                   </div>
                 </div>
 
@@ -160,7 +160,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div 
             ref={formRef}
-            className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
+            className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 mx-4">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">Start Your AI Transformation</h3>
             
             {submitStatus === 'success' && (
@@ -309,7 +309,7 @@ const Contact = () => {
         <div className={`mt-16 text-center transition-all duration-1000 delay-700 ${
           isFormVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="inline-flex items-center px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-slate-800 to-slate-700 rounded-full border border-slate-600 shadow-lg mx-4 max-w-full overflow-x-auto">
+          <div className="inline-flex items-center px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-slate-800 to-slate-700 rounded-full border border-slate-600 shadow-lg mx-4">
             <div className="flex items-center space-x-3 sm:space-x-6">
               <div className="text-center">
                 <div className="text-lg sm:text-2xl font-bold text-cyan-400">24h</div>

@@ -231,7 +231,7 @@ const Hero = () => {
               }`}>AI Powered Knowledge Management</h3>
               <p className={`text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1600 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-              }`}>Transform your business data into intelligent, searchable knowledge systems</p>
+              }`}>Data-driven optimization that scales operations and drives measurable results</p>
             </div>
           </div>
         </div>

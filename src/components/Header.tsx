@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Cpu } from 'lucide-react';
 import SchedulingModal from './SchedulingModal';
 
@@ -7,44 +7,11 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScheduling, setShowScheduling] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  // Fixed header height for scroll offset
-  const HEADER_HEIGHT = 64;
-
-  const scrollToSection = (sectionId: string) => {
-    // If we're not on the home page, navigate there first
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Wait for navigation to complete, then scroll
-      setTimeout(() => {
-        scrollToElement(sectionId);
-      }, 100);
-    } else {
-      scrollToElement(sectionId);
-    }
-  };
-
-  const scrollToElement = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const elementPosition = element.offsetTop - HEADER_HEIGHT;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleNavClick = () => {
     setIsMenuOpen(false);
-  };
-
-  const handleNavClickWithScroll = (sectionId: string) => {
-    setIsMenuOpen(false);
-    scrollToSection(sectionId);
   };
 
   const handleBookCall = () => {
@@ -71,48 +38,54 @@ const Header = () => {
           </div>
           
           <nav className="hidden lg:flex space-x-6 xl:space-x-8">
-            <button 
-              onClick={() => scrollToSection('home')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('about')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            <Link 
+              to="/about"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/about' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               About
-            </button>
-            <button 
-              onClick={() => scrollToSection('services')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/services"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/services' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               AI Solutions
-            </button>
-            <button 
-              onClick={() => scrollToSection('portfolio')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/portfolio"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/portfolio' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Portfolio
-            </button>
-            <button 
-              onClick={() => scrollToSection('results')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
-            >
-              Results
-            </button>
-            <button 
-              onClick={() => scrollToSection('blog')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/blog"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/blog' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Blog
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/results"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/results' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
+            >
+              Results
+            </Link>
+            <Link 
+              to="/contact"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/contact' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Contact
-            </button>
+            </Link>
           </nav>
 
           <div className="hidden lg:flex">
@@ -136,48 +109,48 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800 rounded-lg mt-2 mx-2">
-              <button 
-                onClick={() => handleNavClickWithScroll('home')}
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => handleNavClickWithScroll('about')}
+              <Link 
+                to="/about"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 About
-              </button>
-              <button 
-                onClick={() => handleNavClickWithScroll('services')}
+              </Link>
+              <Link 
+                to="/services"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 AI Solutions
-              </button>
-              <button 
-                onClick={() => handleNavClickWithScroll('portfolio')}
+              </Link>
+              <Link 
+                to="/portfolio"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Portfolio
-              </button>
-              <button 
-                onClick={() => handleNavClickWithScroll('results')}
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
-              >
-                Results
-              </button>
-              <button 
-                onClick={() => handleNavClickWithScroll('blog')}
+              </Link>
+              <Link 
+                to="/blog"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Blog
-              </button>
-              <button 
-                onClick={() => handleNavClickWithScroll('contact')}
+              </Link>
+              <Link 
+                to="/results"
+                onClick={handleNavClick}
+                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
+              >
+                Results
+              </Link>
+              <Link 
+                to="/contact"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Contact
-              </button>
+              </Link>
               <button 
                 onClick={handleBookCall}
                 className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200"

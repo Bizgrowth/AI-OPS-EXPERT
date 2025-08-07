@@ -213,9 +213,9 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
 
         {/* Featured Post */}
         {blogPosts.filter(post => post.featured).map(post => (
-          <div key={post.id} className="mb-12">
+          <div key={post.id} className="mb-12 px-4">
             <div className="bg-gradient-to-br from-slate-700 to-slate-600 rounded-2xl overflow-hidden border border-slate-500 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
-              <div className="p-4 sm:p-6 lg:p-8 mx-4 sm:mx-0">
+              <div className="p-6 sm:p-8">
                 <div className="flex items-center space-x-2 mb-4">
                   <span className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
                     FEATURED
@@ -263,15 +263,15 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
         {/* Blog Posts Grid */}
         <div 
           ref={postsRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 px-4"
         >
           {blogPosts.filter(post => !post.featured).map((post) => (
             <div
               key={post.id}
-              className="bg-slate-700 rounded-xl overflow-hidden border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 transform hover:-translate-y-1 cursor-pointer mx-4 md:mx-0"
+              className="bg-slate-700 rounded-xl overflow-hidden border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 transform hover:-translate-y-1 cursor-pointer"
               onClick={() => openPost(post)}
             >
-              <div className="p-4 sm:p-6">
+              <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-3 hover:text-cyan-400 transition-colors">
                   {post.title}
                 </h3>
@@ -309,7 +309,7 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center px-4">
           <div className="bg-gradient-to-r from-slate-700 to-slate-600 rounded-2xl p-6 sm:p-8 border border-slate-500">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
               Want AI Insights Delivered to Your Inbox?

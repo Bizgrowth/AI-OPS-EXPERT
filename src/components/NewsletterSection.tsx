@@ -75,7 +75,7 @@ const NewsletterSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Newsletter Info */}
-          <div>
+          <div className="px-4">
             <div className="flex items-center space-x-3 mb-6">
               <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full hover:scale-110 transition-transform duration-300 flex-shrink-0">
                 <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400" />
@@ -129,7 +129,7 @@ const NewsletterSection = () => {
           {/* Subscribe Form */}
           <div 
             ref={formRef}
-            className="bg-gradient-to-br from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl border border-slate-500 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
+            className="bg-gradient-to-br from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl border border-slate-500 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 mx-4">
             <div className="text-center mb-8">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Latest AI Insights</h3>
               <p className="text-gray-300 text-sm sm:text-base">Get exclusive AI operations strategies, case studies, and industry insights delivered to your inbox.</p>
@@ -201,7 +201,7 @@ const NewsletterSection = () => {
         </div>
 
         {/* Social Proof */}
-        <div className="mt-12 sm:mt-16 text-center">
+        <div className="mt-12 sm:mt-16 text-center px-4">
           <p className="text-gray-400 mb-6 text-sm sm:text-base">Trusted by business leaders at:</p>
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 opacity-60">
             <span className="text-gray-500 font-semibold text-sm sm:text-base">TechFlow SaaS</span>

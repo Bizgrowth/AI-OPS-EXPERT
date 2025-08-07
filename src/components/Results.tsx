@@ -64,11 +64,11 @@ const Results = () => {
 
         <div 
           ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-16">
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-16 px-4">
           {stats.map((stat, index) => (
             <div 
               key={index} 
-              className="text-center p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg mx-2 sm:mx-0"
+              className="text-center p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-2 hover:scale-110 transition-transform duration-300">
                 {stat.number}
@@ -80,11 +80,11 @@ const Results = () => {
 
         <div 
           ref={testimonialsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 px-4">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="bg-slate-700 p-4 sm:p-8 rounded-2xl hover:bg-slate-600 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/20 mx-4 md:mx-0"
+              className="bg-slate-700 p-4 sm:p-8 rounded-2xl hover:bg-slate-600 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/20"
             >
               <div className="flex items-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (

@@ -34,7 +34,7 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div 
             ref={contentRef}
-            className="space-y-6 sm:space-y-8">
+            className="space-y-6 sm:space-y-8 px-4">
             <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">My Journey to AI Ops Expert</h3>
               <p className="text-gray-300 leading-relaxed mb-6 text-sm sm:text-base">
@@ -123,7 +123,7 @@ const About = () => {
 
           <div 
             ref={featuresRef}
-            className="space-y-4 sm:space-y-6">
+            className="space-y-4 sm:space-y-6 px-4">
             <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-6 rounded-xl mb-6">
               <h4 className="text-lg sm:text-xl font-semibold text-white mb-4">What Sets Me Apart</h4>
               <div className="space-y-3">
