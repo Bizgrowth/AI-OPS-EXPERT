@@ -87,8 +87,8 @@ const Services = () => {
   ];
 
   const handleServiceClick = (serviceId: string) => {
-    // Navigate to detail page - for now we'll use hash routing
-    window.location.hash = `service/${serviceId}`;
+    // Navigate to detail page using React Router
+    window.location.href = `/service/${serviceId}`;
   };
 
   return (

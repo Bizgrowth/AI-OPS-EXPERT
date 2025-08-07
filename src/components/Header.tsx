@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Cpu } from 'lucide-react';
 import SchedulingModal from './SchedulingModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScheduling, setShowScheduling] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleNavClick = (sectionId: string) => {
+  const handleNavClick = () => {
     setIsMenuOpen(false);
-    
-    // If we're on a service detail page, go back to home first
-    if (window.location.hash.startsWith('#service/')) {
-      window.location.hash = '';
-      setTimeout(() => {
-        window.location.hash = sectionId;
-      }, 100);
-    } else {
-      window.location.hash = sectionId;
-    }
   };
 
   const handleBookCall = () => {
@@ -33,54 +25,67 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           <div 
             className="flex items-center space-x-3 cursor-pointer"
-            onClick={() => handleNavClick('')}
           >
-            <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg">
-              <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-            </div>
-            <div>
-              <span className="text-lg sm:text-xl font-bold text-white">Daniel Schley</span>
-              <div className="text-xs sm:text-xs text-cyan-400 font-medium">AI Ops Expert</div>
-            </div>
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg">
+                <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              </div>
+              <div>
+                <span className="text-lg sm:text-xl font-bold text-white">Daniel Schley</span>
+                <div className="text-xs sm:text-xs text-cyan-400 font-medium">AI Ops Expert</div>
+              </div>
+            </Link>
           </div>
           
           <nav className="hidden lg:flex space-x-6 xl:space-x-8">
-            <button 
-              onClick={() => handleNavClick('#about')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            <Link 
+              to="/about"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/about' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               About
-            </button>
-            <button 
-              onClick={() => handleNavClick('#services')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/services"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/services' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               AI Solutions
-            </button>
-            <button 
-              onClick={() => handleNavClick('#ai-portfolio')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/portfolio"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/portfolio' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Portfolio
-            </button>
-            <button 
-              onClick={() => handleNavClick('#blog')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/blog"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/blog' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Blog
-            </button>
-            <button 
-              onClick={() => handleNavClick('#results')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/results"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/results' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Results
-            </button>
-            <button 
-              onClick={() => handleNavClick('#contact')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors text-sm xl:text-base"
+            </Link>
+            <Link 
+              to="/contact"
+              className={`transition-colors text-sm xl:text-base ${
+                location.pathname === '/contact' ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
+              }`}
             >
               Contact
-            </button>
+            </Link>
           </nav>
 
           <div className="hidden lg:flex">
@@ -104,42 +109,48 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800 rounded-lg mt-2 mx-2">
-              <button 
-                onClick={() => handleNavClick('#about')}
+              <Link 
+                to="/about"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 About
-              </button>
-              <button 
-                onClick={() => handleNavClick('#services')}
+              </Link>
+              <Link 
+                to="/services"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 AI Solutions
-              </button>
-              <button 
-                onClick={() => handleNavClick('#ai-portfolio')}
+              </Link>
+              <Link 
+                to="/portfolio"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Portfolio
-              </button>
-              <button 
-                onClick={() => handleNavClick('#blog')}
+              </Link>
+              <Link 
+                to="/blog"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Blog
-              </button>
-              <button 
-                onClick={() => handleNavClick('#results')}
+              </Link>
+              <Link 
+                to="/results"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Results
-              </button>
-              <button 
-                onClick={() => handleNavClick('#contact')}
+              </Link>
+              <Link 
+                to="/contact"
+                onClick={handleNavClick}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Contact
-              </button>
+              </Link>
               <button 
                 onClick={handleBookCall}
                 className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200"
