@@ -18,7 +18,8 @@ const CTA = () => {
   };
 
   return (
-    <section 
+    <section
+      id="cta" // Added ID for anchor link
       ref={ctaRef}
       className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden"
     >

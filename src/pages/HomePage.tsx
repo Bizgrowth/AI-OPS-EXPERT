@@ -2,6 +2,12 @@ import React from 'react';
 import Hero from '../components/Hero';
 import NewsletterSection from '../components/NewsletterSection';
 import SEOHead from '../components/SEOHead';
+import About from '../components/About';
+import Services from '../components/Services';
+import AIPortfolio from '../components/AIPortfolio';
+import Results from '../components/Results';
+import BlogSection from '../components/BlogSection';
+import Contact from '../components/Contact';
 
 const HomePage = () => {
   return (
@@ -14,6 +20,12 @@ const HomePage = () => {
       />
       <Hero />
       <NewsletterSection />
+      <About />
+      <Services />
+      <AIPortfolio />
+      <Results />
+      <BlogSection />
+      <Contact />
     </div>
   );
 };

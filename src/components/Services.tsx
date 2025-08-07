@@ -87,8 +87,16 @@ const Services = () => {
   ];
 
   const handleServiceClick = (serviceId: string) => {
-    // Navigate to detail page using React Router
-    window.location.href = `/service/${serviceId}`;
+    // Scroll to the AI Portfolio section
+    const element = document.getElementById('ai-portfolio');
+    if (element) {
+      const headerHeight = 64; // Height of fixed header
+      const elementPosition = element.offsetTop - headerHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
