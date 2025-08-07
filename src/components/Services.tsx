@@ -150,7 +150,6 @@ const Services = () => {
           <p className="text-gray-400 mb-6 text-sm sm:text-base">
             Each AI solution includes detailed case studies, proven methodologies, and measurable ROI results
           </p>
-          </p>
           <button 
             onClick={() => setShowScheduling(true)}
             Schedule AI Consultation
