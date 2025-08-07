@@ -26,7 +26,6 @@ const Header = () => {
           <div 
             className="flex items-center space-x-3 cursor-pointer"
           >
-            <Link to="/" className="flex items-center space-x-3">
             {/* Changed Link to a tag and updated href */}
             <a href="#top" onClick={(e) => handleNavClick(e, 'top')} className="flex items-center space-x-3">
               <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg">
