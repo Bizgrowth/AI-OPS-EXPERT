@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './Header';
 import ChatbotToggle from './ChatbotToggle';
+import ScrollToTop from './ScrollToTop';
 import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import ServicesPage from '../pages/ServicesPage';
@@ -17,6 +18,7 @@ const Router = () => {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <div className="min-h-screen bg-slate-900">
           <Header />
           <Routes>
