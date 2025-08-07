@@ -72,6 +72,11 @@ export class SupabaseKnowledgeManager {
   // Get all documents (respects privacy settings)
   static async getAllDocuments(includePrivate: boolean = false): Promise<KnowledgeDocument[]> {
     try {
+      if (!supabase) {
+        console.error('Supabase not configured');
+        return [];
+      }
+      
       let query = supabase.from('knowledge_documents').select('*');
       
       if (!includePrivate) {
@@ -95,6 +100,11 @@ export class SupabaseKnowledgeManager {
   // Search documents by query
   static async searchDocuments(query: string, includePrivate: boolean = true): Promise<KnowledgeDocument[]> {
     try {
+      if (!supabase) {
+        console.error('Supabase not configured');
+        return [];
+      }
+      
       const searchTerms = query.toLowerCase().split(' ');
       
       let dbQuery = supabase.from('knowledge_documents').select('*');
@@ -126,6 +136,11 @@ export class SupabaseKnowledgeManager {
   // Delete a document
   static async deleteDocument(id: string): Promise<boolean> {
     try {
+      if (!supabase) {
+        console.error('Supabase not configured');
+        return false;
+      }
+      
       const { error } = await supabase
         .from('knowledge_documents')
         .delete()
@@ -146,6 +161,11 @@ export class SupabaseKnowledgeManager {
   // Get documents by category
   static async getDocumentsByCategory(category: string, includePrivate: boolean = true): Promise<KnowledgeDocument[]> {
     try {
+      if (!supabase) {
+        console.error('Supabase not configured');
+        return [];
+      }
+      
       let query = supabase
         .from('knowledge_documents')
         .select('*')
@@ -177,6 +197,11 @@ export class SupabaseKnowledgeManager {
     knowledgeUsed: any = {}
   ): Promise<boolean> {
     try {
+      if (!supabase) {
+        console.error('Supabase not configured');
+        return false;
+      }
+      
       const { error } = await supabase
         .from('chatbot_conversations')
         .insert({
