@@ -320,11 +320,6 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => setShowScheduling(true)}
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto">
-                Subscribe to Newsletter
-              </button>
-              <button 
-                onClick={() => setShowScheduling(true)}
                 className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
                 Book AI Consultation
               </button>

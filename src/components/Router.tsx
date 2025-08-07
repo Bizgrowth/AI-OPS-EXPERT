@@ -4,7 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Header from './Header';
 import ChatbotToggle from './ChatbotToggle';
 import HomePage from '../pages/HomePage';
-import NewsletterAdmin from './NewsletterAdmin';
 
 const Router = () => {
   return (
@@ -14,7 +13,6 @@ const Router = () => {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/newsletter-admin" element={<NewsletterAdmin />} />
           </Routes>
           <ChatbotToggle />
         </div>

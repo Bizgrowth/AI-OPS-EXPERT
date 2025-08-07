@@ -1,6 +1,5 @@
 import React from 'react';
 import Hero from '../components/Hero';
-import NewsletterSection from '../components/NewsletterSection';
 import SEOHead from '../components/SEOHead';
 import About from '../components/About';
 import Services from '../components/Services';
@@ -19,7 +18,6 @@ const HomePage = () => {
         canonicalUrl="/"
       />
       <Hero />
-      <NewsletterSection />
       <About />
       <Services />
       <AIPortfolio />
