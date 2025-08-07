@@ -356,7 +356,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 max-h-[90vh] bg-slate-800 rounded-2xl shadow-2xl border border-slate-600 flex flex-col z-50 animate-scale-in overflow-hidden">
+    <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-slate-800 rounded-2xl shadow-2xl border border-slate-600 flex flex-col z-50 animate-scale-in overflow-hidden">
       {/* Header with animated robot */}
       <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-2xl flex items-center justify-between relative overflow-hidden">
         {/* Animated background elements */}
@@ -443,17 +443,16 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
         <div className="px-4 pb-2 bg-slate-900">
           <p className="text-gray-400 text-xs mb-2 font-medium">✨ Quick questions to get started:</p>
           <div className="flex flex-wrap gap-2">
-          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-2">
+          <div className="flex flex-wrap gap-2">
             {quickQuestions.map((question, index) => (
               <button
                 key={index}
                 onClick={() => handleQuickQuestion(question)}
-                className="flex-shrink-0 text-xs bg-gradient-to-r from-slate-700 to-slate-600 text-gray-300 px-3 py-2 rounded-full hover:from-cyan-500 hover:to-purple-500 hover:text-white transition-all duration-300 border border-slate-600 hover:border-transparent hover:scale-105 shadow-sm whitespace-nowrap"
+                className="text-xs bg-gradient-to-r from-slate-700 to-slate-600 text-gray-300 px-3 py-2 rounded-full hover:from-cyan-500 hover:to-purple-500 hover:text-white transition-all duration-300 border border-slate-600 hover:border-transparent hover:scale-105 shadow-sm"
               >
                 {question}
               </button>
             ))}
-          </div>
           </div>
         </div>
       )}
