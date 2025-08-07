@@ -36,6 +36,10 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
   const loadDocuments = async () => {
     setIsLoading(true);
     try {
+      if (!supabase) {
+        console.warn('Supabase not configured. Please add your Supabase credentials.');
+        return;
+      }
       const docs = await SupabaseKnowledgeManager.getAllDocuments(true); // Include private docs for admin
       setDocuments(docs);
     } catch (error) {

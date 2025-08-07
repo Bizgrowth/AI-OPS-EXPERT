@@ -1,10 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Supabase configuration
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://kenofrqgfchujhjdinmg.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
 export interface KnowledgeDocument {
   id: string;
@@ -36,6 +36,11 @@ export class SupabaseKnowledgeManager {
     isPrivate: boolean = true
   ): Promise<KnowledgeDocument | null> {
     try {
+      if (!supabase) {
+        console.error('Supabase not configured');
+        return null;
+      }
+      
       const keywords = this.extractKeywords(content);
       const fileSize = new Blob([content]).size;
 
