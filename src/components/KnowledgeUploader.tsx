@@ -57,24 +57,17 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
-    // Validate file types
-    const allowedTypes = ['.txt', '.md'];
-    const invalidFiles = Array.from(files).filter(file => {
-      const extension = '.' + file.name.split('.').pop()?.toLowerCase();
-      return !allowedTypes.includes(extension);
-    });
-
-    if (invalidFiles.length > 0) {
-      alert(`Only text files (.txt, .md) are supported. Invalid files: ${invalidFiles.map(f => f.name).join(', ')}`);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-      return;
-    }
     setIsUploading(true);
     
     try {
       for (const file of Array.from(files)) {
+        // Validate file type
+        const fileName = file.name.toLowerCase();
+        if (!fileName.endsWith('.txt') && !fileName.endsWith('.md')) {
+          alert(`File "${file.name}" is not supported. Only .txt and .md files are allowed.`);
+          continue;
+        }
+        
         // Read file content
         const content = await readFileContent(file);
         
