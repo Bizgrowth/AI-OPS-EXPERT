@@ -57,6 +57,20 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
+    // Validate file types
+    const allowedTypes = ['.txt', '.md'];
+    const invalidFiles = Array.from(files).filter(file => {
+      const extension = '.' + file.name.split('.').pop()?.toLowerCase();
+      return !allowedTypes.includes(extension);
+    });
+
+    if (invalidFiles.length > 0) {
+      alert(`Only text files (.txt, .md) are supported. Invalid files: ${invalidFiles.map(f => f.name).join(', ')}`);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      return;
+    }
     setIsUploading(true);
     
     try {
@@ -178,7 +192,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
                 ref={fileInputRef}
                 type="file"
                 multiple
-                accept=".txt,.pdf,.doc,.docx,.md"
+                accept=".txt,.md"
                 onChange={handleFileUpload}
                 className="hidden"
               />
@@ -198,7 +212,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
               </button>
               
               <p className="text-sm text-gray-400 mt-2">
-                Supported: .txt, .pdf, .doc, .docx, .md
+                Supported: .txt, .md (text files only)
               </p>
             </div>
           </div>
