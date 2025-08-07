@@ -6,7 +6,6 @@ import KnowledgeUploaderComponent from './KnowledgeUploader';
 const ChatbotToggle: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showKnowledgeUploader, setShowKnowledgeUploader] = useState(false);
-  const [showKnowledgeUploader, setShowKnowledgeUploader] = useState(false);
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
