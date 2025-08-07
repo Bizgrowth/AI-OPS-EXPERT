@@ -211,12 +211,21 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
           <div className="mt-6 bg-blue-900/30 border border-blue-700 rounded-lg p-4">
             <h4 className="text-blue-400 font-semibold mb-2">How it works:</h4>
             <ul className="text-sm text-blue-300 space-y-1">
-              <li>• Upload documents with information you want the chatbot to know</li>
-              <li>• Private documents are only used by the AI, not visible to users</li>
-              <li>• The chatbot will automatically reference this information in responses</li>
+              <li>• 🔒 Upload private documents that only the AI chatbot can access</li>
+              <li>• 🤖 Visitors never see these documents, but the chatbot becomes much smarter</li>
+              <li>• 📚 The AI automatically searches and uses this knowledge to answer questions</li>
+              <li>• 🎯 Perfect for detailed pricing, processes, case studies, and internal info</li>
               <li>• Supported formats: Text files, PDFs, Word documents, Markdown</li>
-              <li>• Documents are stored locally and securely</li>
+              <li>• 🔐 All documents stored locally and securely on your device</li>
             </ul>
+            
+            <div className="mt-4 p-3 bg-green-900/30 border border-green-700 rounded-lg">
+              <p className="text-green-300 text-sm font-medium">
+                💡 <strong>Pro Tip:</strong> Upload detailed service descriptions, pricing sheets, case studies, 
+                and FAQ documents. Your chatbot will become incredibly knowledgeable while keeping 
+                sensitive information completely private!
+              </p>
+            </div>
           </div>
         </div>
       </div>

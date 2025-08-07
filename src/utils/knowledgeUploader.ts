@@ -115,8 +115,13 @@ export const enhanceChatbotResponse = (userMessage: string, baseResponse: string
   const relevantDocs = KnowledgeUploader.searchDocuments(userMessage);
   
   if (relevantDocs.length > 0) {
-    const additionalInfo = relevantDocs[0].content.substring(0, 200) + '...';
-    return `${baseResponse}\n\n📚 **Additional Information:**\n${additionalInfo}`;
+    const doc = relevantDocs[0];
+    
+    // Only add if it's truly relevant and adds value
+    if (doc.content.length > 100) {
+      const additionalInfo = doc.content.substring(0, 250) + '...';
+      return `${baseResponse}\n\n📚 **From Daniel's Knowledge Base:**\n${additionalInfo}\n\n💡 *This comes from private documentation to give you the most accurate information!*`;
+    }
   }
   
   return baseResponse;

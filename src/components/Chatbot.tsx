@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Minimize2, Zap, Heart, Star } from 'lucide-react';
 import { searchKnowledge, privateKnowledge } from '../data/privateKnowledge';
+import { KnowledgeUploader, enhanceChatbotResponse } from '../utils/knowledgeUploader';
 
 interface Message {
   id: string;
@@ -58,8 +59,18 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   const getAIResponse = (userMessage: string): { text: string; emotion: 'happy' | 'thinking' | 'excited' | 'helpful' } => {
     const message = userMessage.toLowerCase();
     
-    // First, search the private knowledge base
+    // First, search both built-in knowledge and uploaded documents
     const knowledgeResults = searchKnowledge(userMessage);
+    const uploadedDocs = KnowledgeUploader.searchDocuments(userMessage);
+    
+    // Combine results from both knowledge sources
+    const allKnowledge = [...knowledgeResults, ...uploadedDocs.map(doc => ({
+      category: doc.category,
+      topic: doc.filename,
+      content: doc.content,
+      keywords: doc.keywords
+    }))];
+    
     if (knowledgeResults.length > 0) {
       const relevantKnowledge = knowledgeResults[0]; // Use most relevant result
       
@@ -91,6 +102,17 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
           emotion: 'excited'
         };
       }
+    }
+    
+    // Check uploaded documents for additional context
+    if (uploadedDocs.length > 0) {
+      const relevantDoc = uploadedDocs[0];
+      const snippet = relevantDoc.content.substring(0, 300) + '...';
+      
+      return {
+        text: `📚 Based on my knowledge base, here's what I can tell you:\n\n${snippet}\n\n✨ This information comes from Daniel's private documentation. Would you like me to elaborate on any specific aspect? I have detailed information that can help answer your questions! 🚀`,
+        emotion: 'helpful'
+      };
     }
     
     // Pricing questions
@@ -201,6 +223,17 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
       setRobotEmotion(response.emotion === 'excited' ? 'excited' : 'happy');
+      
+      // Enhance response with uploaded document knowledge if available
+      const enhancedResponse = enhanceChatbotResponse(inputText, response.text);
+      if (enhancedResponse !== response.text) {
+        // Update the message with enhanced content
+        setMessages(prev => prev.map(msg => 
+          msg.id === botResponse.id 
+            ? { ...msg, text: enhancedResponse }
+            : msg
+        ));
+      }
       
       if (response.emotion === 'excited') {
         triggerParticles();
