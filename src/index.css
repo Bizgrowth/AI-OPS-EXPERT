@@ -205,3 +205,35 @@ html {
     linear-gradient(135deg, rgba(6, 182, 212, 0.02) 0%, transparent 50%, rgba(139, 92, 246, 0.02) 100%);
   pointer-events: none;
 }
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Ensure proper spacing on mobile */
+  .mobile-safe-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure buttons don't overflow */
+  button {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Better text wrapping for long emails */
+  .break-all {
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+  
+  /* Ensure cards don't touch screen edges */
+  .mobile-card-spacing {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}

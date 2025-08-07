@@ -380,13 +380,13 @@ Contact Daniel Schley for implementation: dschley@aiopsexpert.com
         {/* AI Solutions Grid */}
         <div 
           ref={gridRef}
-          className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-16 px-4">
+          className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-16">
           {aiSolutions.map((solution) => {
             const IconComponent = solution.icon;
             return (
               <div
                 key={solution.id}
-                className="bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-600 hover:border-cyan-500/50 transform hover:-translate-y-1"
+                className="bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-600 hover:border-cyan-500/50 transform hover:-translate-y-1 mx-4 lg:mx-0"
               >
                 {/* Solution Header */}
                 <div className={`bg-gradient-to-r ${solution.gradient} p-6 text-white relative overflow-hidden`}>
@@ -491,7 +491,7 @@ Contact Daniel Schley for implementation: dschley@aiopsexpert.com
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-sm rounded-2xl p-4 sm:p-8 text-center border border-slate-600 mx-4">
+        <div className="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-sm rounded-2xl p-4 sm:p-8 text-center border border-slate-600 mx-4 lg:mx-0">
           <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4">Ready to Transform Your Business with AI?</h3>
           <p className="text-gray-300 mb-6 text-base sm:text-lg">
             Each solution is custom-implemented for your specific business needs with ongoing support and optimization.
@@ -499,10 +499,10 @@ Contact Daniel Schley for implementation: dschley@aiopsexpert.com
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => setShowScheduling(true)}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto">
+              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto max-w-sm mx-auto sm:mx-0">
               Schedule Free AI Consultation
             </button>
-            <button className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
+            <button className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto max-w-sm mx-auto sm:mx-0">
               Download Complete Portfolio
             </button>
           </div>

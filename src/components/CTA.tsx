@@ -42,9 +42,9 @@ const CTA = () => {
 
         <div 
           ref={cardsRef}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 px-4">
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* AI Strategy Call CTA */}
-          <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20 hover:scale-105">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20 hover:scale-105 mx-4 lg:mx-0">
             <div className="text-center mb-8">
               <div className="p-3 sm:p-4 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full w-fit mx-auto mb-6 hover:scale-110 transition-transform duration-300">
                 <Calendar className="w-8 h-8 sm:w-12 sm:h-12 text-cyan-400" />
@@ -89,7 +89,7 @@ const CTA = () => {
           </div>
 
           {/* AI Portfolio Download CTA */}
-          <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 hover:scale-105">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 hover:scale-105 mx-4 lg:mx-0">
             <div className="text-center mb-8">
               <div className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/20 to-pink-600/20 rounded-full w-fit mx-auto mb-6 hover:scale-110 transition-transform duration-300">
                 <Download className="w-8 h-8 sm:w-12 sm:h-12 text-purple-400" />
