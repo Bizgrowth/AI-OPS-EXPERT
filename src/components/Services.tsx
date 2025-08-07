@@ -11,10 +11,12 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import SchedulingModal from './SchedulingModal';
 
 const Services = () => {
   const [servicesRef, isServicesVisible] = useScrollAnimation(0.1);
   const [gridRef, isGridVisible] = useScrollAnimation(0.2);
+  const [showScheduling, setShowScheduling] = useState(false);
 
   const services = [
     {
@@ -146,12 +148,19 @@ const Services = () => {
         <div className="text-center mt-12 sm:mt-16 px-4">
           <p className="text-gray-400 mb-6 text-sm sm:text-base">
             Each AI solution includes detailed case studies, proven methodologies, and measurable ROI results
-          </p>
+            <button 
+              onClick={() => setShowScheduling(true)}
+              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 w-full sm:w-auto">
           <button className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 w-full sm:w-auto">
             Schedule AI Consultation
           </button>
         </div>
       </div>
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </section>
   );
 };

@@ -2,13 +2,19 @@ import React from 'react';
 import { Calendar, Download, ChevronRight, Clock, CheckCircle } from 'lucide-react';
 import { generateComprehensivePortfolio } from '../utils/downloadUtils';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import SchedulingModal from './SchedulingModal';
 
 const CTA = () => {
   const [ctaRef, isCtaVisible] = useScrollAnimation(0.1);
   const [cardsRef, isCardsVisible] = useScrollAnimation(0.2);
+  const [showScheduling, setShowScheduling] = useState(false);
 
   const handleDownloadPortfolio = () => {
     generateComprehensivePortfolio();
+  };
+
+  const handleBookConsultation = () => {
+    setShowScheduling(true);
   };
 
   return (
@@ -70,6 +76,9 @@ const CTA = () => {
             </div>
 
             <button className="group w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
+            <button 
+              onClick={handleBookConsultation}
+              className="group w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
               Book Your Free AI Session
               <ChevronRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -137,6 +146,11 @@ const CTA = () => {
         </div>
         </div>
       </div>
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </section>
   );
 };

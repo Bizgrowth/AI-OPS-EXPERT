@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ChevronRight, Download, Calendar, Cpu, Brain, Zap } from 'lucide-react';
 import { generateComprehensivePortfolio } from '../utils/downloadUtils';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import SchedulingModal from './SchedulingModal';
 
 const Hero = () => {
   const [heroRef, isHeroVisible] = useScrollAnimation(0.1);
@@ -23,17 +24,10 @@ const Hero = () => {
   };
 
   const handleBookConsultation = () => {
-    // Scroll to contact section
-    const element = document.getElementById('contact');
-    if (element) {
-      const headerHeight = 64; // Height of fixed header
-      const elementPosition = element.offsetTop - headerHeight;
-      window.scrollTo({ 
-        top: elementPosition, 
-        behavior: 'smooth' 
-      });
-    }
+    setShowScheduling(true);
   };
+
+  const [showScheduling, setShowScheduling] = useState(false);
 
   const handleDownloadPortfolio = () => {
     generateComprehensivePortfolio();
@@ -242,6 +236,11 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </section>
   );
 };

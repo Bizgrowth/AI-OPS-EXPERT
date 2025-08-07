@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, X, Cpu } from 'lucide-react';
+import SchedulingModal from './SchedulingModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showScheduling, setShowScheduling] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -22,8 +24,7 @@ const Header = () => {
 
   const handleBookCall = () => {
     setIsMenuOpen(false);
-    // Scroll to contact section
-    handleNavClick('#contact');
+    setShowScheduling(true);
   };
 
   return (
@@ -149,6 +150,11 @@ const Header = () => {
           </div>
         )}
       </div>
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </header>
   );
 };
