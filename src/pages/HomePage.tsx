@@ -12,7 +12,7 @@ import SEOHead from '../components/SEOHead';
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen">
       <SEOHead 
         title="Transform Operations with AI"
         description="AI Operations Expert specializing in intelligent automation, operational optimization, and AI-powered business transformation. Former COO helping companies scale through strategic AI implementation."
@@ -20,48 +20,51 @@ const HomePage = () => {
         canonicalUrl="/"
       />
       
+      {/* Tech accent dots overlay */}
+      <div className="tech-accent-dots fixed inset-0 z-0"></div>
+      
       {/* Hero Section */}
-      <section id="home">
+      <section id="home" className="relative z-10">
         <Hero />
       </section>
 
       {/* About Section */}
-      <section id="about">
+      <section id="about" className="tech-section-overlay relative z-10">
         <About />
       </section>
 
       {/* Services Section */}
-      <section id="services">
+      <section id="services" className="relative z-10">
         <Services />
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio">
+      <section id="portfolio" className="tech-section-overlay relative z-10">
         <AIPortfolio />
       </section>
 
       {/* Results Section */}
-      <section id="results">
+      <section id="results" className="relative z-10">
         <Results />
       </section>
 
       {/* Blog Section */}
-      <section id="blog">
+      <section id="blog" className="tech-section-overlay relative z-10">
         <BlogSection />
       </section>
 
       {/* CTA Section */}
-      <section id="cta">
+      <section id="cta" className="relative z-10">
         <CTA />
       </section>
 
       {/* Contact Section */}
-      <section id="contact">
+      <section id="contact" className="tech-section-overlay relative z-10">
         <Contact />
       </section>
 
       {/* Newsletter Section */}
-      <section id="newsletter">
+      <section id="newsletter" className="relative z-10">
         <NewsletterSection />
       </section>
     </div>
