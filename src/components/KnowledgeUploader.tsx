@@ -61,15 +61,31 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     
     try {
       for (const file of Array.from(files)) {
-        // Validate file type
+        // Validate and extract content based on file type
         const fileName = file.name.toLowerCase();
-        if (!fileName.endsWith('.txt') && !fileName.endsWith('.md')) {
-          alert(`File "${file.name}" is not supported. Only .txt and .md files are allowed.`);
+        const supportedTypes = ['.txt', '.md', '.pdf', '.doc', '.docx'];
+        const isSupported = supportedTypes.some(type => fileName.endsWith(type));
+        
+        if (!isSupported) {
+          alert(`File "${file.name}" is not supported. Supported types: ${supportedTypes.join(', ')}`);
           continue;
         }
         
-        // Read file content
-        const content = await readFileContent(file);
+        // Extract text content based on file type
+        let content = '';
+        try {
+          if (fileName.endsWith('.pdf')) {
+            content = await extractPdfText(file);
+          } else if (fileName.endsWith('.doc') || fileName.endsWith('.docx')) {
+            content = await extractDocText(file);
+          } else {
+            content = await readTextFile(file);
+          }
+        } catch (error) {
+          console.error(`Failed to extract text from ${file.name}:`, error);
+          alert(`Failed to extract text from "${file.name}". Please try again.`);
+          continue;
+        }
         
         if (content) {
           await SupabaseKnowledgeManager.uploadDocument(
@@ -97,7 +113,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     }
   };
 
-  const readFileContent = (file: File): Promise<string> => {
+  const readTextFile = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (e) => resolve(e.target?.result as string);
@@ -106,6 +122,50 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     });
   };
 
+  const extractPdfText = async (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const arrayBuffer = e.target?.result as ArrayBuffer;
+          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          let fullText = '';
+          
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            const pageText = textContent.items
+              .map((item: any) => item.str)
+              .join(' ');
+            fullText += pageText + '\n';
+          }
+          
+          resolve(fullText.trim());
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = () => reject(new Error('Failed to read PDF file'));
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
+  const extractDocText = async (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const arrayBuffer = e.target?.result as ArrayBuffer;
+          const result = await mammoth.extractRawText({ arrayBuffer });
+          resolve(result.value);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = () => reject(new Error('Failed to read DOC file'));
+      reader.readAsArrayBuffer(file);
+    });
+  };
   const handleDeleteDocument = async (id: string) => {
     if (confirm('Are you sure you want to delete this document?')) {
       const success = await SupabaseKnowledgeManager.deleteDocument(id);
@@ -185,7 +245,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
                 ref={fileInputRef}
                 type="file"
                 multiple
-                accept=".txt,.md"
+                accept=".txt,.md,.pdf,.doc,.docx"
                 onChange={handleFileUpload}
                 className="hidden"
               />
@@ -205,7 +265,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
               </button>
               
               <p className="text-sm text-gray-400 mt-2">
-                Supported: .txt, .md (text files only)
+                Supported: .txt, .md, .pdf, .doc, .docx
               </p>
             </div>
           </div>
