@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, Download, ChevronRight, Clock, CheckCircle } from 'lucide-react';
 import { generateComprehensivePortfolio } from '../utils/downloadUtils';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -75,7 +75,6 @@ const CTA = () => {
               </div>
             </div>
 
-            <button className="group w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
             <button 
               onClick={handleBookConsultation}
               className="group w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
@@ -138,12 +137,10 @@ const CTA = () => {
         <div className={`text-center mt-16 transition-all duration-1000 delay-700 ${
           isCardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-        <div className="text-center mt-16">
           <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">
             <strong className="text-white">Still have questions about AI implementation?</strong> Feel free to reach out directly. 
             I personally respond to every inquiry within 24 hours.
           </p>
-        </div>
         </div>
       </div>
       
