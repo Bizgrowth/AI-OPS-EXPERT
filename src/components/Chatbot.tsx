@@ -443,15 +443,17 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
         <div className="px-4 pb-2 bg-slate-900">
           <p className="text-gray-400 text-xs mb-2 font-medium">✨ Quick questions to get started:</p>
           <div className="flex flex-wrap gap-2">
+          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-2">
             {quickQuestions.map((question, index) => (
               <button
                 key={index}
                 onClick={() => handleQuickQuestion(question)}
-                className="text-xs bg-gradient-to-r from-slate-700 to-slate-600 text-gray-300 px-3 py-2 rounded-full hover:from-cyan-500 hover:to-purple-500 hover:text-white transition-all duration-300 border border-slate-600 hover:border-transparent hover:scale-105 shadow-sm"
+                className="flex-shrink-0 text-xs bg-gradient-to-r from-slate-700 to-slate-600 text-gray-300 px-3 py-2 rounded-full hover:from-cyan-500 hover:to-purple-500 hover:text-white transition-all duration-300 border border-slate-600 hover:border-transparent hover:scale-105 shadow-sm whitespace-nowrap"
               >
                 {question}
               </button>
             ))}
+          </div>
           </div>
         </div>
       )}
