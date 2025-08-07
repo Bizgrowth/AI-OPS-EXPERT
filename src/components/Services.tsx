@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useState } from 'react';
 import { 
   Brain, 
   Cpu, 
@@ -118,12 +119,12 @@ const Services = () => {
 
         <div 
           ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 px-4">
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map((service, index) => (
             <div 
               key={index}
               onClick={() => handleServiceClick(service.id)}
-              className="group relative p-4 sm:p-6 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 cursor-pointer"
+              className="group relative p-4 sm:p-6 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 cursor-pointer mx-4 sm:mx-0"
             >
               <div className={`p-3 sm:p-4 bg-gradient-to-r ${service.color} rounded-xl w-fit mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                 <service.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
@@ -150,9 +151,9 @@ const Services = () => {
           <p className="text-gray-400 mb-6 text-sm sm:text-base">
             Each AI solution includes detailed case studies, proven methodologies, and measurable ROI results
           </p>
-            <button 
-              onClick={() => setShowScheduling(true)}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 w-full sm:w-auto">
+          </p>
+          <button 
+            onClick={() => setShowScheduling(true)}
             Schedule AI Consultation
           </button>
         </div>
@@ -163,6 +164,7 @@ const Services = () => {
         onClose={() => setShowScheduling(false)} 
       />
     </section>
+  )
   );
 };
 
