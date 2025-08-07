@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, File, Trash2, Eye, EyeOff, Plus, X } from 'lucide-react';
-import { SupabaseKnowledgeManager, KnowledgeDocument } from '../utils/supabaseKnowledge';
+import { SupabaseKnowledgeManager, KnowledgeDocument, supabase } from '../utils/supabaseKnowledge';
 
 interface KnowledgeUploaderProps {
   isOpen: boolean;
