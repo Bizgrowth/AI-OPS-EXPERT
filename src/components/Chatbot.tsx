@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Minimize2, Zap, Heart, Star } from 'lucide-react';
 import { searchKnowledge, privateKnowledge } from '../data/privateKnowledge';
-import { searchKnowledgeDatabase, SupabaseKnowledgeManager } from '../utils/supabaseKnowledge';
 
 interface Message {
   id: string;
