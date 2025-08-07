@@ -1072,7 +1072,16 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
             Let's discuss how this service can accelerate your business growth and deliver measurable results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className={`bg-gradient-to-r ${service.color} text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg`}>
+            <button 
+              onClick={() => {
+                // Navigate back to home and scroll to contact
+                window.location.hash = '';
+                setTimeout(() => {
+                  window.location.hash = 'contact';
+                }, 100);
+              }}
+              className={`bg-gradient-to-r ${service.color} text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg cursor-pointer`}
+            >
               Schedule Strategy Session
             </button>
             <button 
