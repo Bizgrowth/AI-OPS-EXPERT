@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import { Menu, X, Cpu } from 'lucide-react'; // Removed useLocation
-// import { Link, useLocation } from 'react-router-dom'; // Original import
 import SchedulingModal from './SchedulingModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScheduling, setShowScheduling] = useState(false);
-  // const location = useLocation(); // Removed useLocation
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
     setIsMenuOpen(false);
+    
+    // Smooth scroll to section
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 64; // Height of fixed header
+      const elementPosition = element.offsetTop - headerHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const handleBookCall = () => {
@@ -26,7 +36,6 @@ const Header = () => {
           <div 
             className="flex items-center space-x-3 cursor-pointer"
           >
-            {/* Changed Link to a tag and updated href */}
             <a href="#top" onClick={(e) => handleNavClick(e, 'top')} className="flex items-center space-x-3">
               <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg">
                 <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
@@ -39,7 +48,6 @@ const Header = () => {
           </div>
           
           <nav className="hidden lg:flex space-x-6 xl:space-x-8">
-            {/* Changed Link to a tag and updated href, removed location.pathname logic */}
             <a
               href="#about"
               onClick={(e) => handleNavClick(e, 'about')}
@@ -105,7 +113,6 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800 rounded-lg mt-2 mx-2">
-              {/* Changed Link to a tag and updated href */}
               <a
                 href="#about"
                 onClick={(e) => handleNavClick(e, 'about')}
