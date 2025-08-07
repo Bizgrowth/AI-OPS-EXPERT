@@ -152,6 +152,8 @@ const Services = () => {
           </p>
           <button 
             onClick={() => setShowScheduling(true)}
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+          >
             Schedule AI Consultation
           </button>
         </div>
