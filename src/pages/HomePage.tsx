@@ -23,8 +23,6 @@ const HomePage = () => {
       {/* Tech accent dots overlay */}
       <div className="tech-accent-dots fixed inset-0 z-0"></div>
       
-      {/* Main content wrapper with proper mobile padding */}
-      <div className="px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
       <section id="home" className="relative z-10">
         <Hero />
@@ -69,7 +67,6 @@ const HomePage = () => {
       <section id="newsletter" className="relative z-10">
         <NewsletterSection />
       </section>
-      </div>
     </div>
   );
 };
