@@ -356,7 +356,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-slate-800 rounded-2xl shadow-2xl border border-slate-600 flex flex-col z-50 animate-scale-in overflow-hidden">
+    <div className="fixed bottom-4 right-4 w-96 max-h-[90vh] bg-slate-800 rounded-2xl shadow-2xl border border-slate-600 flex flex-col z-50 animate-scale-in overflow-hidden">
       {/* Header with animated robot */}
       <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-2xl flex items-center justify-between relative overflow-hidden">
         {/* Animated background elements */}
