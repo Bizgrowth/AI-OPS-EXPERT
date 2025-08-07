@@ -229,7 +229,7 @@ const Hero = () => {
               </div>
               <h3 className={`text-xl sm:text-2xl font-bold text-white mb-2 transition-all duration-700 delay-1500 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-              }`}>AI Powered Knowledge Management</h3>
+              }`}>AI Performance</h3>
               <p className={`text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1600 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
               }`}>Data-driven optimization that scales operations and drives measurable results</p>
