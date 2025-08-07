@@ -217,7 +217,17 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
               <li>• 🎯 Perfect for detailed pricing, processes, case studies, and internal info</li>
               <li>• Supported formats: Text files, PDFs, Word documents, Markdown</li>
               <li>• 🔐 All documents stored locally and securely on your device</li>
+              <li>• Supported formats: Text files, PDFs, Word documents, Markdown</li>
+              <li>• 🔐 All documents stored locally and securely on your device</li>
             </ul>
+            
+            <div className="mt-4 p-3 bg-green-900/30 border border-green-700 rounded-lg">
+              <p className="text-green-300 text-sm font-medium">
+                💡 <strong>Pro Tip:</strong> Upload detailed service descriptions, pricing sheets, case studies, 
+                and FAQ documents. Your chatbot will become incredibly knowledgeable while keeping 
+                sensitive information completely private!
+              </p>
+            </div>
             
             <div className="mt-4 p-3 bg-green-900/30 border border-green-700 rounded-lg">
               <p className="text-green-300 text-sm font-medium">
