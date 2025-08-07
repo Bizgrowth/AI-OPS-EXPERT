@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Settings } from 'lucide-react';
 import Chatbot from './Chatbot';
+import KnowledgeUploaderComponent from './KnowledgeUploader';
 
 const ChatbotToggle: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showKnowledgeUploader, setShowKnowledgeUploader] = useState(false);
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
@@ -48,6 +50,15 @@ const ChatbotToggle: React.FC = () => {
     <>
       {/* Single Robot Chat Button */}
       <div className="fixed bottom-6 right-6 z-40">
+        {/* Knowledge Upload Button (Admin) */}
+        <button
+          onClick={() => setShowKnowledgeUploader(true)}
+          className="absolute -top-16 right-0 bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border border-slate-600"
+          title="Upload Knowledge Base Documents"
+        >
+          <Settings className="w-5 h-5" />
+        </button>
+        
         <button
           onClick={toggleChatbot}
           className="relative bg-white rounded-full shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center hover:scale-110 p-2 border-2 border-blue-100"
@@ -71,6 +82,12 @@ const ChatbotToggle: React.FC = () => {
 
       {/* Chatbot Component */}
       <Chatbot isOpen={isOpen} onToggle={toggleChatbot} />
+      
+      {/* Knowledge Uploader */}
+      <KnowledgeUploaderComponent 
+        isOpen={showKnowledgeUploader} 
+        onClose={() => setShowKnowledgeUploader(false)} 
+      />
     </>
   );
 };

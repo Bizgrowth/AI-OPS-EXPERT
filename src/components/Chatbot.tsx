@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Minimize2, Zap, Heart, Star } from 'lucide-react';
+import { searchKnowledge, privateKnowledge } from '../data/privateKnowledge';
 
 interface Message {
   id: string;
@@ -56,6 +57,41 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
 
   const getAIResponse = (userMessage: string): { text: string; emotion: 'happy' | 'thinking' | 'excited' | 'helpful' } => {
     const message = userMessage.toLowerCase();
+    
+    // First, search the private knowledge base
+    const knowledgeResults = searchKnowledge(userMessage);
+    if (knowledgeResults.length > 0) {
+      const relevantKnowledge = knowledgeResults[0]; // Use most relevant result
+      
+      // Extract key information from the knowledge base
+      if (relevantKnowledge.category === 'Pricing' && (message.includes('price') || message.includes('cost'))) {
+        return {
+          text: `💰 Here's detailed pricing information:\n\n${relevantKnowledge.content}\n\n✨ **All solutions include 90-day ROI guarantee!** Ready for a personalized quote? Let's schedule your free consultation! 🚀`,
+          emotion: 'excited'
+        };
+      }
+      
+      if (relevantKnowledge.category === 'Client Success' && (message.includes('results') || message.includes('case') || message.includes('success'))) {
+        return {
+          text: `📊 Here are detailed client success stories:\n\n${relevantKnowledge.content}\n\n🎯 **Want similar results for your business?** Book your free AI assessment! 🚀`,
+          emotion: 'excited'
+        };
+      }
+      
+      if (relevantKnowledge.category === 'Consultation Process' && (message.includes('consultation') || message.includes('session') || message.includes('expect'))) {
+        return {
+          text: `🎯 Here's what to expect from your AI strategy session:\n\n${relevantKnowledge.content}\n\n📧 Ready to get started? Email: dschley@aiopsexpert.com\n📞 Call: 904-955-3905 ✨`,
+          emotion: 'helpful'
+        };
+      }
+      
+      if (relevantKnowledge.category === 'AI Solutions' && (message.includes('process') || message.includes('implementation') || message.includes('how'))) {
+        return {
+          text: `⚡ Here's Daniel's proven AI implementation process:\n\n${relevantKnowledge.content}\n\n🚀 Ready to start your AI transformation? Let's schedule your strategy session! ✨`,
+          emotion: 'excited'
+        };
+      }
+    }
     
     // Pricing questions
     if (message.includes('price') || message.includes('cost') || message.includes('pricing') || message.includes('how much')) {
