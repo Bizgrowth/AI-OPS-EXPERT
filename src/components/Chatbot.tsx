@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Minimize2, Zap, Heart, Star } from 'lucide-react';
 import { searchKnowledge, privateKnowledge } from '../data/privateKnowledge';
-import { KnowledgeUploader, enhanceChatbotResponse } from '../utils/knowledgeUploader';
+import { searchKnowledgeDatabase, SupabaseKnowledgeManager } from '../utils/supabaseKnowledge';
 
 interface Message {
   id: string;
@@ -59,17 +59,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   const getAIResponse = (userMessage: string): { text: string; emotion: 'happy' | 'thinking' | 'excited' | 'helpful' } => {
     const message = userMessage.toLowerCase();
     
-    // First, search both built-in knowledge and uploaded documents
+    // Search built-in knowledge first
     const knowledgeResults = searchKnowledge(userMessage);
-    const uploadedDocs = KnowledgeUploader.searchDocuments(userMessage);
-    
-    // Combine results from both knowledge sources
-    const allKnowledge = [...knowledgeResults, ...uploadedDocs.map(doc => ({
-      category: doc.category,
-      topic: doc.filename,
-      content: doc.content,
-      keywords: doc.keywords
-    }))];
     
     if (knowledgeResults.length > 0) {
       const relevantKnowledge = knowledgeResults[0]; // Use most relevant result
@@ -102,17 +93,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
           emotion: 'excited'
         };
       }
-    }
-    
-    // Check uploaded documents for additional context
-    if (uploadedDocs.length > 0) {
-      const relevantDoc = uploadedDocs[0];
-      const snippet = relevantDoc.content.substring(0, 300) + '...';
-      
-      return {
-        text: `📚 Based on my knowledge base, here's what I can tell you:\n\n${snippet}\n\n✨ This information comes from Daniel's private documentation. Would you like me to elaborate on any specific aspect? I have detailed information that can help answer your questions! 🚀`,
-        emotion: 'helpful'
-      };
     }
     
     // Pricing questions
@@ -197,9 +177,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
 
+    const currentInput = inputText;
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputText,
+      text: currentInput,
       sender: 'user',
       timestamp: new Date()
     };
@@ -211,7 +192,46 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
 
     // Simulate AI thinking time
     setTimeout(() => {
-      const response = getAIResponse(inputText);
+      handleAIResponse(currentInput);
+    }, 1500 + Math.random() * 2000);
+  };
+
+  const handleAIResponse = async (userInput: string) => {
+    try {
+      // First try database search for enhanced knowledge
+      const dbSearch = await searchKnowledgeDatabase(userInput);
+      
+      let response;
+      if (dbSearch.documents.length > 0) {
+        // Use database knowledge for enhanced response
+        const relevantDoc = dbSearch.documents[0];
+        const snippet = relevantDoc.content.substring(0, 300);
+        
+        response = {
+          text: `📚 Based on my comprehensive knowledge base:\n\n${snippet}...\n\n✨ This information comes from Daniel's private documentation. I have detailed information that can help answer your specific questions! Would you like me to elaborate on any aspect? 🚀`,
+          emotion: 'helpful' as const
+        };
+        
+        // Log the conversation with knowledge used
+        await SupabaseKnowledgeManager.logConversation(
+          'web-session-' + Date.now(),
+          userInput,
+          response.text,
+          { documentUsed: relevantDoc.filename, category: relevantDoc.category }
+        );
+      } else {
+        // Fall back to built-in knowledge
+        response = getAIResponse(userInput);
+        
+        // Log the conversation
+        await SupabaseKnowledgeManager.logConversation(
+          'web-session-' + Date.now(),
+          userInput,
+          response.text,
+          { source: 'built-in-knowledge' }
+        );
+      }
+
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         text: response.text,
@@ -224,21 +244,26 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
       setIsTyping(false);
       setRobotEmotion(response.emotion === 'excited' ? 'excited' : 'happy');
       
-      // Enhance response with uploaded document knowledge if available
-      const enhancedResponse = enhanceChatbotResponse(inputText, response.text);
-      if (enhancedResponse !== response.text) {
-        // Update the message with enhanced content
-        setMessages(prev => prev.map(msg => 
-          msg.id === botResponse.id 
-            ? { ...msg, text: enhancedResponse }
-            : msg
-        ));
-      }
-      
       if (response.emotion === 'excited') {
         triggerParticles();
       }
-    }, 1500 + Math.random() * 2000);
+    } catch (error) {
+      console.error('AI response error:', error);
+      
+      // Fallback to built-in response
+      const response = getAIResponse(userInput);
+      const botResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: response.text,
+        sender: 'bot',
+        timestamp: new Date(),
+        emotion: response.emotion
+      };
+
+      setMessages(prev => [...prev, botResponse]);
+      setIsTyping(false);
+      setRobotEmotion(response.emotion === 'excited' ? 'excited' : 'happy');
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
