@@ -443,7 +443,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
         <div className="px-4 pb-2 bg-slate-900">
           <p className="text-gray-400 text-xs mb-2 font-medium">✨ Quick questions to get started:</p>
           <div className="flex flex-wrap gap-2">
-          <div className="flex flex-wrap gap-2">
             {quickQuestions.map((question, index) => (
               <button
                 key={index}
