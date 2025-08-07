@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, File, Trash2, Eye, EyeOff, Plus, X } from 'lucide-react';
-import { KnowledgeUploader, DocumentUpload } from '../utils/knowledgeUploader';
+import { SupabaseKnowledgeManager, KnowledgeDocument } from '../utils/supabaseKnowledge';
 
 interface KnowledgeUploaderProps {
   isOpen: boolean;
@@ -8,8 +8,9 @@ interface KnowledgeUploaderProps {
 }
 
 const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, onClose }) => {
-  const [documents, setDocuments] = useState<DocumentUpload[]>(KnowledgeUploader.getAllDocuments());
+  const [documents, setDocuments] = useState<KnowledgeDocument[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('General');
   const [isPrivate, setIsPrivate] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -27,6 +28,23 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     'Other'
   ];
 
+  // Load documents on component mount
+  React.useEffect(() => {
+    loadDocuments();
+  }, []);
+
+  const loadDocuments = async () => {
+    setIsLoading(true);
+    try {
+      const docs = await SupabaseKnowledgeManager.getAllDocuments(true); // Include private docs for admin
+      setDocuments(docs);
+    } catch (error) {
+      console.error('Failed to load documents:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
@@ -35,17 +53,21 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     
     try {
       for (const file of Array.from(files)) {
-        // Only allow text files, PDFs, and documents
-        if (file.type.startsWith('text/') || 
-            file.type === 'application/pdf' || 
-            file.type.includes('document')) {
-          
-          await KnowledgeUploader.uploadDocument(file, selectedCategory, isPrivate);
+        // Read file content
+        const content = await readFileContent(file);
+        
+        if (content) {
+          await SupabaseKnowledgeManager.uploadDocument(
+            file.name,
+            content,
+            selectedCategory,
+            isPrivate
+          );
         }
       }
       
       // Refresh the documents list
-      setDocuments(KnowledgeUploader.getAllDocuments());
+      await loadDocuments();
       
       // Clear the file input
       if (fileInputRef.current) {
@@ -60,10 +82,23 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
     }
   };
 
-  const handleDeleteDocument = (id: string) => {
+  const readFileContent = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target?.result as string);
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsText(file);
+    });
+  };
+
+  const handleDeleteDocument = async (id: string) => {
     if (confirm('Are you sure you want to delete this document?')) {
-      KnowledgeUploader.deleteDocument(id);
-      setDocuments(KnowledgeUploader.getAllDocuments());
+      const success = await SupabaseKnowledgeManager.deleteDocument(id);
+      if (success) {
+        await loadDocuments();
+      } else {
+        alert('Failed to delete document. Please try again.');
+      }
     }
   };
 
@@ -163,10 +198,15 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
           {/* Documents List */}
           <div className="bg-slate-700 rounded-xl p-6 border border-slate-600">
             <h3 className="text-xl font-semibold text-white mb-4">
-              Uploaded Documents ({documents.length})
+              Knowledge Base Documents ({documents.length})
             </h3>
             
-            {documents.length === 0 ? (
+            {isLoading ? (
+              <div className="text-center py-8 text-gray-400">
+                <div className="animate-spin w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full mx-auto mb-4"></div>
+                <p>Loading documents...</p>
+              </div>
+            ) : documents.length === 0 ? (
               <div className="text-center py-8 text-gray-400">
                 <File className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>No documents uploaded yet</p>
@@ -181,8 +221,8 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
                         <h4 className="text-white font-medium truncate">{doc.filename}</h4>
                         <div className="flex items-center space-x-4 text-sm text-gray-400">
                           <span>{doc.category}</span>
-                          <span>{formatFileSize(doc.content)}</span>
-                          <span>{doc.uploadDate.toLocaleDateString()}</span>
+                          <span>{(doc.file_size / 1024).toFixed(1)} KB</span>
+                          <span>{new Date(doc.created_at).toLocaleDateString()}</span>
                         </div>
                       </div>
                     </div>
@@ -211,27 +251,18 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
           <div className="mt-6 bg-blue-900/30 border border-blue-700 rounded-lg p-4">
             <h4 className="text-blue-400 font-semibold mb-2">How it works:</h4>
             <ul className="text-sm text-blue-300 space-y-1">
-              <li>• 🔒 Upload private documents that only the AI chatbot can access</li>
+              <li>• 🔒 Upload private documents stored securely in the database</li>
               <li>• 🤖 Visitors never see these documents, but the chatbot becomes much smarter</li>
               <li>• 📚 The AI automatically searches and uses this knowledge to answer questions</li>
               <li>• 🎯 Perfect for detailed pricing, processes, case studies, and internal info</li>
-              <li>• Supported formats: Text files, PDFs, Word documents, Markdown</li>
-              <li>• 🔐 All documents stored locally and securely on your device</li>
-              <li>• Supported formats: Text files, PDFs, Word documents, Markdown</li>
-              <li>• 🔐 All documents stored locally and securely on your device</li>
+              <li>• 🔐 All documents stored securely in your Supabase database</li>
+              <li>• 🌐 Access from anywhere - not tied to a single device</li>
             </ul>
             
             <div className="mt-4 p-3 bg-green-900/30 border border-green-700 rounded-lg">
               <p className="text-green-300 text-sm font-medium">
-                💡 <strong>Pro Tip:</strong> Upload detailed service descriptions, pricing sheets, case studies, 
-                and FAQ documents. Your chatbot will become incredibly knowledgeable while keeping 
-                sensitive information completely private!
-              </p>
-            </div>
-            
-            <div className="mt-4 p-3 bg-green-900/30 border border-green-700 rounded-lg">
-              <p className="text-green-300 text-sm font-medium">
-                💡 <strong>Pro Tip:</strong> Upload detailed service descriptions, pricing sheets, case studies, 
+                💡 <strong>Database Storage:</strong> All documents are now stored in your Supabase database, 
+                making them accessible from anywhere while keeping them completely private from website visitors. 
                 and FAQ documents. Your chatbot will become incredibly knowledgeable while keeping 
                 sensitive information completely private!
               </p>
