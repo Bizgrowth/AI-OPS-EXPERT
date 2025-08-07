@@ -2,6 +2,14 @@ import React, { useState, useRef } from 'react';
 import { Upload, File, Trash2, Eye, EyeOff, Plus, X } from 'lucide-react';
 import { SupabaseKnowledgeManager, KnowledgeDocument, supabase } from '../utils/supabaseKnowledge';
 
+// Import libraries for document processing
+declare global {
+  interface Window {
+    pdfjsLib: any;
+    mammoth: any;
+  }
+}
+
 interface KnowledgeUploaderProps {
   isOpen: boolean;
   onClose: () => void;
@@ -95,7 +103,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
           }
         } catch (error) {
           console.error(`Failed to extract text from ${file.name}:`, error);
-          alert(`Failed to extract text from "${file.name}". Please try again.`);
+          alert(`Failed to extract text from "${file.name}". ${error instanceof Error ? error.message : 'Please try again.'}`);
           continue;
         }
         
@@ -135,12 +143,17 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
   };
 
   const extractPdfText = async (file: File): Promise<string> => {
+    // Check if PDF.js is available
+    if (!window.pdfjsLib) {
+      throw new Error('PDF.js library not loaded. Please refresh the page and try again.');
+    }
+    
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = async (e) => {
         try {
           const arrayBuffer = e.target?.result as ArrayBuffer;
-          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
           let fullText = '';
           
           for (let i = 1; i <= pdf.numPages; i++) {
@@ -154,6 +167,7 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
           
           resolve(fullText.trim());
         } catch (error) {
+          console.error('PDF.js extraction error:', error);
           reject(error);
         }
       };
@@ -163,14 +177,20 @@ const KnowledgeUploaderComponent: React.FC<KnowledgeUploaderProps> = ({ isOpen, 
   };
 
   const extractDocText = async (file: File): Promise<string> => {
+    // Check if mammoth is available
+    if (!window.mammoth) {
+      throw new Error('Mammoth library not loaded. Please refresh the page and try again.');
+    }
+    
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = async (e) => {
         try {
           const arrayBuffer = e.target?.result as ArrayBuffer;
-          const result = await mammoth.extractRawText({ arrayBuffer });
+          const result = await window.mammoth.extractRawText({ arrayBuffer });
           resolve(result.value);
         } catch (error) {
+          console.error('Mammoth extraction error:', error);
           reject(error);
         }
       };
