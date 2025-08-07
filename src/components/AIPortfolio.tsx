@@ -13,6 +13,7 @@ import {
   Download,
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import SchedulingModal from './SchedulingModal';
 
 interface AISolution {
   id: string;
@@ -48,6 +49,7 @@ const AIPortfolio: React.FC = () => {
   const [portfolioRef, isPortfolioVisible] = useScrollAnimation(0.1);
   const [statsRef, isStatsVisible] = useScrollAnimation(0.2);
   const [gridRef, isGridVisible] = useScrollAnimation(0.3);
+  const [showScheduling, setShowScheduling] = useState(false);
 
   const aiSolutions: AISolution[] = [
     {
@@ -495,7 +497,9 @@ Contact Daniel Schley for implementation: dschley@aiopsexpert.com
             Each solution is custom-implemented for your specific business needs with ongoing support and optimization.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto">
+            <button 
+              onClick={() => setShowScheduling(true)}
+              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto">
               Schedule Free AI Consultation
             </button>
             <button className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
@@ -597,6 +601,11 @@ Contact Daniel Schley for implementation: dschley@aiopsexpert.com
           </div>
         </div>
       )}
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </section>
   );
 };

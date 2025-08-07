@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowLeft, CheckCircle, Target, DollarSign, BarChart3, Globe, Users, TrendingUp, Settings, Zap, Clock, AlertTriangle, Search, Cog, ClipboardList, Monitor, FileText, RotateCcw, Headphones, Package, Italic as Crystal, Activity, UserCheck, Wrench, MessageSquare, Bot, Crosshair, Eye, Mic, Edit, ShoppingCart, GraduationCap, PieChart, Factory, Calculator, Link, BarChart, DollarSign as CostIcon, RefreshCw, TrendingUp as PerformanceIcon } from 'lucide-react';
 import { downloadCaseStudy, CaseStudyData } from '../utils/downloadUtils';
+import SchedulingModal from './SchedulingModal';
 
 interface ServiceDetailProps {
   serviceId: string;
@@ -8,6 +9,8 @@ interface ServiceDetailProps {
 }
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
+  const [showScheduling, setShowScheduling] = useState(false);
+  
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -58,7 +61,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
           icon: ClipboardList,
           title: "Strategic Implementation Planning",
           problem: "Companies struggling with AI adoption due to lack of structured implementation approach",
-          solution: "Structured approach to AI adoption that minimizes disruption while maximizing value creation through carefully orchestrated deployment phases",
+          solution: "Structured approach to AI adoption that minimizes disruption while maximizes value creation through carefully orchestrated deployment phases",
           impact: "Achieve 90% faster successful implementation with structured methodology",
           color: "from-green-500 to-emerald-600",
           badge: "Phased Rollout Strategy",
@@ -1074,13 +1077,9 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => {
-                // Navigate back to home and scroll to contact
-                window.location.hash = '';
-                setTimeout(() => {
-                  window.location.hash = 'contact';
-                }, 100);
+                setShowScheduling(true);
               }}
-              className={`bg-gradient-to-r ${service.color} text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg cursor-pointer`}
+              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 cursor-pointer"
             >
               Schedule Strategy Session
             </button>
@@ -1093,6 +1092,11 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack }) => {
           </div>
         </div>
       </div>
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </div>
   );
 };

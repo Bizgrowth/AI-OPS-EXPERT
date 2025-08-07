@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, ArrowRight, Tag, User } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import SchedulingModal from './SchedulingModal';
 
 interface BlogPost {
   id: string;
@@ -18,6 +19,7 @@ const BlogSection = () => {
   const [blogRef, isBlogVisible] = useScrollAnimation(0.1);
   const [postsRef, isPostsVisible] = useScrollAnimation(0.2);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [showScheduling, setShowScheduling] = useState(false);
 
   const blogPosts: BlogPost[] = [
     {
@@ -316,10 +318,14 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
               Get exclusive AI strategies, case studies, and implementation guides delivered weekly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto">
+              <button 
+                onClick={() => setShowScheduling(true)}
+                className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg w-full sm:w-auto">
                 Subscribe to Newsletter
               </button>
-              <button className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
+              <button 
+                onClick={() => setShowScheduling(true)}
+                className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
                 Book AI Consultation
               </button>
             </div>
@@ -379,7 +385,9 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
                   <p className="text-gray-300 mb-4">
                     Get personalized AI strategies and implementation guidance tailored to your specific business needs.
                   </p>
-                  <button className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105">
+                  <button 
+                    onClick={() => setShowScheduling(true)}
+                    className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105">
                     Schedule Free AI Consultation
                   </button>
                 </div>
@@ -388,6 +396,11 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
           </div>
         </div>
       )}
+      
+      <SchedulingModal 
+        isOpen={showScheduling} 
+        onClose={() => setShowScheduling(false)} 
+      />
     </section>
   );
 };
