@@ -164,9 +164,6 @@ const Services = () => {
         onClose={() => setShowScheduling(false)} 
       />
     </section>
-  )
-  )
-  )
   );
 };
 
