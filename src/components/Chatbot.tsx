@@ -197,39 +197,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
 
   const handleAIResponse = async (userInput: string) => {
     try {
-      // First try database search for enhanced knowledge
-      const dbSearch = await searchKnowledgeDatabase(userInput);
-      
-      let response;
-      if (dbSearch.documents.length > 0) {
-        // Use database knowledge for enhanced response
-        const relevantDoc = dbSearch.documents[0];
-        const snippet = relevantDoc.content.substring(0, 300);
-        
-        response = {
-          text: `📚 Based on my comprehensive knowledge base:\n\n${snippet}...\n\n✨ This information comes from Daniel's private documentation. I have detailed information that can help answer your specific questions! Would you like me to elaborate on any aspect? 🚀`,
-          emotion: 'helpful' as const
-        };
-        
-        // Log the conversation with knowledge used
-        await SupabaseKnowledgeManager.logConversation(
-          'web-session-' + Date.now(),
-          userInput,
-          response.text,
-          { documentUsed: relevantDoc.filename, category: relevantDoc.category }
-        );
-      } else {
-        // Fall back to built-in knowledge
-        response = getAIResponse(userInput);
-        
-        // Log the conversation
-        await SupabaseKnowledgeManager.logConversation(
-          'web-session-' + Date.now(),
-          userInput,
-          response.text,
-          { source: 'built-in-knowledge' }
-        );
-      }
+      // Use built-in knowledge
+      const response = getAIResponse(userInput);
 
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
