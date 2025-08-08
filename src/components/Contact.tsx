@@ -24,18 +24,21 @@ const Contact = () => {
     };
 
     try {
-      // Using Formspree for form submission
-      const response = await fetch('https://formspree.io/f/xdkogkvo', {
+      // Submit to Netlify Forms
+      const response = await fetch('/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
-          ...data,
-          _replyto: data.email,
-          _subject: `AI Consultation Request from ${data.firstName} ${data.lastName}`,
-          _to: 'dschley@aiopsexpert.com'
-        })
+        body: new URLSearchParams({
+          'form-name': 'ai-consultation',
+          'firstName': data.firstName as string,
+          'lastName': data.lastName as string,
+          'email': data.email as string,
+          'company': data.company as string || '',
+          'service': data.service as string || '',
+          'message': data.message as string
+        }).toString()
       });
 
       if (response.ok) {
@@ -180,7 +183,8 @@ const Contact = () => {
             <form 
               name="ai-consultation" 
               method="POST" 
-              data-netlify="true" 
+              data-netlify="true"
+              data-netlify-recaptcha="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit} 
               className="space-y-6"
@@ -282,6 +286,9 @@ const Contact = () => {
                   placeholder="Describe your current operational challenges and how you envision AI helping your business..."
                 ></textarea>
               </div>
+
+              {/* reCAPTCHA */}
+              <div data-netlify-recaptcha="true"></div>
 
               <button
                 type="submit"
