@@ -311,8 +311,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all resize-none hover:border-cyan-500/50 text-sm sm:text-base"
-                  style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all resize-none hover:border-cyan-500/50 text-sm sm:text-base relative z-20"
                   style={{ pointerEvents: 'auto' }}
                   placeholder="Describe your current operational challenges and how you envision AI helping your business..."
                 ></textarea>
