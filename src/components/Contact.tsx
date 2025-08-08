@@ -29,29 +29,21 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      const res = await fetch('https://formspree.io/f/xdkogkvo', {
+      // Create FormData for Netlify form submission
+      const formDataToSend = new FormData();
+      formDataToSend.append('form-name', 'ai-consultation');
+      
+      // Append all form fields
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
+
+      const res = await fetch('/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          // Formspree fields (JSON endpoint)
-          _replyto: formData.email, // <-- fixed reference
-          _subject: `AI Consultation Request from ${formData.firstName} ${formData.lastName}`,
-          // NOTE: do not rely on _to; set recipient in Formspree dashboard
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          company: formData.company || '',
-          service: formData.service || '',
-          message: formData.message,
-        }),
+        body: formDataToSend,
       });
 
       if (!res.ok) {
-        // Optional: read error details
-        // const errJson = await res.json().catch(() => null);
         setSubmitStatus('error');
         return;
       }
@@ -199,9 +191,17 @@ const Contact = () => {
             )}
 
             <form 
+              name="ai-consultation"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit} 
               className="space-y-6"
             >
+              {/* Hidden fields for Netlify form handling */}
+              <input type="hidden" name="form-name" value="ai-consultation" />
+              <input type="hidden" name="bot-field" />
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
