@@ -28,6 +28,27 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    // Check if we're in development mode
+    const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    if (isDevelopment) {
+      // Simulate form submission in development
+      console.log('Development mode: Simulating form submission with data:', formData);
+      setTimeout(() => {
+        setSubmitStatus('success');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          company: '',
+          service: '',
+          message: '',
+        });
+        setIsSubmitting(false);
+      }, 1000);
+      return;
+    }
+
     try {
       // Create form data object for Netlify
       const submitData = {
