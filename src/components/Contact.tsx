@@ -29,23 +29,26 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      // Create FormData and convert to URL-encoded string (Netlify requirement)
-      const formDataToSend = new FormData();
-      formDataToSend.append('form-name', 'ai-consultation');
-      formDataToSend.append('bot-field', ''); // Honeypot field (should be empty)
-      
-      // Append all form fields
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataToSend.append(key, value);
-      });
+      // Create form data object for Netlify
+      const submitData = {
+        'form-name': 'ai-consultation',
+        'bot-field': '', // Honeypot field (should be empty)
+        ...formData
+      };
 
+      console.log('Submitting form data:', submitData);
+      console.log('URL-encoded body:', new URLSearchParams(submitData).toString());
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataToSend).toString(),
+        body: new URLSearchParams(submitData).toString(),
       });
 
+      console.log('Response status:', res.status);
+      console.log('Response headers:', res.headers);
       if (!res.ok) {
+        const responseText = await res.text();
+        console.error('Form submission failed:', res.status, res.statusText, responseText);
         setSubmitStatus('error');
         return;
       }
