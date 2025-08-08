@@ -7,17 +7,27 @@ const Contact = () => {
   const [formRef, isFormVisible] = useScrollAnimation(0.2);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    service: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    
-    // Convert FormData to regular object
-    const data = Object.fromEntries(formData.entries());
 
     try {
       // Submit to Formspree (reliable email service)
@@ -28,20 +38,27 @@ const Contact = () => {
         },
         body: JSON.stringify({
           _replyto: data.email,
-          _subject: `AI Consultation Request from ${data.firstName} ${data.lastName}`,
+          _subject: `AI Consultation Request from ${formData.firstName} ${formData.lastName}`,
           _to: 'dschley@aiopsexpert.com',
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          company: data.company || '',
-          service: data.service || '',
-          message: data.message
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          company: formData.company || '',
+          service: formData.service || '',
+          message: formData.message
         })
       });
 
       if (response.ok) {
         setSubmitStatus('success');
-        form.reset();
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          company: '',
+          service: '',
+          message: ''
+        });
       } else {
         setSubmitStatus('error');
       }
@@ -191,6 +208,8 @@ const Contact = () => {
                     type="text"
                     id="firstName"
                     name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
                     placeholder="John"
@@ -204,6 +223,8 @@ const Contact = () => {
                     type="text"
                     id="lastName"
                     name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
                     placeholder="Smith"
@@ -219,6 +240,8 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
                   placeholder="john@company.com"
@@ -233,6 +256,8 @@ const Contact = () => {
                   type="text"
                   id="company"
                   name="company"
+                  value={formData.company}
+                  onChange={handleChange}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
                   placeholder="Your Company"
                 />
@@ -245,6 +270,8 @@ const Contact = () => {
                 <select
                   id="service"
                   name="service"
+                  value={formData.service}
+                  onChange={handleChange}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
                 >
                   <option value="">Select an AI solution...</option>
@@ -265,6 +292,8 @@ const Contact = () => {
                   id="message"
                   rows={4}
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all resize-none hover:border-cyan-500/50 text-sm sm:text-base"
                   placeholder="Describe your current operational challenges and how you envision AI helping your business..."
@@ -273,7 +302,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !formData.firstName || !formData.lastName || !formData.email || !formData.message}
                 className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
               >
                 {isSubmitting ? (
