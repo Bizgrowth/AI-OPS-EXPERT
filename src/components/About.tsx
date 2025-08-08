@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Users, TrendingUp, Cpu, Brain, Zap } from 'lucide-react';
+import { Award, Users, TrendingUp, Cpu, Brain, Zap, Target, Building, DollarSign, Trophy } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
@@ -22,12 +22,12 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 px-4">
-            From C-Suite to
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> AI Operations Expert</span>
+            AI Ops Expert — 20+ Years of
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> Scaling, Optimizing & Transforming</span> Businesses
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-            Two decades of operational leadership combined with cutting-edge AI expertise 
-            to help businesses transform their operations and achieve exponential growth.
+            From C-Suite to AI innovator, I combine two decades of proven operational leadership 
+            with cutting-edge AI solutions to deliver measurable growth in 90 days or less.
           </p>
         </div>
 
@@ -36,77 +36,80 @@ const About = () => {
             ref={contentRef}
             className="space-y-6 sm:space-y-8 px-4">
             <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">My Journey to AI Ops Expert</h3>
-              <p className="text-gray-300 leading-relaxed mb-6 text-sm sm:text-base">
-                My path to becoming an AI Ops Expert was forged in 20+ years of real business operations, 
-                solving the exact problems that AI now addresses at scale. Every breakthrough came from 
-                bridging operations and technology execution. The AI revolution is the culmination of 
-                everything I've been working toward for two decades.
-              </p>
-              
-              <div className="mb-6">
-                <h4 className="text-base sm:text-lg font-semibold text-cyan-400 mb-3">Key Operational Milestones</h4>
-                <div className="space-y-2 text-xs sm:text-sm text-gray-300">
-                  <div className="flex items-start space-x-2">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span><strong>Align Networks:</strong> Scaled start-up from $0 to $265M revenue in 5 years</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span><strong>Executive Coach Professionals:</strong> 40% revenue increase, 12X EBITDA exit to General Atlantic</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span><strong>One Call Care Management:</strong> Scaled revenue from $15M to $75M in under a year</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span><strong>GO T&T:</strong> Enhanced efficiency 50%, achieved 96% YoY revenue increase</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span><strong>Lux Community Living:</strong> Managed $40M portfolio, boosted NOI by 28%</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span><strong>The Klotz Group:</strong> Developed strategies for $1B real estate portfolio</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">The AI Transformation</h3>
-              <p className="text-gray-300 leading-relaxed mb-4 text-sm sm:text-base">
+              <p className="text-gray-300 leading-relaxed mb-6 text-sm sm:text-base">
                 In 20+ years of business operations, I've never witnessed anything like this. What once took 
                 months of resources and complex implementations now happens in days with minimal overhead. 
                 This isn't just another technology trend—it's a historical explosion of business optimization 
                 that's redefining what's possible.
               </p>
+            </div>
+
+            {/* Key Proof Points */}
+            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">Key Proof Points</h3>
               
-              <div className="space-y-3 mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-gray-300 text-sm sm:text-base">Recognized AI as the ultimate operational amplification tool</span>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="p-2 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-full">
+                    <TrendingUp className="w-5 h-5 text-green-400" />
+                  </div>
+                  <div>
+                    <span className="text-green-400 font-bold text-sm sm:text-base">$265M Startup Scale</span>
+                    <p className="text-gray-300 text-xs sm:text-sm">Align Networks, acquired by equity firm</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-gray-300 text-sm sm:text-base">Achieved 30% cost reductions for clients</span>
+
+                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="p-2 bg-gradient-to-r from-purple-500/20 to-violet-600/20 rounded-full">
+                    <Trophy className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <div>
+                    <span className="text-purple-400 font-bold text-sm sm:text-base">12X EBITDA Exit</span>
+                    <p className="text-gray-300 text-xs sm:text-sm">Executive Coach Professionals sold to General Atlantic</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-gray-300 text-sm sm:text-base">Drove 25% profit margin increases</span>
+
+                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="p-2 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 rounded-full">
+                    <Building className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <span className="text-blue-400 font-bold text-sm sm:text-base">$1B Portfolio Strategy</span>
+                    <p className="text-gray-300 text-xs sm:text-sm">The Klotz Group, boosting NOI & occupancy</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-gray-300 text-sm sm:text-base">Founded AI Ops Expert to be part of this transformational moment</span>
+
+                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="p-2 bg-gradient-to-r from-orange-500/20 to-red-600/20 rounded-full">
+                    <Award className="w-5 h-5 text-orange-400" />
+                  </div>
+                  <div>
+                    <span className="text-orange-400 font-bold text-sm sm:text-base">96% YoY Growth</span>
+                    <p className="text-gray-300 text-xs sm:text-sm">GO T&T through 50% efficiency gains</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-teal-600/20 rounded-full">
+                    <Users className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <div>
+                    <span className="text-cyan-400 font-bold text-sm sm:text-base">5X Revenue Growth</span>
+                    <p className="text-gray-300 text-xs sm:text-sm">One Call Care Management, $15M to $75M in under a year</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="p-2 bg-gradient-to-r from-yellow-500/20 to-amber-600/20 rounded-full">
+                    <DollarSign className="w-5 h-5 text-yellow-400" />
+                  </div>
+                  <div>
+                    <span className="text-yellow-400 font-bold text-sm sm:text-base">30% Cost Reduction / 25% Profit Increase</span>
+                    <p className="text-gray-300 text-xs sm:text-sm">AI automation for SMBs</p>
+                  </div>
                 </div>
               </div>
-              
-              <p className="text-cyan-400 font-medium italic text-sm sm:text-base">
-                "The speed of transformation is unprecedented. I'm passionate about this historical moment 
-                because I believe we're only seeing 10% of what AI will ultimately deliver for business optimization."
-              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
@@ -126,22 +129,33 @@ const About = () => {
             className="space-y-4 sm:space-y-6 px-4">
             <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-6 rounded-xl mb-6">
               <h4 className="text-lg sm:text-xl font-semibold text-white mb-4">What Sets Me Apart</h4>
-              <div className="space-y-3">
-                <div>
-                  <span className="text-cyan-400 font-semibold text-sm sm:text-base">Operations-First:</span>
-                  <span className="text-gray-300 ml-2 text-sm sm:text-base">20+ years solving AI-addressable problems before AI existed</span>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0 mt-1">
+                    <Cpu className="w-4 h-4 text-cyan-400" />
+                  </div>
+                  <div>
+                    <span className="text-cyan-400 font-semibold text-sm sm:text-base">Operations-first AI approach:</span>
+                    <span className="text-gray-300 ml-2 text-sm sm:text-base">solving AI-addressable problems before AI existed</span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-purple-400 font-semibold text-sm sm:text-base">Proven Results:</span>
-                  <span className="text-gray-300 ml-2 text-sm sm:text-base">Track record of 100-200% YoY growth across industries</span>
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 bg-gradient-to-r from-purple-500/20 to-pink-600/20 rounded-full flex-shrink-0 mt-1">
+                    <Award className="w-4 h-4 text-purple-400" />
+                  </div>
+                  <div>
+                    <span className="text-purple-400 font-semibold text-sm sm:text-base">Executive-level execution:</span>
+                    <span className="text-gray-300 ml-2 text-sm sm:text-base">across healthcare, real estate, hospitality, and tech</span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-green-400 font-semibold text-sm sm:text-base">Executive Credibility:</span>
-                  <span className="text-gray-300 ml-2 text-sm sm:text-base">Managed portfolios from start-up to $1B+ valuations</span>
-                </div>
-                <div>
-                  <span className="text-yellow-400 font-semibold text-sm sm:text-base">ROI Focus:</span>
-                  <span className="text-gray-300 ml-2 text-sm sm:text-base">Every solution measured against 90-day ROI and scalability</span>
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-full flex-shrink-0 mt-1">
+                    <Target className="w-4 h-4 text-green-400" />
+                  </div>
+                  <div>
+                    <span className="text-green-400 font-semibold text-sm sm:text-base">ROI-focused solutions:</span>
+                    <span className="text-gray-300 ml-2 text-sm sm:text-base">every implementation measured against 90-day results</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,7 +192,7 @@ const About = () => {
 
             <div className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0">
-                <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
+                <Target className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
               </div>
               <div>
                 <h4 className="text-lg sm:text-xl font-semibold text-white mb-2">90-Day ROI Guarantee</h4>
