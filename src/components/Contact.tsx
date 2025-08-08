@@ -39,7 +39,6 @@ const Contact = () => {
         body: JSON.stringify({
           _replyto: formData.email,
           _subject: `AI Consultation Request from ${formData.firstName} ${formData.lastName}`,
-          _to: 'dschley@aiopsexpert.com',
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
