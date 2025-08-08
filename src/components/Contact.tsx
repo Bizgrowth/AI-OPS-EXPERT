@@ -30,14 +30,14 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      // Submit to Formspree (reliable email service)
-      const response = await fetch('https://formspree.io/f/xdkogkvo', {
+      const res = await fetch('https://formspree.io/f/xdkogkvo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          _replyto: data.email,
+          _replyto: formData.email,
           _subject: `AI Consultation Request from ${formData.firstName} ${formData.lastName}`,
           _to: 'dschley@aiopsexpert.com',
           firstName: formData.firstName,
@@ -49,21 +49,22 @@ const Contact = () => {
         })
       });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          company: '',
-          service: '',
-          message: ''
-        });
-      } else {
+      if (!res.ok) {
         setSubmitStatus('error');
+        return;
       }
-    } catch (error) {
-      console.error('Form submission error:', error);
+
+      setSubmitStatus('success');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        company: '',
+        service: '',
+        message: ''
+      });
+    } catch (err) {
+      console.error('Form submission error:', err);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
