@@ -29,12 +29,10 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      // Create FormData for Netlify form submission
+      // Create FormData and convert to URL-encoded string (Netlify requirement)
       const formDataToSend = new FormData();
       formDataToSend.append('form-name', 'ai-consultation');
-      
-      // Add honeypot field (should be empty for humans)
-      formDataToSend.append('bot-field', '');
+      formDataToSend.append('bot-field', ''); // Honeypot field (should be empty)
       
       // Append all form fields
       Object.entries(formData).forEach(([key, value]) => {
@@ -43,7 +41,8 @@ const Contact = () => {
 
       const res = await fetch('/', {
         method: 'POST',
-        body: formDataToSend,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataToSend).toString(),
       });
 
       if (!res.ok) {
