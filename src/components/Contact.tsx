@@ -175,7 +175,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div 
             ref={formRef}
-            className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 mx-4">
+            className="bg-gradient-to-br from-slate-800 to-slate-700 p-4 sm:p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 mx-4 relative z-10">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">Start Your AI Transformation</h3>
             
             {submitStatus === 'success' && (
