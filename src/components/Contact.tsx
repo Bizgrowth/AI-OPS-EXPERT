@@ -33,6 +33,9 @@ const Contact = () => {
       const formDataToSend = new FormData();
       formDataToSend.append('form-name', 'ai-consultation');
       
+      // Add honeypot field (should be empty for humans)
+      formDataToSend.append('bot-field', '');
+      
       // Append all form fields
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
@@ -195,12 +198,17 @@ const Contact = () => {
               method="POST"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
+              data-netlify-recaptcha="true"
               onSubmit={handleSubmit} 
               className="space-y-6"
             >
               {/* Hidden fields for Netlify form handling */}
               <input type="hidden" name="form-name" value="ai-consultation" />
-              <input type="hidden" name="bot-field" />
+              <div style={{ display: 'none' }}>
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -317,6 +325,9 @@ const Contact = () => {
                   'Send AI Consultation Request'
                 )}
               </button>
+              
+              {/* reCAPTCHA will be automatically inserted here by Netlify */}
+              <div data-netlify-recaptcha="true"></div>
             </form>
 
             <div className="mt-6 text-center text-xs sm:text-sm text-gray-400">
