@@ -253,7 +253,8 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base cursor-text"
+                  style={{ pointerEvents: 'auto' }}
                   placeholder="john@company.com"
                 />
               </div>
@@ -268,7 +269,8 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base cursor-text"
+                  style={{ pointerEvents: 'auto' }}
                   placeholder="Your Company"
                 />
               </div>
