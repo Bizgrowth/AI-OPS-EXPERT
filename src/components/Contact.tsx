@@ -13,37 +13,35 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      firstName: formData.get('firstName'),
-      lastName: formData.get('lastName'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      service: formData.get('service'),
-      message: formData.get('message')
-    };
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    // Convert FormData to regular object
+    const data = Object.fromEntries(formData.entries());
 
     try {
-      // Submit to Netlify Forms
-      const response = await fetch('/', {
+      // Submit to Formspree (reliable email service)
+      const response = await fetch('https://formspree.io/f/xdkogkvo', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: new URLSearchParams({
-          'form-name': 'ai-consultation',
-          'firstName': data.firstName as string,
-          'lastName': data.lastName as string,
-          'email': data.email as string,
-          'company': data.company as string || '',
-          'service': data.service as string || '',
-          'message': data.message as string
-        }).toString()
+        body: JSON.stringify({
+          _replyto: data.email,
+          _subject: `AI Consultation Request from ${data.firstName} ${data.lastName}`,
+          _to: 'dschley@aiopsexpert.com',
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          company: data.company || '',
+          service: data.service || '',
+          message: data.message
+        })
       });
 
       if (response.ok) {
         setSubmitStatus('success');
-        (e.target as HTMLFormElement).reset();
+        form.reset();
       } else {
         setSubmitStatus('error');
       }
@@ -181,23 +179,9 @@ const Contact = () => {
             )}
 
             <form 
-              name="ai-consultation" 
-              method="POST" 
-              data-netlify="true"
-              data-netlify-recaptcha="true"
-              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit} 
               className="space-y-6"
             >
-              {/* Netlify form detection */}
-              <input type="hidden" name="form-name" value="ai-consultation" />
-              
-              {/* Honeypot field for spam protection */}
-              <div style={{ display: 'none' }}>
-                <label>
-                  Don't fill this out if you're human: <input name="bot-field" />
-                </label>
-              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
@@ -286,9 +270,6 @@ const Contact = () => {
                   placeholder="Describe your current operational challenges and how you envision AI helping your business..."
                 ></textarea>
               </div>
-
-              {/* reCAPTCHA */}
-              <div data-netlify-recaptcha="true"></div>
 
               <button
                 type="submit"
