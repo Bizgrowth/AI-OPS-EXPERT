@@ -16,12 +16,11 @@ const Contact = () => {
     message: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,18 +36,22 @@ const Contact = () => {
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          _replyto: formData.email,
+          // Formspree fields (JSON endpoint)
+          _replyto: formData.email, // <-- fixed reference
           _subject: `AI Consultation Request from ${formData.firstName} ${formData.lastName}`,
+          // NOTE: do not rely on _to; set recipient in Formspree dashboard
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           company: formData.company || '',
           service: formData.service || '',
-          message: formData.message
-        })
+          message: formData.message,
+        }),
       });
 
       if (!res.ok) {
+        // Optional: read error details
+        // const errJson = await res.json().catch(() => null);
         setSubmitStatus('error');
         return;
       }
@@ -60,7 +63,7 @@ const Contact = () => {
         email: '',
         company: '',
         service: '',
-        message: ''
+        message: '',
       });
     } catch (err) {
       console.error('Form submission error:', err);
