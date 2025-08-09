@@ -6,6 +6,7 @@ import AIPortfolio from '../components/AIPortfolio';
 import Results from '../components/Results';
 import BlogSection from '../components/BlogSection';
 import Contact from '../components/Contact';
+import TechStack from '../components/TechStack';
 import Header from '../components/Header';
 import SEOHead from '../components/SEOHead';
 
@@ -24,6 +25,7 @@ const HomePage = () => {
       <Services />
       <AIPortfolio />
       <Results />
+      <TechStack />
       <BlogSection />
       <Contact />
     </>
