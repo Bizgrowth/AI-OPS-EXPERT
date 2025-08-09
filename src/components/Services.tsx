@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Brain, 
   Cpu, 
@@ -13,13 +14,12 @@ import {
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
-import ServiceDetail from './ServiceDetail';
 
 const Services = () => {
   const [servicesRef, isServicesVisible] = useScrollAnimation(0.1);
   const [gridRef, isGridVisible] = useScrollAnimation(0.2);
   const [showScheduling, setShowScheduling] = useState(false);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const services = [
     {
@@ -89,22 +89,8 @@ const Services = () => {
   ];
 
   const handleServiceClick = (serviceId: string) => {
-    setSelectedService(serviceId);
+    navigate(`/service/${serviceId}`);
   };
-
-  const handleBackToServices = () => {
-    setSelectedService(null);
-  };
-
-  // If a service is selected, show the ServiceDetail component
-  if (selectedService) {
-    return (
-      <ServiceDetail 
-        serviceId={selectedService} 
-        onBack={handleBackToServices} 
-      />
-    );
-  }
 
   return (
     <section 
