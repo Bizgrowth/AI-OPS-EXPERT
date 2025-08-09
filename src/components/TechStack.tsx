@@ -139,20 +139,23 @@ const TechStack = () => {
         <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/5 to-pink-600/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Use ONE vertical stack to manage spacing */}
+        <div className="flex flex-col gap-12 md:gap-16">
+
         {/* Section Header */}
-        <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 px-4">
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 px-4">
             🔧 Technology
             <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> Stack</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Built on Enterprise-Grade Technology for Maximum Performance and Scalability
           </p>
-        </div>
+          </div>
 
         {/* Benefits Grid */}
-        <div 
+          <div 
           ref={benefitsRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4"
         >
@@ -169,10 +172,10 @@ const TechStack = () => {
               <p className="text-gray-400 text-sm">{benefit.description}</p>
             </div>
           ))}
-        </div>
+          </div>
 
         {/* Technology Categories */}
-        <div 
+          <div 
           ref={categoriesRef}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4"
         >
@@ -214,10 +217,10 @@ const TechStack = () => {
               </div>
             );
           })}
-        </div>
+          </div>
 
         {/* Trusted Partners */}
-        <div className="bg-slate-800 rounded-2xl p-8 border border-slate-600 mx-4">
+          <div className="bg-slate-800 rounded-2xl p-8 border border-slate-600 mx-4">
           <h3 className="text-2xl font-bold text-white text-center mb-8">Trusted Technology Partners</h3>
           <div className="flex flex-wrap justify-center items-center gap-6">
             {partners.map((partner, index) => (
@@ -229,16 +232,18 @@ const TechStack = () => {
               </div>
             ))}
           </div>
-        </div>
+          </div>
 
         {/* CTA Section */}
-        <div className="text-center px-4">
+          <div className="text-center px-4">
           <a 
             href="#contact" 
             className="inline-block bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
           >
             Ready to see what's possible for your business?
           </a>
+          </div>
+
         </div>
       </div>
     </section>
