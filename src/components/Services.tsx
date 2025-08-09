@@ -13,11 +13,13 @@ import {
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
+import ServiceDetail from './ServiceDetail';
 
 const Services = () => {
   const [servicesRef, isServicesVisible] = useScrollAnimation(0.1);
   const [gridRef, isGridVisible] = useScrollAnimation(0.2);
   const [showScheduling, setShowScheduling] = useState(false);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
 
   const services = [
     {
@@ -87,17 +89,22 @@ const Services = () => {
   ];
 
   const handleServiceClick = (serviceId: string) => {
-    // Scroll to the AI Portfolio section
-    const element = document.getElementById('ai-portfolio');
-    if (element) {
-      const headerHeight = 64; // Height of fixed header
-      const elementPosition = element.offsetTop - headerHeight;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+    setSelectedService(serviceId);
   };
+
+  const handleBackToServices = () => {
+    setSelectedService(null);
+  };
+
+  // If a service is selected, show the ServiceDetail component
+  if (selectedService) {
+    return (
+      <ServiceDetail 
+        serviceId={selectedService} 
+        onBack={handleBackToServices} 
+      />
+    );
+  }
 
   return (
     <section 
