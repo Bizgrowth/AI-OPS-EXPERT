@@ -131,7 +131,7 @@ const TechStack = () => {
     <section 
       id="tech-stack"
       ref={techStackRef}
-      className="py-20 bg-slate-900 relative overflow-hidden"
+      className="py-12 md:py-16 bg-slate-900 relative overflow-hidden pt-px"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -139,11 +139,11 @@ const TechStack = () => {
         <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/5 to-pink-600/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 px-4">
-            🔧 Our Technology
+            🔧 Technology
             <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> Stack</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
@@ -154,7 +154,7 @@ const TechStack = () => {
         {/* Benefits Grid */}
         <div 
           ref={benefitsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 px-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4"
         >
           {benefits.map((benefit, index) => (
             <div 
@@ -174,7 +174,7 @@ const TechStack = () => {
         {/* Technology Categories */}
         <div 
           ref={categoriesRef}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 px-4"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4"
         >
           {techCategories.map((category, index) => {
             const IconComponent = category.icon;
@@ -217,7 +217,7 @@ const TechStack = () => {
         </div>
 
         {/* Trusted Partners */}
-        <div className="bg-slate-800 rounded-2xl p-8 border border-slate-600 mb-16 mx-4">
+        <div className="bg-slate-800 rounded-2xl p-8 border border-slate-600 mx-4">
           <h3 className="text-2xl font-bold text-white text-center mb-8">Trusted Technology Partners</h3>
           <div className="flex flex-wrap justify-center items-center gap-6">
             {partners.map((partner, index) => (
