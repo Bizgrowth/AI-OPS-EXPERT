@@ -185,7 +185,7 @@ const TechStack = () => {
               <div 
                 key={category.id}
                 className={`bg-slate-800 rounded-2xl p-8 border border-slate-600 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/10 transform hover:-translate-y-1 ${
-                  isCategoriesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  isCategoriesVisible ? 'opacity-100 translate-y-0' : 'hidden'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
