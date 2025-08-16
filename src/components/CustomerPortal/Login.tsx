@@ -13,7 +13,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-  const [showDemo, setShowDemo] = useState(false);
+  const [showDemo, setShowDemo] = useState(true); // Default to demo mode
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +37,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         onLogin();
       }
     } catch (error: any) {
-      setError(error.message);
+      // Check if it's a network/configuration error
+      if (error.message.includes('fetch') || error.message.includes('network') || error.message.includes('Invalid API key')) {
+        setError('Supabase not configured yet. Please use Demo Mode to preview the portal interface.');
+        setShowDemo(true);
+      } else {
+        setError(error.message);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -104,6 +110,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                     <li>• Live chat interface demonstration</li>
                     <li>• Full portal navigation and features</li>
                   </ul>
+                </div>
+                
+                <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4">
+                  <h4 className="text-blue-400 font-semibold mb-2">💡 Quick Start for Daniel:</h4>
+                  <p className="text-gray-300 text-sm">
+                    Click "Enter Demo Portal" above to immediately see the full client portal interface. 
+                    This shows exactly what your clients will experience when accessing their projects.
+                  </p>
                 </div>
               </div>
             ) : (
