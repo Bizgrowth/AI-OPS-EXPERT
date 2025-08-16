@@ -37,13 +37,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         onLogin();
       }
     } catch (error: any) {
-      // Check if it's a network/configuration error
-      if (error.message.includes('fetch') || error.message.includes('network') || error.message.includes('Invalid API key')) {
-        setError('Supabase not configured yet. Please use Demo Mode to preview the portal interface.');
-        setShowDemo(true);
-      } else {
-        setError(error.message);
-      }
+      console.error('Authentication error:', error);
+      setError(error.message || 'Authentication failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }
