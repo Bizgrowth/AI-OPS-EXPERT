@@ -16,9 +16,10 @@ interface ChatMessage {
 interface LiveChatProps {
   userEmail: string;
   userName: string;
+  isDemo?: boolean;
 }
 
-const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName }) => {
+const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName, isDemo = false }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
@@ -27,8 +28,64 @@ const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    fetchMessages();
-    subscribeToMessages();
+    if (isDemo) {
+      // Load demo messages
+      const demoMessages: ChatMessage[] = [
+        {
+          id: '1',
+          message: 'Hi! I wanted to check on the progress of our AI chatbot project. How are things looking?',
+          sender_email: 'demo@aiopsexpert.com',
+          sender_name: 'Demo Client',
+          is_admin: false,
+          created_at: '2024-01-20T10:00:00Z'
+        },
+        {
+          id: '2',
+          message: 'Great question! The chatbot development is going very well. We\'re currently at 75% completion. The core NLP engine is built and we\'re now working on the CRM integration. I\'ll have a demo ready for you by Friday.',
+          sender_email: 'daniel@aiopsexpert.com',
+          sender_name: 'Daniel Schley',
+          is_admin: true,
+          created_at: '2024-01-20T10:15:00Z'
+        },
+        {
+          id: '3',
+          message: 'That sounds fantastic! I\'m excited to see the demo. Will it be able to handle our most common customer questions about pricing and availability?',
+          sender_email: 'demo@aiopsexpert.com',
+          sender_name: 'Demo Client',
+          is_admin: false,
+          created_at: '2024-01-20T10:30:00Z'
+        },
+        {
+          id: '4',
+          message: 'Absolutely! I\'ve trained it on your FAQ database and it can handle pricing inquiries, product availability, order status, and even basic troubleshooting. It will escalate complex issues to your team seamlessly. The accuracy rate in testing is 94%.',
+          sender_email: 'daniel@aiopsexpert.com',
+          sender_name: 'Daniel Schley',
+          is_admin: true,
+          created_at: '2024-01-20T10:45:00Z'
+        },
+        {
+          id: '5',
+          message: 'Perfect! Also, I wanted to discuss the inventory management system we talked about. When would be a good time to start that project?',
+          sender_email: 'demo@aiopsexpert.com',
+          sender_name: 'Demo Client',
+          is_admin: false,
+          created_at: '2024-01-20T11:00:00Z'
+        },
+        {
+          id: '6',
+          message: 'Great timing! I was just about to bring that up. Once we launch the chatbot (next week), we can start the inventory system. I\'ve already done some preliminary analysis of your sales data and identified some interesting patterns. I think we can achieve even better results than projected - potentially 45% reduction in overstock.',
+          sender_email: 'daniel@aiopsexpert.com',
+          sender_name: 'Daniel Schley',
+          is_admin: true,
+          created_at: '2024-01-20T11:15:00Z'
+        }
+      ];
+      setMessages(demoMessages);
+      setLoading(false);
+    } else {
+      fetchMessages();
+      subscribeToMessages();
+    }
   }, [userEmail]);
 
   useEffect(() => {
@@ -81,6 +138,42 @@ const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName }) => {
   const sendMessage = async () => {
     if (!newMessage.trim() || sending) return;
 
+    if (isDemo) {
+      // Demo mode - just add message locally
+      const demoMessage: ChatMessage = {
+        id: Date.now().toString(),
+        message: newMessage.trim(),
+        sender_email: userEmail,
+        sender_name: userName,
+        is_admin: false,
+        created_at: new Date().toISOString()
+      };
+      setMessages(prev => [...prev, demoMessage]);
+      setNewMessage('');
+      
+      // Simulate Daniel's response after a delay
+      setTimeout(() => {
+        const responses = [
+          "Thanks for your message! I'll look into that and get back to you shortly.",
+          "Great question! Let me check on that for you and provide an update.",
+          "I appreciate you reaching out. I'll review this and respond with details soon.",
+          "Perfect timing! I was just working on that aspect of your project.",
+          "Thanks for the feedback! I'll incorporate that into our next iteration."
+        ];
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+        
+        const adminResponse: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          message: randomResponse,
+          sender_email: 'daniel@aiopsexpert.com',
+          sender_name: 'Daniel Schley',
+          is_admin: true,
+          created_at: new Date().toISOString()
+        };
+        setMessages(prev => [...prev, adminResponse]);
+      }, 2000);
+      return;
+    }
     setSending(true);
     try {
       const { error } = await supabase
@@ -213,7 +306,10 @@ const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName }) => {
       {/* Chat Header */}
       <div className="p-4 border-b border-slate-600">
         <h3 className="text-lg font-semibold text-white">Project Communication</h3>
-        <p className="text-sm text-gray-400">Direct line to Daniel for project updates and questions</p>
+        <p className="text-sm text-gray-400">
+          Direct line to Daniel for project updates and questions
+          {isDemo && <span className="text-green-400 ml-2">(Demo Mode)</span>}
+        </p>
       </div>
 
       {/* Messages */}
@@ -302,6 +398,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName }) => {
           <button
             onClick={() => fileInputRef.current?.click()}
             className="p-3 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+            disabled={isDemo}
             title="Attach file"
           >
             <Paperclip className="w-5 h-5" />
@@ -320,6 +417,14 @@ const LiveChat: React.FC<LiveChatProps> = ({ userEmail, userName }) => {
           </button>
         </div>
       </div>
+      
+      {isDemo && (
+        <div className="p-2 bg-green-500/10 border-t border-green-500/30">
+          <p className="text-green-400 text-xs text-center">
+            Demo Mode: Messages are simulated. In live mode, messages sync in real-time with Daniel.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

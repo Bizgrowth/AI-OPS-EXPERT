@@ -33,6 +33,24 @@ const CustomerPortal: React.FC = () => {
   const handleLogout = () => {
     setUser(null);
   };
+  
+  // Check if we're in demo mode (no real user but want to show interface)
+  const isDemoMode = window.location.search.includes('demo=true');
+  
+  if (isDemoMode && !user) {
+    // Create a mock user for demo purposes
+    const demoUser = {
+      id: 'demo-user',
+      email: 'demo@aiopsexpert.com',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      app_metadata: {},
+      user_metadata: {},
+      aud: 'authenticated'
+    } as User;
+    
+    return <Dashboard user={demoUser} onLogout={handleLogout} isDemo={true} />;
+  }
 
   if (loading) {
     return (

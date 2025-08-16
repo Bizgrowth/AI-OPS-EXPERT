@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Settings } from 'lucide-react';
 
 interface LoginProps {
   onLogin: () => void;
@@ -13,6 +13,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +43,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     }
   };
 
+  const handleDemoLogin = () => {
+    // Simulate admin login for demo purposes
+    onLogin();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
@@ -50,11 +56,58 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-6 text-center">
             <h1 className="text-2xl font-bold text-white mb-2">Client Portal</h1>
             <p className="text-white/90">Access your AI project dashboard</p>
+            <div className="mt-4 flex justify-center space-x-2">
+              <button
+                onClick={() => setShowDemo(false)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                  !showDemo ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white'
+                }`}
+              >
+                <User className="w-3 h-3 inline mr-1" />
+                Client Login
+              </button>
+              <button
+                onClick={() => setShowDemo(true)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                  showDemo ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white'
+                }`}
+              >
+                <Settings className="w-3 h-3 inline mr-1" />
+                Demo Mode
+              </button>
+            </div>
           </div>
 
           {/* Form */}
           <div className="p-6">
-            <form onSubmit={handleAuth} className="space-y-4">
+            {showDemo ? (
+              <div className="space-y-6">
+                <div className="bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-lg p-4">
+                  <h3 className="text-green-400 font-semibold mb-2">Demo Mode - Owner Access</h3>
+                  <p className="text-gray-300 text-sm mb-4">
+                    This will show you the client portal interface with sample data. Perfect for seeing how your clients will experience the portal.
+                  </p>
+                  <button
+                    onClick={handleDemoLogin}
+                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all flex items-center justify-center space-x-2"
+                  >
+                    <Settings className="w-4 h-4" />
+                    <span>Enter Demo Portal</span>
+                  </button>
+                </div>
+                
+                <div className="bg-slate-700/50 border border-slate-600 rounded-lg p-4">
+                  <h4 className="text-white font-semibold mb-2">What you'll see in Demo Mode:</h4>
+                  <ul className="text-gray-300 text-sm space-y-1">
+                    <li>• Sample client projects with different statuses</li>
+                    <li>• Mock documents (MVPs, PRDs, Project Plans)</li>
+                    <li>• Live chat interface demonstration</li>
+                    <li>• Full portal navigation and features</li>
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleAuth} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Email Address
@@ -117,8 +170,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 )}
               </button>
             </form>
+            )}
 
-            <div className="mt-6 text-center">
+            {!showDemo && (
+              <div className="mt-6 text-center">
               <button
                 onClick={() => setIsSignUp(!isSignUp)}
                 className="text-cyan-400 hover:text-cyan-300 text-sm"
@@ -126,10 +181,20 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
               </button>
             </div>
+            )}
           </div>
         </div>
 
-        <div className="mt-6 text-center text-gray-400 text-sm">
+        <div className="mt-6 text-center text-gray-400 text-sm space-y-2">
+          <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-4">
+            <h4 className="text-white font-semibold mb-2">🚀 Setup Instructions for Owner:</h4>
+            <div className="text-left space-y-2 text-xs">
+              <p><strong>1. Supabase Setup:</strong> Create account at supabase.com</p>
+              <p><strong>2. Environment:</strong> Add SUPABASE_URL and SUPABASE_ANON_KEY to .env</p>
+              <p><strong>3. Database:</strong> Run the migration file to create tables</p>
+              <p><strong>4. Admin Access:</strong> Sign up with your email to become admin</p>
+            </div>
+          </div>
           <p>Need help? Contact Daniel at dschley@aiopsexpert.com</p>
         </div>
       </div>

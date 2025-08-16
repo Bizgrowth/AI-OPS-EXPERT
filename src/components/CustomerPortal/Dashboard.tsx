@@ -28,15 +28,47 @@ interface Project {
 interface DashboardProps {
   user: User;
   onLogout: () => void;
+  isDemo?: boolean;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
+const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, isDemo = false }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'documents' | 'chat'>('overview');
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProjects();
+    if (isDemo) {
+      // Load demo data
+      setProjects([
+        {
+          id: '1',
+          name: 'AI Customer Service Chatbot',
+          status: 'in-progress',
+          progress: 75,
+          created_at: '2024-01-15T10:00:00Z',
+          updated_at: '2024-01-20T14:30:00Z'
+        },
+        {
+          id: '2',
+          name: 'Inventory Management AI',
+          status: 'completed',
+          progress: 100,
+          created_at: '2024-01-01T09:00:00Z',
+          updated_at: '2024-01-10T16:45:00Z'
+        },
+        {
+          id: '3',
+          name: 'Financial Forecasting System',
+          status: 'planning',
+          progress: 25,
+          created_at: '2024-01-25T11:00:00Z',
+          updated_at: '2024-01-25T11:00:00Z'
+        }
+      ]);
+      setLoading(false);
+    } else {
+      fetchProjects();
+    }
   }, []);
 
   const fetchProjects = async () => {
@@ -88,9 +120,11 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-bold text-white">Client Portal</h1>
+              <h1 className="text-xl font-bold text-white">
+                Client Portal {isDemo && <span className="text-green-400 text-sm">(Demo Mode)</span>}
+              </h1>
               <span className="text-gray-400">|</span>
-              <span className="text-gray-300">{user.email}</span>
+              <span className="text-gray-300">{isDemo ? 'demo@aiopsexpert.com' : user.email}</span>
             </div>
             <button
               onClick={handleLogout}
@@ -157,6 +191,13 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
             {/* Welcome Section */}
             <div className="bg-gradient-to-r from-cyan-500/10 to-purple-600/10 rounded-2xl p-6 border border-cyan-500/20">
               <h2 className="text-2xl font-bold text-white mb-2">Welcome back!</h2>
+              {isDemo && (
+                <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-3 mb-4">
+                  <p className="text-green-400 text-sm font-semibold">
+                    🎯 Demo Mode Active - This shows how your clients will experience the portal
+                  </p>
+                </div>
+              )}
               <p className="text-gray-300">
                 Track your AI transformation projects and communicate directly with Daniel about your implementation progress.
               </p>
@@ -242,7 +283,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
         )}
 
         {activeTab === 'documents' && <ProjectDocuments userEmail={user.email!} />}
-        {activeTab === 'chat' && <LiveChat userEmail={user.email!} userName={user.email!} />}
+        {activeTab === 'documents' && <ProjectDocuments userEmail={isDemo ? 'demo@aiopsexpert.com' : user.email!} isDemo={isDemo} />}
+        {activeTab === 'chat' && <LiveChat userEmail={isDemo ? 'demo@aiopsexpert.com' : user.email!} userName={isDemo ? 'Demo Client' : user.email!} isDemo={isDemo} />}
       </main>
     </div>
   );
