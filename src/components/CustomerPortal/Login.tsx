@@ -59,11 +59,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       if (error.message?.includes('fetch')) {
         setError(`Connection failed. Please check your Supabase configuration. URL: ${supabaseUrl}`);
       } else {
-        setError(error.message || 'Authentication failed. Please check your credentials.');
-      }
         setError('Unable to connect to authentication service. Please check your Supabase configuration or use Demo Mode.');
-      } else {
-        setError(error.message || 'Authentication failed. Please check your credentials.');
       }
     } finally {
       setIsLoading(false);
