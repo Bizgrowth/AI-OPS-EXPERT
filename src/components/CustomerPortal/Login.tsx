@@ -78,8 +78,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   const handleDemoLogin = () => {
-    // Redirect to portal with demo parameter
-    window.location.href = '/portal?demo=true';
+    // Force reload with demo parameter to ensure proper activation
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('demo', 'true');
+    window.location.href = currentUrl.toString();
   };
 
   return (
