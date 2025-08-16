@@ -15,6 +15,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [showDemo, setShowDemo] = useState(true); // Default to demo mode
 
+  // Debug environment variables
+  React.useEffect(() => {
+    console.log('Environment check:');
+    console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
+    console.log('VITE_SUPABASE_ANON_KEY exists:', !!import.meta.env.VITE_SUPABASE_ANON_KEY);
+    console.log('All env vars:', import.meta.env);
+  }, []);
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -24,7 +32,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     
-    if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your-project') || supabaseKey.includes('your-anon-key')) {
+    if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your-project') || supabaseKey.includes('your-anon-key') || supabaseUrl.includes('placeholder')) {
       setError('Supabase is not configured yet. Please set up your environment variables first, or use Demo Mode to preview the interface.');
       setIsLoading(false);
       return;
@@ -49,6 +57,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     } catch (error: any) {
       console.error('Authentication error:', error);
       if (error.message?.includes('fetch')) {
+        setError(`Connection failed. Please check your Supabase configuration. URL: ${supabaseUrl}`);
+      } else {
+        setError(error.message || 'Authentication failed. Please check your credentials.');
+      }
         setError('Unable to connect to authentication service. Please check your Supabase configuration or use Demo Mode.');
       } else {
         setError(error.message || 'Authentication failed. Please check your credentials.');
