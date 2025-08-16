@@ -23,6 +23,7 @@ const hasPlaceholders = !supabaseUrl ||
   console.error('❌ Contains placeholders - please update your .env file with real values');
 
 if (hasPlaceholders) {
+}
 export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
   supabaseAnonKey || 'placeholder-key'
