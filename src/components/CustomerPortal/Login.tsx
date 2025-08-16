@@ -32,8 +32,19 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     
-    if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your-project') || supabaseKey.includes('your-anon-key') || supabaseUrl.includes('placeholder')) {
-      setError('Supabase is not configured yet. Please set up your environment variables first, or use Demo Mode to preview the interface.');
+    console.log('🔍 Login Debug - Environment Check:');
+    console.log('URL:', supabaseUrl);
+    console.log('Key exists:', !!supabaseKey);
+    
+    const hasPlaceholders = !supabaseUrl || 
+                           !supabaseKey || 
+                           supabaseUrl.includes('your-project') || 
+                           supabaseUrl.includes('placeholder') ||
+                           supabaseKey.includes('your-anon-key') ||
+                           supabaseKey.includes('placeholder');
+    
+    if (hasPlaceholders) {
+      setError(`❌ Environment variables contain placeholder values. Please update your .env file with real Supabase values. Current URL: ${supabaseUrl}`);
       setIsLoading(false);
       return;
     }
