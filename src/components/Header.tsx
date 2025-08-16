@@ -93,6 +93,12 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex">
+            <a
+              href="/portal"
+              className="mr-4 border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 text-sm xl:text-base"
+            >
+              Client Portal
+            </a>
             <button 
               onClick={handleBookCall}
               className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 xl:px-6 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm xl:text-base"
@@ -154,6 +160,12 @@ const Header = () => {
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Contact
+              </a>
+              <a
+                href="/portal"
+                className="block w-full text-left px-3 py-2 text-cyan-400 hover:text-cyan-300 transition-colors border-t border-slate-600 mt-2 pt-4"
+              >
+                Client Portal
               </a>
               <button 
                 onClick={handleBookCall}

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ServiceDetail from './components/ServiceDetail';
+import PortalPage from './pages/PortalPage';
 import ChatbotToggle from './components/ChatbotToggle';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/service/:serviceId" element={<ServiceDetail />} />
+          <Route path="/portal" element={<PortalPage />} />
         </Routes>
         <ChatbotToggle />
       </div>
