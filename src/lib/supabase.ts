@@ -16,13 +16,11 @@ const hasPlaceholders = !supabaseUrl ||
                        supabaseUrl.includes('placeholder') ||
                        supabaseAnonKey.includes('your-anon-key') ||
                        supabaseAnonKey.includes('placeholder');
-  console.error('Missing Supabase environment variables');
-  console.error('VITE_SUPABASE_URL:', supabaseUrl);
-  console.error('❌ VITE_SUPABASE_URL:', supabaseUrl);
-  console.error('❌ VITE_SUPABASE_ANON_KEY exists:', !!supabaseAnonKey);
-  console.error('❌ Contains placeholders - please update your .env file with real values');
-
 if (hasPlaceholders) {
+  console.warn('Missing Supabase environment variables');
+  console.warn('VITE_SUPABASE_URL:', supabaseUrl);
+  console.warn('❌ VITE_SUPABASE_ANON_KEY exists:', !!supabaseAnonKey);
+  console.warn('❌ Contains placeholders - please update your .env file with real values');
 }
 export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
