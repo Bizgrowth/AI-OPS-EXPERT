@@ -78,8 +78,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   const handleDemoLogin = () => {
-    // Simulate admin login for demo purposes
-    onLogin();
+    // Redirect to portal with demo parameter
+    window.location.href = '/portal?demo=true';
   };
 
   return (
