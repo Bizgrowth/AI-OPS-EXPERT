@@ -20,6 +20,16 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     setIsLoading(true);
     setError('');
 
+    // Check if Supabase is properly configured
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    
+    if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your-project') || supabaseKey.includes('your-anon-key')) {
+      setError('Supabase is not configured yet. Please set up your environment variables first, or use Demo Mode to preview the interface.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       if (isSignUp) {
         const { error } = await supabase.auth.signUp({
@@ -38,7 +48,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       }
     } catch (error: any) {
       console.error('Authentication error:', error);
-      setError(error.message || 'Authentication failed. Please check your credentials.');
+      if (error.message?.includes('fetch')) {
+        setError('Unable to connect to authentication service. Please check your Supabase configuration or use Demo Mode.');
+      } else {
+        setError(error.message || 'Authentication failed. Please check your credentials.');
+      }
     } finally {
       setIsLoading(false);
     }
