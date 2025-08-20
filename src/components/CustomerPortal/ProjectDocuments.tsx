@@ -498,7 +498,7 @@ This document outlines the strategic approach for implementing AI solutions acro
             </div>
             
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
-              <div className="prose prose-invert max-w-none">
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-200 prose-li:text-gray-200 prose-strong:text-white prose-code:text-cyan-300 prose-code:bg-slate-700 prose-blockquote:text-gray-300 prose-th:text-white prose-td:text-gray-200">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {selectedDocument.content}
                 </ReactMarkdown>
