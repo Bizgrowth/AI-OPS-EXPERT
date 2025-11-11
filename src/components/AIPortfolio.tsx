@@ -59,7 +59,7 @@ const AIPortfolio: React.FC = () => {
       description: 'AI-powered customer service that handles routine inquiries, captures leads, and reduces owner interruptions by 80% while maintaining personal touch.',
       icon: MessageSquare,
       gradient: 'from-blue-500 to-blue-700',
-      demoUrl: 'https://chic-cheesecake-4515b2.netlify.app',
+      demoUrl: 'https://conversabot-demo.netlify.app',
       category: 'AI Customer Experience Systems',
       results: {
         interruptions: '80% Reduced',
@@ -97,7 +97,7 @@ const AIPortfolio: React.FC = () => {
       description: 'AI-driven marketing personalization that tracks customer behavior and delivers targeted content, increasing cart recovery and repeat purchases.',
       icon: Mail,
       gradient: 'from-orange-500 to-orange-700',
-      demoUrl: 'https://effortless-lollipop-4fd86e.netlify.app',
+      demoUrl: 'https://personagen-demo.netlify.app',
       category: 'AI-Powered Workflow Optimization',
       results: {
         cartRecovery: '15% Recovery',
@@ -135,7 +135,7 @@ const AIPortfolio: React.FC = () => {
       description: 'Intelligent financial analysis that predicts cash flow patterns, prevents crises, and automates bookkeeping with 90-day forecasting accuracy.',
       icon: TrendingUp,
       gradient: 'from-green-500 to-green-700',
-      demoUrl: 'https://lucent-salamander-76034a.netlify.app',
+      demoUrl: 'https://finsight-demo.netlify.app',
       category: 'AI Analytics & Insights',
       results: {
         timeSaved: '87% Saved',
@@ -173,7 +173,7 @@ const AIPortfolio: React.FC = () => {
       description: 'AI content creation system that generates blog posts, social media content, and marketing copy in minutes, increasing traffic and engagement.',
       icon: PenTool,
       gradient: 'from-purple-500 to-purple-700',
-      demoUrl: 'https://delicate-frangollo-0feb83.netlify.app/',
+      demoUrl: 'https://creatorspark-demo.netlify.app',
       category: 'AI-Enhanced Web Solutions',
       results: {
         trafficIncrease: '200% Traffic',
@@ -211,7 +211,7 @@ const AIPortfolio: React.FC = () => {
       description: 'Intelligent ad campaign management that automatically optimizes budgets, tests variations, and maximizes ROAS across all platforms.',
       icon: Target,
       gradient: 'from-red-500 to-red-700',
-      demoUrl: 'https://dreamy-swan-db3e7b.netlify.app/',
+      demoUrl: 'https://adoptimo-demo.netlify.app',
       category: 'AI Analytics & Insights',
       results: {
         roas: '4.0x ROAS',
@@ -249,7 +249,7 @@ const AIPortfolio: React.FC = () => {
       description: 'Smart inventory system that predicts demand patterns, prevents stockouts, and reduces overstock using historical data and trend analysis.',
       icon: Package,
       gradient: 'from-cyan-500 to-cyan-700',
-      demoUrl: 'https://chic-cheesecake-4515b2.netlify.app',
+      demoUrl: 'https://stockwise-demo.netlify.app',
       category: 'Intelligent Process Automation',
       results: {
         overstockReduction: '40% Reduction',
