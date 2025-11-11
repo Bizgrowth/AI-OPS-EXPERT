@@ -283,7 +283,12 @@ const AIPortfolio: React.FC = () => {
   ];
 
   const openDemo = (demoUrl: string): void => {
-    window.open(demoUrl, '_blank');
+    // Scroll to top of page when opening demo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Small delay to ensure scroll completes before opening
+    setTimeout(() => {
+      window.open(demoUrl, '_blank');
+    }, 300);
   };
 
   const downloadCaseStudy = (solution: AISolution): void => {
