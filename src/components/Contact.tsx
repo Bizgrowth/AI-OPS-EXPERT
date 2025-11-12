@@ -165,7 +165,7 @@ const Contact = () => {
               <div className="mt-8 pt-8 border-t border-slate-600">
                 <h4 className="text-base sm:text-lg font-semibold text-white mb-4">Follow My AI Journey</h4>
                 <div className="flex flex-wrap gap-3 sm:gap-4">
-                  <a href="https://x.com/AIOpsExpert" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Follow on X/Twitter" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://x.com/AIOpsExpert" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Follow on X/Twitter">
                     <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
                   <a href="https://www.linkedin.com/in/danielschley/" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-600 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Connect on LinkedIn">
