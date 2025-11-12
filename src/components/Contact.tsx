@@ -166,21 +166,22 @@ const Contact = () => {
                 <h4 className="text-base sm:text-lg font-semibold text-white mb-4">Follow My AI Journey</h4>
                 <div className="flex flex-wrap gap-3 sm:gap-4">
                   <a href="https://x.com/AIOpsExpert" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Follow on X/Twitter" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://x.com/AIOpsExpert" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Follow on X/Twitter">
                     <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
-                  <a href="https://www.linkedin.com/in/danielschley/" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-600 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Connect on LinkedIn" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://www.linkedin.com/in/danielschley/" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-600 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Connect on LinkedIn">
                     <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
-                  <a href="https://www.facebook.com/profile.php?id=61578737542703" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-600 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Follow on Facebook" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://www.facebook.com/profile.php?id=61578737542703" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-blue-600 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Follow on Facebook">
                     <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
-                  <a href="https://www.instagram.com/aiopsexpert?igsh=cG52emNqaTVxYmpn" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-pink-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Follow on Instagram" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://www.instagram.com/aiopsexpert?igsh=cG52emNqaTVxYmpn" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-pink-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Follow on Instagram">
                     <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
-                  <a href="https://www.youtube.com/@AIOPSEXPERT" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-red-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Subscribe on YouTube" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://www.youtube.com/@AIOPSEXPERT" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-red-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Subscribe on YouTube">
                     <Youtube className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
-                  <a href="https://aiopsexpert.com" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-green-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer z-10 relative" title="Visit Website" style={{ pointerEvents: 'auto' }}>
+                  <a href="https://aiopsexpert.com" target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 bg-green-500 rounded-full hover:bg-slate-600 transition-all duration-300 group hover:scale-110 cursor-pointer form-element-z10-relative form-element-pointer-auto" title="Visit Website">
                     <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-300" />
                   </a>
                 </div>
@@ -245,8 +246,7 @@ const Contact = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
-                    style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base form-element-pointer-auto form-element-z10-relative"
                     placeholder="John"
                   />
                 </div>
@@ -261,8 +261,7 @@ const Contact = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
-                    style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base form-element-pointer-auto form-element-z10-relative"
                     placeholder="Smith"
                   />
                 </div>
@@ -279,8 +278,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
-                  style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base form-element-pointer-auto form-element-z10-relative"
                   placeholder="john@company.com"
                 />
               </div>
@@ -295,8 +293,7 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
-                  style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base form-element-pointer-auto form-element-z10-relative"
                   placeholder="Your Company"
                 />
               </div>
@@ -310,8 +307,7 @@ const Contact = () => {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base"
-                  style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all hover:border-cyan-500/50 text-sm sm:text-base form-element-pointer-auto form-element-z10-relative"
                 >
                   <option value="">Select an AI solution...</option>
                   <option value="ai-strategy">AI Strategy & Implementation</option>
@@ -334,8 +330,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all resize-none hover:border-cyan-500/50 text-sm sm:text-base relative z-20"
-                  style={{ pointerEvents: 'auto' }}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-600 border border-slate-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all resize-none hover:border-cyan-500/50 text-sm sm:text-base form-element-pointer-auto form-element-z10-relative"
                   placeholder="Describe your current operational challenges and how you envision AI helping your business..."
                 ></textarea>
               </div>

@@ -83,3 +83,13 @@ html {
   transform: translateZ(0);
   will-change: transform;
 }
+
+/* Form element utilities */
+.form-element-pointer-auto {
+  pointer-events: auto;
+}
+
+.form-element-z10-relative {
+  z-index: 10;
+  position: relative;
+}
