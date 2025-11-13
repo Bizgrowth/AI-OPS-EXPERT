@@ -10,7 +10,10 @@ import {
   Zap,
   BarChart3,
   Lightbulb,
-  ExternalLink
+  ExternalLink,
+  Search,
+  DollarSign,
+  Rocket
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
@@ -20,8 +23,11 @@ interface DemoCard {
   title: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
-  demoUrl: string;
+  demoUrl?: string;
   gradient: string;
+  duration?: string;
+  price?: string;
+  isAssessment?: boolean;
 }
 
 interface DemoCategory {
@@ -39,6 +45,46 @@ const AIPortfolio: React.FC = () => {
   const [showScheduling, setShowScheduling] = useState(false);
 
   const demoCategories: DemoCategory[] = [
+    {
+      id: 'assessment',
+      title: 'AI Assessment',
+      subtitle: 'Strategic Planning & Readiness Analysis',
+      icon: Search,
+      gradient: 'from-cyan-500 to-blue-600',
+      iconBg: 'bg-gradient-to-br from-cyan-500 to-blue-600',
+      demos: [
+        {
+          id: 'business-readiness',
+          title: 'Business Readiness Assessment',
+          description: 'Evaluate processes, data, and integration feasibility before building anything',
+          icon: Search,
+          gradient: 'from-cyan-500 to-blue-600',
+          duration: '60-90 minutes',
+          price: '$150',
+          isAssessment: true
+        },
+        {
+          id: 'roi-viability',
+          title: 'ROI Viability Analysis',
+          description: 'Calculate real costs vs. savings to ensure your automation investment makes sense',
+          icon: DollarSign,
+          gradient: 'from-emerald-500 to-teal-600',
+          duration: '45 minutes',
+          price: '$99',
+          isAssessment: true
+        },
+        {
+          id: 'implementation-readiness',
+          title: 'Implementation Readiness Check',
+          description: 'Assess team adoption readiness and create deployment strategy for successful rollout',
+          icon: Rocket,
+          gradient: 'from-orange-500 to-red-600',
+          duration: '45 minutes',
+          price: '$99',
+          isAssessment: true
+        }
+      ]
+    },
     {
       id: 'automation',
       title: 'AI Automation',
@@ -222,13 +268,29 @@ const AIPortfolio: React.FC = () => {
                             </div>
                           </div>
 
-                          <button
-                            onClick={() => openDemo(demo.demoUrl)}
-                            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group mt-4"
-                          >
-                            <span>Launch Live Demo</span>
-                            <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                          </button>
+                          {demo.isAssessment ? (
+                            <>
+                              <div className="flex items-center justify-between text-gray-400 text-xs sm:text-sm mb-4 pt-2 border-t border-slate-700">
+                                <span>{demo.duration}</span>
+                                <span className="text-cyan-400 font-semibold">{demo.price}</span>
+                              </div>
+                              <button
+                                onClick={() => setShowScheduling(true)}
+                                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group"
+                              >
+                                <span>Start Assessment</span>
+                                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                              </button>
+                            </>
+                          ) : (
+                            <button
+                              onClick={() => demo.demoUrl && openDemo(demo.demoUrl)}
+                              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group mt-4"
+                            >
+                              <span>Launch Live Demo</span>
+                              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </button>
+                          )}
                         </div>
                       );
                     })}
