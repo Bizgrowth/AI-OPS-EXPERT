@@ -59,7 +59,7 @@ const AIPortfolio: React.FC = () => {
       description: 'AI-powered customer service that handles routine inquiries, captures leads, and reduces owner interruptions by 80% while maintaining personal touch.',
       icon: MessageSquare,
       gradient: 'from-blue-500 to-blue-700',
-      demoUrl: 'https://conversabot-demo.netlify.app',
+      demoUrl: 'https://conversabot-demo.vercel.app/',
       category: 'AI Customer Experience Systems',
       results: {
         interruptions: '80% Reduced',
