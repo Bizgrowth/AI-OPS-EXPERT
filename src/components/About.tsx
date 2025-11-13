@@ -25,9 +25,8 @@ const About = () => {
             AI Ops Expert — 20+ Years of
             <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> Scaling, Optimizing & Transforming</span> Businesses
           </h2>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-            From C-Suite to AI innovator, I combine two decades of proven operational leadership 
-            with cutting-edge AI solutions to deliver measurable growth in 90 days or less.
+          <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto px-4 leading-relaxed">
+            From operational strategist to AI innovator, I combine two decades of proven operational leadership with cutting-edge AI solutions to deliver measurable growth in 90 days or less. In 20+ years of business operations, I've never witnessed anything like this—what once took months of resources and complex implementations now happens in days with minimal overhead. This isn't just another technology trend, it's a historical explosion of business optimization that's redefining what's possible.
           </p>
         </div>
 
@@ -35,15 +34,6 @@ const About = () => {
           <div
             ref={contentRef}
             className="space-y-8 sm:space-y-10">
-            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-8 sm:p-12 lg:p-16 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6">The AI Transformation</h3>
-              <p className="text-gray-300 leading-relaxed text-base sm:text-lg lg:text-xl">
-                In 20+ years of business operations, I've never witnessed anything like this. What once took
-                months of resources and complex implementations now happens in days with minimal overhead.
-                This isn't just another technology trend—it's a historical explosion of business optimization
-                that's redefining what's possible.
-              </p>
-            </div>
 
             <div className="space-y-8">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-12">What Sets Me Apart</h3>
