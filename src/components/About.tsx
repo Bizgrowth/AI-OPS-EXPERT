@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Users, Cpu, Brain, Zap, Target } from 'lucide-react';
+import { Award, Cpu, Target } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
@@ -93,45 +93,6 @@ const About = () => {
           <div
             ref={featuresRef}
             className="space-y-4 sm:space-y-6 px-4">
-            <div className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0">
-                <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
-              </div>
-              <div>
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-2">Historical AI Transformation Moment</h4>
-                <p className="text-gray-300 text-sm sm:text-base">Leveraging 20 years of operational excellence to make AI genuinely transformational for your business at unprecedented speed.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0">
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
-              </div>
-              <div>
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-2">Operations-First AI Implementation</h4>
-                <p className="text-gray-300 text-sm sm:text-base">I don't just understand AI technology—I know exactly which processes benefit from automation and how to implement solutions that scale.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0">
-                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
-              </div>
-              <div>
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-2">Proven Scale & Growth Results</h4>
-                <p className="text-gray-300 text-sm sm:text-base">From $0 to $265M revenue scaling, 12X EBITDA exits, and $1B+ portfolio management—results that translate to AI success.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0">
-                <Target className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
-              </div>
-              <div>
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-2">90-Day ROI Guarantee</h4>
-                <p className="text-gray-300 text-sm sm:text-base">Every AI solution measured against 90-day ROI and scalability—because I've spent 20 years delivering measurable operational results.</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
