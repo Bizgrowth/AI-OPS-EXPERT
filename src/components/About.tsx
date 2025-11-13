@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Users, TrendingUp, Cpu, Brain, Zap, Target, Building, DollarSign, Trophy } from 'lucide-react';
+import { Award, Users, Cpu, Brain, Zap, Target } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
@@ -38,97 +38,15 @@ const About = () => {
             <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">The AI Transformation</h3>
               <p className="text-gray-300 leading-relaxed mb-6 text-sm sm:text-base">
-                In 20+ years of business operations, I've never witnessed anything like this. What once took 
-                months of resources and complex implementations now happens in days with minimal overhead. 
-                This isn't just another technology trend—it's a historical explosion of business optimization 
+                In 20+ years of business operations, I've never witnessed anything like this. What once took
+                months of resources and complex implementations now happens in days with minimal overhead.
+                This isn't just another technology trend—it's a historical explosion of business optimization
                 that's redefining what's possible.
               </p>
             </div>
 
-            {/* Key Proof Points */}
-            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">Key Proof Points</h3>
-              
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="p-2 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-full">
-                    <TrendingUp className="w-5 h-5 text-green-400" />
-                  </div>
-                  <div>
-                    <span className="text-green-400 font-bold text-sm sm:text-base">$265M Startup Scale</span>
-                    <p className="text-gray-300 text-xs sm:text-sm">Align Networks, acquired by equity firm</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="p-2 bg-gradient-to-r from-purple-500/20 to-violet-600/20 rounded-full">
-                    <Trophy className="w-5 h-5 text-purple-400" />
-                  </div>
-                  <div>
-                    <span className="text-purple-400 font-bold text-sm sm:text-base">12X EBITDA Exit</span>
-                    <p className="text-gray-300 text-xs sm:text-sm">Executive Coach Professionals sold to General Atlantic</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="p-2 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 rounded-full">
-                    <Building className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <div>
-                    <span className="text-blue-400 font-bold text-sm sm:text-base">$1B Portfolio Strategy</span>
-                    <p className="text-gray-300 text-xs sm:text-sm">The Klotz Group, boosting NOI & occupancy</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="p-2 bg-gradient-to-r from-orange-500/20 to-red-600/20 rounded-full">
-                    <Award className="w-5 h-5 text-orange-400" />
-                  </div>
-                  <div>
-                    <span className="text-orange-400 font-bold text-sm sm:text-base">96% YoY Growth</span>
-                    <p className="text-gray-300 text-xs sm:text-sm">GO T&T through 50% efficiency gains</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-teal-600/20 rounded-full">
-                    <Users className="w-5 h-5 text-cyan-400" />
-                  </div>
-                  <div>
-                    <span className="text-cyan-400 font-bold text-sm sm:text-base">5X Revenue Growth</span>
-                    <p className="text-gray-300 text-xs sm:text-sm">One Call Care Management, $15M to $75M in under a year</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-3 bg-slate-600/50 rounded-lg hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="p-2 bg-gradient-to-r from-yellow-500/20 to-amber-600/20 rounded-full">
-                    <DollarSign className="w-5 h-5 text-yellow-400" />
-                  </div>
-                  <div>
-                    <span className="text-yellow-400 font-bold text-sm sm:text-base">30% Cost Reduction / 25% Profit Increase</span>
-                    <p className="text-gray-300 text-xs sm:text-sm">AI automation for SMBs</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 sm:gap-6">
-              <div className="text-center p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105">
-                <div className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">$1B+</div>
-                <div className="text-gray-300 text-sm sm:text-base">Portfolio Managed</div>
-              </div>
-              <div className="text-center p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105">
-                <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-2">200%</div>
-                <div className="text-gray-300 text-sm sm:text-base">YoY Growth Record</div>
-              </div>
-            </div>
-          </div>
-
-          <div 
-            ref={featuresRef}
-            className="space-y-4 sm:space-y-6 px-4">
-            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-4 sm:p-6 rounded-xl mb-6">
-              <h4 className="text-lg sm:text-xl font-semibold text-white mb-4">What Sets Me Apart</h4>
+            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-6 sm:p-8 rounded-2xl hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">What Sets Me Apart</h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0 mt-1">
@@ -158,8 +76,23 @@ const About = () => {
                   </div>
                 </div>
               </div>
-            </div>
 
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-6">
+                <div className="text-center p-4 sm:p-6 bg-slate-600/50 rounded-xl hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">$1B+</div>
+                  <div className="text-gray-300 text-sm sm:text-base">Portfolio Managed</div>
+                </div>
+                <div className="text-center p-4 sm:p-6 bg-slate-600/50 rounded-xl hover:bg-slate-600/70 transition-all duration-300">
+                  <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-2">200%</div>
+                  <div className="text-gray-300 text-sm sm:text-base">YoY Growth Record</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            ref={featuresRef}
+            className="space-y-4 sm:space-y-6 px-4">
             <div className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 bg-slate-700 rounded-xl hover:bg-slate-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0">
                 <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
