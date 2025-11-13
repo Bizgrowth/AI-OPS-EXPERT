@@ -63,48 +63,50 @@ const AssessmentForm: React.FC<AssessmentFormProps> = ({ assessmentType, onClose
   }
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-slate-800 rounded-2xl p-6 sm:p-8 max-w-3xl w-full my-8 relative">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-        >
-          <X className="w-6 h-6" />
-        </button>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto">
+      <div className="min-h-screen flex items-start justify-center p-4 py-8">
+        <div className="bg-slate-800 rounded-2xl p-6 sm:p-8 max-w-3xl w-full relative">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
+          >
+            <X className="w-6 h-6" />
+          </button>
 
-        <div className="mb-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-            {assessmentType === 'business_readiness' && 'Business Readiness Assessment'}
-            {assessmentType === 'roi_viability' && 'ROI Viability Analysis'}
-            {assessmentType === 'implementation_readiness' && 'Implementation Readiness Check'}
-          </h2>
-          <p className="text-gray-400">
-            Please answer the following questions to help us understand your needs
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {assessmentType === 'business_readiness' && <BusinessReadinessForm formData={formData} updateField={updateField} />}
-          {assessmentType === 'roi_viability' && <ROIViabilityForm formData={formData} updateField={updateField} />}
-          {assessmentType === 'implementation_readiness' && <ImplementationReadinessForm formData={formData} updateField={updateField} />}
-
-          <div className="flex justify-end space-x-4 pt-4 border-t border-slate-700">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-2.5 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit Assessment'}
-            </button>
+          <div className="mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+              {assessmentType === 'business_readiness' && 'Business Readiness Assessment'}
+              {assessmentType === 'roi_viability' && 'ROI Viability Analysis'}
+              {assessmentType === 'implementation_readiness' && 'Implementation Readiness Check'}
+            </h2>
+            <p className="text-gray-400">
+              Please answer the following questions to help us understand your needs
+            </p>
           </div>
-        </form>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {assessmentType === 'business_readiness' && <BusinessReadinessForm formData={formData} updateField={updateField} />}
+            {assessmentType === 'roi_viability' && <ROIViabilityForm formData={formData} updateField={updateField} />}
+            {assessmentType === 'implementation_readiness' && <ImplementationReadinessForm formData={formData} updateField={updateField} />}
+
+            <div className="flex justify-end space-x-4 pt-4 border-t border-slate-700">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-6 py-2.5 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit Assessment'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
