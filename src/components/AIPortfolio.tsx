@@ -56,7 +56,7 @@ const AIPortfolio: React.FC = () => {
       iconBg: 'bg-gradient-to-br from-cyan-500 to-blue-600',
       demos: [
         {
-          id: 'business-readiness',
+          id: 'business_readiness',
           title: 'Business Readiness Assessment',
           description: 'Evaluate processes, data, and integration feasibility before building anything',
           icon: Search,
@@ -66,7 +66,7 @@ const AIPortfolio: React.FC = () => {
           isAssessment: true
         },
         {
-          id: 'roi-viability',
+          id: 'roi_viability',
           title: 'ROI Viability Analysis',
           description: 'Calculate real costs vs. savings to ensure your automation investment makes sense',
           icon: DollarSign,
@@ -76,7 +76,7 @@ const AIPortfolio: React.FC = () => {
           isAssessment: true
         },
         {
-          id: 'implementation-readiness',
+          id: 'implementation_readiness',
           title: 'Implementation Readiness Check',
           description: 'Assess team adoption readiness and create deployment strategy for successful rollout',
           icon: Rocket,
