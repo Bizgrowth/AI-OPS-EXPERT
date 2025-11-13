@@ -9,7 +9,6 @@ import {
   Users,
   Zap,
   BarChart3,
-  Lightbulb,
   ExternalLink,
   Search,
   DollarSign,
@@ -176,24 +175,6 @@ const AIPortfolio: React.FC = () => {
           icon: Zap,
           demoUrl: 'https://resilient-sorbet-d14680.netlify.app/',
           gradient: 'from-orange-500 to-amber-600'
-        }
-      ]
-    },
-    {
-      id: 'design',
-      title: 'AI Design',
-      subtitle: 'Strategic Planning & Intelligence Architecture',
-      icon: Lightbulb,
-      gradient: 'from-blue-500 to-cyan-600',
-      iconBg: 'bg-gradient-to-br from-blue-500 to-cyan-600',
-      demos: [
-        {
-          id: 'strategic-planning',
-          title: 'Strategic AI Design & Planning',
-          description: 'Comprehensive strategic planning platform with multiple AI-powered tools and scenarios for business development, market analysis, and strategic decision-making',
-          icon: Lightbulb,
-          demoUrl: 'https://vermillion-salamander-06bea1.netlify.app/',
-          gradient: 'from-blue-500 to-indigo-600'
         }
       ]
     }
