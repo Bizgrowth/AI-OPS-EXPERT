@@ -121,27 +121,26 @@ const Services = () => {
           ref={gridRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map((service, index) => (
-            <div 
+            <div
               key={index}
               onClick={() => handleServiceClick(service.id)}
-              className="group relative p-4 sm:p-6 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 cursor-pointer mx-4 sm:mx-0"
+              className="group relative p-4 sm:p-6 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30 border border-slate-700 hover:border-cyan-500/50 cursor-pointer mx-4 sm:mx-0 perspective-card hover-border-glow"
             >
-              <div className={`p-3 sm:p-4 bg-gradient-to-r ${service.color} rounded-xl w-fit mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+              <div className={`p-3 sm:p-4 bg-gradient-to-r ${service.color} rounded-xl w-fit mb-4 sm:mb-6 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 animate-gradient-shift`}>
                 <service.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              
+
               <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 group-hover:text-cyan-400 transition-colors duration-300">
-                {service.title}
+                <span className="inline-block group-hover:scale-105 transition-transform duration-300">{service.title}</span>
               </h3>
-              
+
               <p className="text-gray-400 leading-relaxed mb-3 sm:mb-4 group-hover:text-gray-300 transition-colors duration-300 text-sm sm:text-base">
                 {service.description}
               </p>
 
-              {/* Click indicator */}
               <div className="flex items-center text-cyan-400 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 transform translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0">
                 <span className="text-xs sm:text-sm font-medium">View AI Solutions</span>
-                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform" />
               </div>
             </div>
           ))}
@@ -151,9 +150,9 @@ const Services = () => {
           <p className="text-gray-400 mb-6 text-sm sm:text-base">
             Each AI solution includes detailed case studies, proven methodologies, and measurable ROI results
           </p>
-          <button 
+          <button
             onClick={() => setShowScheduling(true)}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 animate-gradient-shift hover-shine relative overflow-hidden"
           >
             Schedule AI Consultation
           </button>

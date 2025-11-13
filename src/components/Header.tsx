@@ -51,42 +51,42 @@ const Header = () => {
             <a
               href="#about"
               onClick={(e) => handleNavClick(e, 'about')}
-              className={`transition-colors text-sm xl:text-base text-gray-300 hover:text-cyan-400`}
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               About
             </a>
             <a
               href="#services"
               onClick={(e) => handleNavClick(e, 'services')}
-              className={`transition-colors text-sm xl:text-base text-gray-300 hover:text-cyan-400`}
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               AI Solutions
             </a>
             <a
               href="#ai-portfolio"
               onClick={(e) => handleNavClick(e, 'ai-portfolio')}
-              className={`transition-colors text-sm xl:text-base text-gray-300 hover:text-cyan-400`}
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               Portfolio
             </a>
             <a
               href="#blog"
               onClick={(e) => handleNavClick(e, 'blog')}
-              className={`transition-colors text-sm xl:text-base text-gray-300 hover:text-cyan-400`}
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               Blog
             </a>
             <a
               href="#results"
               onClick={(e) => handleNavClick(e, 'results')}
-              className={`transition-colors text-sm xl:text-base text-gray-300 hover:text-cyan-400`}
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               Results
             </a>
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, 'contact')}
-              className={`transition-colors text-sm xl:text-base text-gray-300 hover:text-cyan-400`}
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               Contact
             </a>
@@ -95,13 +95,13 @@ const Header = () => {
           <div className="hidden lg:flex">
             <a
               href="/portal"
-              className="mr-4 border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 text-sm xl:text-base"
+              className="mr-4 border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
             >
               Client Portal
             </a>
-            <button 
+            <button
               onClick={handleBookCall}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 xl:px-6 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm xl:text-base"
+              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 xl:px-6 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 text-sm xl:text-base hover-shine relative overflow-hidden"
             >
               <span className="hidden xl:inline">Book AI Consultation</span>
               <span className="xl:hidden">Book Call</span>

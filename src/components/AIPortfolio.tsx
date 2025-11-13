@@ -235,7 +235,7 @@ const AIPortfolio: React.FC = () => {
                       return (
                         <div
                           key={demo.id}
-                          className="bg-slate-800/90 backdrop-blur-sm rounded-xl p-6 border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                          className="bg-slate-800/90 backdrop-blur-sm rounded-xl p-6 border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-105 perspective-card"
                         >
                           <div className="flex items-start space-x-3 mb-4">
                             <div className={`w-10 h-10 bg-gradient-to-r ${demo.gradient} rounded-lg flex items-center justify-center flex-shrink-0`}>
@@ -259,19 +259,19 @@ const AIPortfolio: React.FC = () => {
                               </div>
                               <button
                                 onClick={() => setShowAssessment(demo.id as 'business_readiness' | 'roi_viability' | 'implementation_readiness')}
-                                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group"
+                                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30 hover-shine relative overflow-hidden"
                               >
                                 <span>Start Assessment</span>
-                                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                <ExternalLink className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                               </button>
                             </>
                           ) : (
                             <button
                               onClick={() => demo.demoUrl && openDemo(demo.demoUrl)}
-                              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group mt-4"
+                              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group mt-4 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30 hover-shine relative overflow-hidden"
                             >
                               <span>Launch Live Demo</span>
-                              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                              <ExternalLink className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </button>
                           )}
                         </div>
@@ -291,14 +291,16 @@ const AIPortfolio: React.FC = () => {
           })}
         </div>
 
-        <div className="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-sm rounded-2xl p-8 text-center border border-slate-600 mt-16">
-          <h3 className="text-2xl font-semibold text-white mb-4">Ready to Transform Your Business with AI?</h3>
+        <div className="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-sm rounded-2xl p-8 text-center border border-slate-600 mt-16 hover-lift">
+          <h3 className="text-2xl font-semibold text-white mb-4">
+            <span className="inline-block hover:scale-110 transition-transform duration-300">Ready to Transform Your Business with AI?</span>
+          </h3>
           <p className="text-gray-300 mb-6 text-lg">
             Each solution is custom-implemented for your specific business needs with ongoing support and optimization.
           </p>
           <button
             onClick={() => setShowScheduling(true)}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105 shadow-lg">
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 animate-gradient-shift hover-shine relative overflow-hidden">
             Schedule Free AI Consultation
           </button>
         </div>

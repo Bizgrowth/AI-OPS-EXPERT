@@ -164,20 +164,20 @@ const Hero = () => {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 transition-all duration-1000 delay-900 ${
             isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-            <button 
+            <button
               onClick={handleBookConsultation}
-              className="group bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 w-full sm:w-auto"
+              className="group bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 w-full sm:w-auto hover-shine relative overflow-hidden"
             >
               <Calendar className="inline-block w-5 h-5 mr-2" />
               Book AI Consultation
-              <ChevronRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </button>
-            
-            <button 
+
+            <button
               onClick={handlePortfolioClick}
-              className="group border-2 border-gray-600 text-gray-300 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-cyan-400 hover:text-cyan-400 transition-all duration-200 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/10 w-full sm:w-auto"
+              className="group border-2 border-gray-600 text-gray-300 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-400/30 w-full sm:w-auto hover-border-glow"
             >
-              <ChevronRight className="inline-block w-5 h-5 mr-2" />
+              <ChevronRight className="inline-block w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
               AI Solutions Portfolio
             </button>
           </div>
@@ -187,49 +187,55 @@ const Hero = () => {
             className={`grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto px-4 transition-all duration-1000 delay-1100 ${
               isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
-            <div className="text-center">
+            <div className="text-center hover-lift cursor-pointer p-4 rounded-xl">
               <div className={`flex justify-center mb-4 transition-all duration-700 delay-1200 ${
                 isStatsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
               }`}>
-                <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full">
+                <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full animate-float">
                   <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400" />
                 </div>
               </div>
               <h3 className={`text-xl sm:text-2xl font-bold text-white mb-2 transition-all duration-700 delay-1300 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-              }`}>AI Strategy</h3>
+              }`}>
+                <span className="inline-block hover:scale-110 transition-transform duration-300">AI Strategy</span>
+              </h3>
               <p className={`text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1400 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
               }`}>Provide AI Readiness Assessment and AI Roadmap  tailored to your business objectives</p>
             </div>
-            
-            <div className="text-center">
+
+            <div className="text-center hover-lift cursor-pointer p-4 rounded-xl">
               <div className={`flex justify-center mb-4 transition-all duration-700 delay-1300 ${
                 isStatsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
               }`}>
-                <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full">
+                <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }}>
                   <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
                 </div>
               </div>
               <h3 className={`text-xl sm:text-2xl font-bold text-white mb-2 transition-all duration-700 delay-1400 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-              }`}>AI Automation</h3>
+              }`}>
+                <span className="inline-block hover:scale-110 transition-transform duration-300">AI Automation</span>
+              </h3>
               <p className={`text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1500 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
               }`}>AI-powered solutions that eliminate manual work and optimize workflows</p>
             </div>
-            
-            <div className="text-center">
+
+            <div className="text-center hover-lift cursor-pointer p-4 rounded-xl">
               <div className={`flex justify-center mb-4 transition-all duration-700 delay-1400 ${
                 isStatsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
               }`}>
-                <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full">
+                <div className="p-2 sm:p-3 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full animate-float" style={{ animationDelay: '1s' }}>
                   <Cpu className="w-6 h-6 sm:w-8 sm:h-8 text-green-400" />
                 </div>
               </div>
               <h3 className={`text-xl sm:text-2xl font-bold text-white mb-2 transition-all duration-700 delay-1500 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-              }`}>AI Performance</h3>
+              }`}>
+                <span className="inline-block hover:scale-110 transition-transform duration-300">AI Performance</span>
+              </h3>
               <p className={`text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1600 ${
                 isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
               }`}>Data-driven optimization that scales operations and drives measurable results</p>
