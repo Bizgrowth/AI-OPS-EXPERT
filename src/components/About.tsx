@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Cpu, Target } from 'lucide-react';
+import { Award, Cpu, Target, TrendingUp, Clock } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
@@ -45,46 +45,56 @@ const About = () => {
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-slate-700 to-slate-600 p-8 sm:p-12 lg:p-16 rounded-2xl hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8">What Sets Me Apart</h3>
-              <div className="space-y-6 sm:space-y-8">
-                <div className="flex items-start space-x-4 sm:space-x-6">
-                  <div className="p-3 sm:p-4 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full flex-shrink-0 mt-1">
-                    <Cpu className="w-6 h-6 sm:w-7 sm:h-7 text-cyan-400" />
-                  </div>
-                  <div>
-                    <span className="text-cyan-400 font-semibold text-base sm:text-lg lg:text-xl">Operations-first AI approach:</span>
-                    <span className="text-gray-300 ml-2 text-base sm:text-lg lg:text-xl">solving AI-addressable problems before AI existed</span>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4 sm:space-x-6">
-                  <div className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/20 to-pink-600/20 rounded-full flex-shrink-0 mt-1">
-                    <Award className="w-6 h-6 sm:w-7 sm:h-7 text-purple-400" />
-                  </div>
-                  <div>
-                    <span className="text-purple-400 font-semibold text-base sm:text-lg lg:text-xl">Executive-level execution:</span>
-                    <span className="text-gray-300 ml-2 text-base sm:text-lg lg:text-xl">across healthcare, real estate, hospitality, and tech</span>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4 sm:space-x-6">
-                  <div className="p-3 sm:p-4 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-full flex-shrink-0 mt-1">
-                    <Target className="w-6 h-6 sm:w-7 sm:h-7 text-green-400" />
-                  </div>
-                  <div>
-                    <span className="text-green-400 font-semibold text-base sm:text-lg lg:text-xl">ROI-focused solutions:</span>
-                    <span className="text-gray-300 ml-2 text-base sm:text-lg lg:text-xl">every implementation measured against 90-day results</span>
-                  </div>
-                </div>
-              </div>
+            <div className="space-y-8">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-12">What Sets Me Apart</h3>
 
-              <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mt-8 sm:mt-10">
-                <div className="text-center p-6 sm:p-8 lg:p-10 bg-slate-600/50 rounded-xl hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-cyan-400 mb-3">$1B+</div>
-                  <div className="text-gray-300 text-base sm:text-lg lg:text-xl">Portfolio Managed</div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Cpu className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-xl sm:text-2xl font-bold text-white">Operations-First AI Approach</h4>
+                  </div>
+                  <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                    I don't sell AI. I sell operational excellence powered by AI. We start with your business challenges, not with the technology.
+                  </p>
                 </div>
-                <div className="text-center p-6 sm:p-8 lg:p-10 bg-slate-600/50 rounded-xl hover:bg-slate-600/70 transition-all duration-300">
-                  <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-purple-400 mb-3">200%</div>
-                  <div className="text-gray-300 text-base sm:text-lg lg:text-xl">YoY Growth Record</div>
+
+                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Award className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-xl sm:text-2xl font-bold text-white">Executive-Level Execution</h4>
+                  </div>
+                  <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                    With C-level experience across healthcare, real estate, hospitality, and tech, I implement solutions that align with your strategic vision.
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Target className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-xl sm:text-2xl font-bold text-white">ROI-Focused with a 90-Day Guarantee</h4>
+                  </div>
+                  <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                    Every solution is designed for measurable ROI. If you're not satisfied with the results in 90 days, you get a full refund. Period.
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Clock className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-xl sm:text-2xl font-bold text-white">The AI Transformation Moment</h4>
+                  </div>
+                  <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                    This is a pivotal moment in business history. I provide the expertise to ensure you're a leader in this transformation, not a follower.
+                  </p>
                 </div>
               </div>
             </div>
