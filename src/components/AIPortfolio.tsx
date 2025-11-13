@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
+import AssessmentForm from './AssessmentForm';
 
 interface DemoCard {
   id: string;
@@ -43,6 +44,7 @@ interface DemoCategory {
 const AIPortfolio: React.FC = () => {
   const [portfolioRef, isPortfolioVisible] = useScrollAnimation(0.1);
   const [showScheduling, setShowScheduling] = useState(false);
+  const [showAssessment, setShowAssessment] = useState<'business_readiness' | 'roi_viability' | 'implementation_readiness' | null>(null);
 
   const demoCategories: DemoCategory[] = [
     {
@@ -275,7 +277,7 @@ const AIPortfolio: React.FC = () => {
                                 <span className="text-cyan-400 font-semibold">{demo.price}</span>
                               </div>
                               <button
-                                onClick={() => setShowScheduling(true)}
+                                onClick={() => setShowAssessment(demo.id as 'business_readiness' | 'roi_viability' | 'implementation_readiness')}
                                 className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2 text-sm font-medium group"
                               >
                                 <span>Start Assessment</span>
@@ -325,6 +327,13 @@ const AIPortfolio: React.FC = () => {
         isOpen={showScheduling}
         onClose={() => setShowScheduling(false)}
       />
+
+      {showAssessment && (
+        <AssessmentForm
+          assessmentType={showAssessment}
+          onClose={() => setShowAssessment(null)}
+        />
+      )}
     </section>
   );
 };
