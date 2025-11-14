@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to Demo Center - Code Snippet</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+        h1 {
+            color: #06b6d4;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            color: #06b6d4;
+            margin-top: 0;
+            font-size: 20px;
+        }
+        pre {
+            background: #020617;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            color: #e2e8f0;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .preview {
+            border: 2px dashed #334155;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            background: #1e293b;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #0f172a;
+            color: #06b6d4;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid #334155;
+        }
+        .back-button:hover {
+            background: #1e293b;
+            border-color: #06b6d4;
+            transform: translateX(-4px);
+        }
+        .instructions {
+            background: #064e3b;
+            border-left: 4px solid #10b981;
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+        .note {
+            background: #1e40af;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔗 Back to Demo Center - Implementation Guide</h1>
+    <p class="subtitle">Add this button to all your demo pages to enable navigation back to the AI Portfolio section</p>
+
+    <div class="instructions">
+        <strong>📋 Quick Instructions:</strong>
+        <ol>
+            <li>Copy the HTML code below</li>
+            <li>Paste it at the top of each demo page (right after the opening <code>&lt;body&gt;</code> tag)</li>
+            <li>The button will automatically detect the return URL and navigate back to the Demo Center</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>📝 HTML Code to Add to Each Demo Page</h2>
+        <p>Copy this entire code block and paste it into your demo pages:</p>
+        <pre><code>&lt;!-- Back to Demo Center Button --&gt;
+&lt;div id="demo-back-button" style="
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    animation: slideIn 0.5s ease-out;
+"&gt;
+    &lt;a id="back-to-demo-link" href="#" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        color: #06b6d4;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        border: 1px solid rgba(51, 65, 85, 0.8);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    " onmouseover="this.style.background='rgba(30, 41, 59, 0.95)'; this.style.borderColor='#06b6d4'; this.style.transform='translateX(-4px)';" onmouseout="this.style.background='rgba(15, 23, 42, 0.95)'; this.style.borderColor='rgba(51, 65, 85, 0.8)'; this.style.transform='translateX(0)';"&gt;
+        &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+            &lt;path d="M19 12H5M12 19l-7-7 7-7"/&gt;
+        &lt;/svg&gt;
+        &lt;span&gt;Back to Demo Center&lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        #demo-back-button {
+            top: 10px !important;
+            left: 10px !important;
+        }
+        #back-to-demo-link {
+            padding: 10px 16px !important;
+            font-size: 13px !important;
+        }
+    }
+&lt;/style&gt;
+
+&lt;script&gt;
+    // Automatically set the return URL from the query parameter
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const returnUrl = urlParams.get('returnUrl');
+        const backButton = document.getElementById('back-to-demo-link');
+
+        if (returnUrl) {
+            backButton.href = decodeURIComponent(returnUrl);
+        } else {
+            // Fallback to main portfolio section if no returnUrl provided
+            backButton.href = 'https://aiopsexpert.com#ai-portfolio';
+        }
+
+        // Handle click with smooth transition
+        backButton.addEventListener('click', function(e) {
+            if (window.opener) {
+                e.preventDefault();
+                window.close();
+                if (!window.closed) {
+                    window.location.href = this.href;
+                }
+            }
+        });
+    })();
+&lt;/script&gt;
+&lt;!-- End Back to Demo Center Button --&gt;</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>👀 Preview</h2>
+        <p>This is how the button will look on your demo pages:</p>
+        <div class="preview">
+            <a href="#" class="back-button" onclick="return false;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Back to Demo Center</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>💡 How It Works:</strong>
+        <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+            <li>When users click "Launch Live Demo", the URL includes a <code>returnUrl</code> parameter</li>
+            <li>The button automatically reads this parameter and sets the correct return destination</li>
+            <li>Users click "Back to Demo Center" and return to exactly where they were</li>
+            <li>If opened directly (without the parameter), it defaults to the main Demo Center</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Demo Pages to Update</h2>
+        <p>Add this code to the following demo pages:</p>
+        <ul>
+            <li>✅ Smart Customer Support Chatbot (chic-cheesecake-4515b2.netlify.app)</li>
+            <li>✅ Lead Qualification System (effortless-lollipop-4fd86e.netlify.app)</li>
+            <li>✅ Contract Analysis Tool (lucent-salamander-76034a.netlify.app)</li>
+            <li>✅ Employee Onboarding Assistant (delicate-frangollo-0feb83.netlify.app)</li>
+            <li>✅ Meeting Scheduler (dreamy-swan-db3e7b.netlify.app)</li>
+            <li>✅ Revenue Forecasting Dashboard (tourmaline-brioche-f3aefd.netlify.app)</li>
+            <li>✅ Team Collaboration Hub (earnest-biscochitos-38fb92.netlify.app)</li>
+            <li>✅ Marketing Campaign Manager (sparkly-youtiao-190d3e.netlify.app)</li>
+            <li>✅ Predictive Analytics Platform (resilient-sorbet-d14680.netlify.app)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📱 Responsive Design</h2>
+        <p>The button automatically adjusts for mobile devices with:</p>
+        <ul>
+            <li>Smaller padding and font size on screens under 768px</li>
+            <li>Fixed positioning that stays visible while scrolling</li>
+            <li>Smooth hover animations on desktop</li>
+            <li>Touch-friendly sizing on mobile</li>
+        </ul>
+    </div>
+
+    <div class="instructions" style="background: #4c1d95; border-left-color: #8b5cf6;">
+        <strong>🚀 Testing:</strong>
+        <p style="margin: 8px 0 0 0;">After adding the button to your demo pages:</p>
+        <ol style="margin: 8px 0 0 0; padding-left: 20px;">
+            <li>Click "Launch Live Demo" from the main site</li>
+            <li>Verify the "Back to Demo Center" button appears in the top-left</li>
+            <li>Click the button to confirm it returns to the correct section</li>
+            <li>Test on both desktop and mobile devices</li>
+        </ol>
+    </div>
+
+</body>
+</html>

@@ -183,7 +183,11 @@ const AIPortfolio: React.FC = () => {
   const openDemo = (demoUrl: string): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
-      window.open(demoUrl, '_blank');
+      const currentUrl = window.location.origin;
+      const portfolioSection = `${currentUrl}#ai-portfolio`;
+      const separator = demoUrl.includes('?') ? '&' : '?';
+      const urlWithReturn = `${demoUrl}${separator}returnUrl=${encodeURIComponent(portfolioSection)}`;
+      window.open(urlWithReturn, '_blank');
     }, 300);
   };
 
