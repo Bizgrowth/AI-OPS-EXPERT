@@ -95,6 +95,14 @@ const AIPortfolio: React.FC = () => {
       iconBg: 'bg-gradient-to-br from-pink-500 to-purple-600',
       demos: [
         {
+          id: 'test-demo',
+          title: '🧪 TEST: Customer Support Chatbot (Local)',
+          description: '✅ Click this to test the Back to Demo Center button - works immediately!',
+          icon: MessageSquare,
+          demoUrl: '/test-demo.html',
+          gradient: 'from-cyan-500 to-blue-600'
+        },
+        {
           id: 'customer-support',
           title: 'Smart Customer Support Chatbot',
           description: 'Intelligent 24/7 customer service that handles inquiries, resolves issues, and escalates complex cases',

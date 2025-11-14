@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Demo - Smart Customer Support Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 24px;
+            opacity: 0.9;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        .demo-section h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .chatbot-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            color: #1e293b;
+            min-height: 400px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        .chat-message.bot {
+            background: #e0f2fe;
+            margin-right: auto;
+        }
+
+        .chat-message.user {
+            background: #3b82f6;
+            color: white;
+            margin-left: auto;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .notice {
+            background: rgba(16, 185, 129, 0.2);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .notice h3 {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            .header p {
+                font-size: 18px;
+            }
+            .demo-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== BACK TO DEMO CENTER BUTTON ==================== -->
+<div id="demo-back-button" style="position: fixed; top: 20px; left: 20px; z-index: 9999; animation: slideIn 0.5s ease-out;">
+    <a id="back-to-demo-link" href="#" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); color: #06b6d4; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; border: 1px solid rgba(51, 65, 85, 0.8); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(30, 41, 59, 0.95)'; this.style.borderColor='#06b6d4'; this.style.transform='translateX(-4px)';" onmouseout="this.style.background='rgba(15, 23, 42, 0.95)'; this.style.borderColor='rgba(51, 65, 85, 0.8)'; this.style.transform='translateX(0)';">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Back to Demo Center</span>
+    </a>
+</div>
+
+<style>
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @media (max-width: 768px) {
+        #demo-back-button { top: 10px !important; left: 10px !important; }
+        #back-to-demo-link { padding: 10px 16px !important; font-size: 13px !important; }
+    }
+</style>
+
+<script>
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const returnUrl = urlParams.get('returnUrl');
+        const backButton = document.getElementById('back-to-demo-link');
+
+        if (returnUrl) {
+            backButton.href = decodeURIComponent(returnUrl);
+            console.log('Return URL detected:', decodeURIComponent(returnUrl));
+        } else {
+            // Fallback - try to go back to same domain
+            backButton.href = window.location.origin + '#ai-portfolio';
+            console.log('No return URL, using fallback:', backButton.href);
+        }
+
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Back button clicked, navigating to:', this.href);
+
+            // If opened in popup/new window, try to close it
+            if (window.opener) {
+                window.opener.location.href = this.href;
+                window.close();
+
+                // If window didn't close, navigate anyway
+                setTimeout(() => {
+                    if (!window.closed) {
+                        window.location.href = this.href;
+                    }
+                }, 100);
+            } else {
+                // Regular navigation
+                window.location.href = this.href;
+            }
+        });
+    })();
+</script>
+<!-- ==================== END BACK BUTTON ==================== -->
+
+    <div class="container">
+        <div class="header">
+            <h1>Smart Customer Support Chatbot</h1>
+            <p>Experience how AI can handle customer inquiries 24/7 with 98% accuracy</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>
+                    <span class="icon">⭐</span>
+                    98% Accuracy Rate
+                </h3>
+                <p>Our AI understands context and intent to provide accurate responses to customer questions, reducing the need for human intervention.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>
+                    <span class="icon">🕐</span>
+                    24/7 Availability
+                </h3>
+                <p>Never miss a customer inquiry. Our chatbot works around the clock to ensure your customers always get the support they need.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>
+                    <span class="icon">⚡</span>
+                    Instant Responses
+                </h3>
+                <p>Eliminate wait times with immediate responses to common questions, improving customer satisfaction and engagement.</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Live Demo Interface</h2>
+            <div class="chatbot-demo">
+                <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #e2e8f0;">
+                    <h3 style="margin-bottom: 8px;">AI Customer Support Assistant</h3>
+                    <p style="color: #64748b; display: flex; align-items: center;">
+                        <span class="status-indicator"></span>
+                        Online - Ready to help
+                    </p>
+                </div>
+
+                <div class="chat-message bot">
+                    <strong>AI Assistant:</strong> Hello! Welcome to our support center. How can I help you today?
+                </div>
+
+                <div class="chat-message user">
+                    <strong>Customer:</strong> I need help tracking my order
+                </div>
+
+                <div class="chat-message bot">
+                    <strong>AI Assistant:</strong> I'd be happy to help you track your order! Could you please provide your order number? It should be in the confirmation email you received.
+                </div>
+
+                <div class="chat-message user">
+                    <strong>Customer:</strong> It's #12345
+                </div>
+
+                <div class="chat-message bot">
+                    <strong>AI Assistant:</strong> Thank you! I found your order #12345. It's currently out for delivery and should arrive today by 5 PM. You can track it in real-time using this link. Is there anything else I can help you with?
+                </div>
+
+                <div style="margin-top: 32px; padding: 20px; background: #f1f5f9; border-radius: 8px;">
+                    <p style="color: #64748b; font-style: italic;">
+                        💡 <strong>Demo Note:</strong> This is a simplified example. The actual chatbot handles complex inquiries, integrates with your systems, escalates to human agents when needed, and learns from interactions to improve over time.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="notice">
+            <h3>✅ This is a Working Test Demo</h3>
+            <p style="line-height: 1.6;">
+                Notice the "Back to Demo Center" button in the top-left corner?
+                <strong>Click it now to test the navigation!</strong> It will take you back to exactly where you came from on the main site.
+                This same button needs to be added to all your external demo pages for the same seamless navigation experience.
+            </p>
+        </div>
+
+        <div class="features" style="margin-top: 60px;">
+            <div class="feature-card">
+                <h3>
+                    <span class="icon">🔗</span>
+                    Seamless Integration
+                </h3>
+                <p>Integrates with your existing CRM, ticketing system, and knowledge base for comprehensive customer support.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>
+                    <span class="icon">📊</span>
+                    Analytics Dashboard
+                </h3>
+                <p>Track performance metrics, customer satisfaction, and identify common issues to improve your service.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>
+                    <span class="icon">🎯</span>
+                    Smart Escalation
+                </h3>
+                <p>Automatically routes complex issues to human agents with full conversation context for efficient resolution.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
