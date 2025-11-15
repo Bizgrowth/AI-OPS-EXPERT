@@ -165,7 +165,7 @@ const AIPortfolio: React.FC = () => {
           title: 'Remote Team Ops Portal',
           description: 'Central hub for async execution, check-ins, and team communication',
           icon: Users,
-          demoUrl: 'https://sparkly-youtiao-190d3e.netlify.app/',
+          demoUrl: 'https://remoteperformance.aiopsexpert.com/',
           gradient: 'from-green-500 to-teal-600'
         },
         {
