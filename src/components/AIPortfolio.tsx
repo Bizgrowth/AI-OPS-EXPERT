@@ -99,7 +99,7 @@ const AIPortfolio: React.FC = () => {
           title: 'Smart Customer Support Chatbot',
           description: 'Intelligent 24/7 customer service that handles inquiries, resolves issues, and escalates complex cases',
           icon: MessageSquare,
-          demoUrl: 'https://chic-cheesecake-4515b2.netlify.app/',
+          demoUrl: 'https://smartchatbot.aiopsexpert.com/',
           gradient: 'from-blue-500 to-blue-700'
         },
         {
@@ -107,7 +107,7 @@ const AIPortfolio: React.FC = () => {
           title: 'AI Social Media Content Creator',
           description: 'Automated content generation for social platforms with brand-consistent messaging and scheduling',
           icon: Share2,
-          demoUrl: 'https://effortless-lollipop-4fd86e.netlify.app/',
+          demoUrl: 'https://contentcreator.aiopsexpert.com/',
           gradient: 'from-purple-500 to-purple-700'
         },
         {
@@ -115,7 +115,7 @@ const AIPortfolio: React.FC = () => {
           title: 'AI Invoice Processing Assistant',
           description: 'Intelligent document processing that extracts, validates, and organizes invoice data automatically',
           icon: FileText,
-          demoUrl: 'https://lucent-salamander-76034a.netlify.app/',
+          demoUrl: 'https://invoiceprocessing.aiopsexpert.com/',
           gradient: 'from-green-500 to-green-700'
         },
         {
@@ -123,7 +123,7 @@ const AIPortfolio: React.FC = () => {
           title: 'AI Lead Qualification Bot',
           description: 'Smart lead scoring and qualification system that identifies high-value prospects automatically',
           icon: UserCheck,
-          demoUrl: 'https://delicate-frangollo-0feb83.netlify.app/',
+          demoUrl: 'https://aileadqualification.aiopsexpert.com/',
           gradient: 'from-orange-500 to-red-600'
         },
         {
@@ -149,7 +149,7 @@ const AIPortfolio: React.FC = () => {
           title: 'AI-Powered KPI Dashboard',
           description: 'Real-time performance metrics with AI-generated insights',
           icon: BarChart3,
-          demoUrl: 'https://tourmaline-brioche-f3aefd.netlify.app/',
+          demoUrl: 'https://aikpidashboard.aiopsexpert.com/',
           gradient: 'from-blue-500 to-cyan-600'
         },
         {
@@ -157,7 +157,7 @@ const AIPortfolio: React.FC = () => {
           title: 'AI Executive Assistant (Ops Agent)',
           description: 'Daily performance summaries, task automation, and alerting',
           icon: Users,
-          demoUrl: 'https://earnest-biscochitos-38fb92.netlify.app/',
+          demoUrl: 'https://aiexecutiveassistant.aiopsexpert.com/',
           gradient: 'from-purple-500 to-indigo-600'
         },
         {
