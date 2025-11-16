@@ -111,6 +111,14 @@ const AIPortfolio: React.FC = () => {
           gradient: 'from-purple-500 to-purple-700'
         },
         {
+          id: 'social-media-pro',
+          title: 'Social Media Pro - AI Content Manager',
+          description: 'Advanced social media management platform with AI-powered content creation, scheduling, and analytics',
+          icon: TrendingUp,
+          demoUrl: 'https://socialmediapro.aiopsexpert.com/',
+          gradient: 'from-pink-500 to-purple-600'
+        },
+        {
           id: 'invoice-processing',
           title: 'AI Invoice Processing Assistant',
           description: 'Intelligent document processing that extracts, validates, and organizes invoice data automatically',
