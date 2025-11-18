@@ -77,11 +77,11 @@ const Header = () => {
               Blog
             </a>
             <a
-              href="#results"
-              onClick={(e) => handleNavClick(e, 'results')}
+              href="#tech-stack"
+              onClick={(e) => handleNavClick(e, 'tech-stack')}
               className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
-              Results
+              Tech Stack
             </a>
             <a
               href="#contact"
@@ -148,11 +148,11 @@ const Header = () => {
                 Blog
               </a>
               <a
-                href="#results"
-                onClick={(e) => handleNavClick(e, 'results')}
+                href="#tech-stack"
+                onClick={(e) => handleNavClick(e, 'tech-stack')}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
-                Results
+                Tech Stack
               </a>
               <a
                 href="#contact"
