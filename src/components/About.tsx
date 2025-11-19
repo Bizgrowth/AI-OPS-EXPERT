@@ -116,10 +116,10 @@ const About = () => {
                       </div>
                     </div>
                     <a
-                      href="#services"
+                      href="#ai-portfolio"
                       onClick={(e) => {
                         e.preventDefault();
-                        const element = document.getElementById('services');
+                        const element = document.getElementById('ai-portfolio');
                         if (element) {
                           const headerHeight = 64;
                           const elementPosition = element.offsetTop - headerHeight;
