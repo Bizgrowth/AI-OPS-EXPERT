@@ -108,11 +108,11 @@ const About = () => {
                       </div>
                       <div className="flex items-start">
                         <span className="text-cyan-400 mr-2">→</span>
-                        <span className="text-gray-200">30-90 Day ROI</span>
+                        <span className="text-gray-200">30-90 Day Results</span>
                       </div>
                       <div className="flex items-start">
                         <span className="text-cyan-400 mr-2">→</span>
-                        <span className="text-gray-200">Starting at $5K</span>
+                        <span className="text-gray-200">Live in 2-3 Weeks</span>
                       </div>
                     </div>
                     <a
@@ -145,11 +145,11 @@ const About = () => {
                       </div>
                       <div className="flex items-start">
                         <span className="text-purple-400 mr-2">→</span>
-                        <span className="text-gray-200">6-12 Month Roadmaps</span>
+                        <span className="text-gray-200">Enterprise-Wide Implementation</span>
                       </div>
                       <div className="flex items-start">
                         <span className="text-purple-400 mr-2">→</span>
-                        <span className="text-gray-200">$50K+ Engagements</span>
+                        <span className="text-gray-200">Strategic Roadmap Included</span>
                       </div>
                     </div>
                     <a
