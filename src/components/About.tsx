@@ -87,6 +87,90 @@ const About = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Client Type Selection */}
+              <div className="mt-16 pt-16 border-t border-slate-700">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8">
+                  Which describes you best?
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                  {/* Small Business Owner */}
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-700/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-600 hover:border-cyan-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20">
+                    <h4 className="text-2xl font-bold text-white mb-4">Small Business Owner</h4>
+                    <p className="text-gray-300 text-lg mb-6 italic">
+                      "I need quick wins with AI but don't have a tech team"
+                    </p>
+                    <div className="space-y-3 mb-8">
+                      <div className="flex items-start">
+                        <span className="text-cyan-400 mr-2">→</span>
+                        <span className="text-gray-200">Try Interactive Demos</span>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-cyan-400 mr-2">→</span>
+                        <span className="text-gray-200">30-90 Day ROI</span>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-cyan-400 mr-2">→</span>
+                        <span className="text-gray-200">Starting at $5K</span>
+                      </div>
+                    </div>
+                    <a
+                      href="#services"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById('services');
+                        if (element) {
+                          const headerHeight = 64;
+                          const elementPosition = element.offsetTop - headerHeight;
+                          window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                        }
+                      }}
+                      className="inline-block w-full text-center bg-gradient-to-r from-cyan-500 to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105"
+                    >
+                      Explore Solutions →
+                    </a>
+                  </div>
+
+                  {/* Enterprise Executive */}
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-700/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-600 hover:border-purple-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
+                    <h4 className="text-2xl font-bold text-white mb-4">Enterprise Executive</h4>
+                    <p className="text-gray-300 text-lg mb-6 italic">
+                      "I need strategic AI transformation across multiple departments"
+                    </p>
+                    <div className="space-y-3 mb-8">
+                      <div className="flex items-start">
+                        <span className="text-purple-400 mr-2">→</span>
+                        <span className="text-gray-200">View Our Methodology</span>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-purple-400 mr-2">→</span>
+                        <span className="text-gray-200">6-12 Month Roadmaps</span>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-purple-400 mr-2">→</span>
+                        <span className="text-gray-200">$50K+ Engagements</span>
+                      </div>
+                    </div>
+                    <a
+                      href="#contact"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById('contact');
+                        if (element) {
+                          const headerHeight = 64;
+                          const elementPosition = element.offsetTop - headerHeight;
+                          window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                        }
+                      }}
+                      className="inline-block w-full text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                    >
+                      Schedule Briefing →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
