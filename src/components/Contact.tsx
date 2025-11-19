@@ -49,6 +49,25 @@ const Contact = () => {
         return;
       }
 
+      const emailApiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`;
+
+      fetch(emailApiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message,
+        }),
+      }).catch(err => {
+        console.error('Email notification failed (non-blocking):', err);
+      });
+
       setSubmitStatus('success');
       setFormData({
         firstName: '',
