@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Clock, ExternalLink, Linkedin, Twitter, Facebook, Instagram, Youtube } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { supabase } from '../lib/supabase';
 
 const Contact = () => {
   const [contactRef, isContactVisible] = useScrollAnimation(0.1);
@@ -28,48 +29,22 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Check if we're in development mode
-    const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    
-    if (isDevelopment) {
-      // Simulate form submission in development
-      console.log('Development mode: Simulating form submission with data:', formData);
-      setTimeout(() => {
-        setSubmitStatus('success');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          company: '',
-          service: '',
-          message: '',
-        });
-        setIsSubmitting(false);
-      }, 1000);
-      return;
-    }
-
     try {
-      // Create form data object for Netlify
-      const submitData = {
-        'form-name': 'ai-consultation',
-        'bot-field': '', // Honeypot field (should be empty)
-        ...formData
-      };
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            company: formData.company || null,
+            service: formData.service || null,
+            message: formData.message,
+          }
+        ]);
 
-      console.log('Submitting form data:', submitData);
-      console.log('URL-encoded body:', new URLSearchParams(submitData).toString());
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(submitData).toString(),
-      });
-
-      console.log('Response status:', res.status);
-      console.log('Response headers:', res.headers);
-      if (!res.ok) {
-        const responseText = await res.text();
-        console.error('Form submission failed:', res.status, res.statusText, responseText);
+      if (error) {
+        console.error('Form submission error:', error);
         setSubmitStatus('error');
         return;
       }
@@ -216,22 +191,10 @@ const Contact = () => {
               </div>
             )}
 
-            <form 
-              name="ai-consultation"
-              method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              data-netlify-recaptcha="true"
-              onSubmit={handleSubmit} 
+            <form
+              onSubmit={handleSubmit}
               className="space-y-6"
             >
-              {/* Hidden fields for Netlify form handling */}
-              <input type="hidden" name="form-name" value="ai-consultation" />
-              <div style={{ display: 'none' }}>
-                <label>
-                  Don't fill this out if you're human: <input name="bot-field" />
-                </label>
-              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -348,9 +311,6 @@ const Contact = () => {
                   'Send AI Consultation Request'
                 )}
               </button>
-              
-              {/* reCAPTCHA will be automatically inserted here by Netlify */}
-              <div data-netlify-recaptcha="true"></div>
             </form>
 
             <div className="mt-6 text-center text-xs sm:text-sm text-gray-400">
