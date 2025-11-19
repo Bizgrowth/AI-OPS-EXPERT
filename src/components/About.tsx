@@ -153,10 +153,10 @@ const About = () => {
                       </div>
                     </div>
                     <a
-                      href="#contact"
+                      href="#services"
                       onClick={(e) => {
                         e.preventDefault();
-                        const element = document.getElementById('contact');
+                        const element = document.getElementById('services');
                         if (element) {
                           const headerHeight = 64;
                           const elementPosition = element.offsetTop - headerHeight;
