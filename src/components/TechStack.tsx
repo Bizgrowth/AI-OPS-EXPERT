@@ -92,6 +92,21 @@ const TechStack = () => {
       ]
     },
     {
+      id: 'ai-app-builders',
+      icon: Brain,
+      title: 'AI-Powered Application Builders',
+      description: 'Next-generation development with AI assistance',
+      gradient: 'bg-gradient-ai',
+      technologies: [
+        { name: 'Bolt.new', logo: 'BT' },
+        { name: 'Lovable', logo: 'LV' },
+        { name: 'Claude Code', logo: 'CC' },
+        { name: 'Cursor', logo: 'CR' },
+        { name: 'Replit', logo: 'RP' },
+        { name: 'StackBlitz', logo: 'SB' }
+      ]
+    },
+    {
       id: 'cloud-infrastructure',
       icon: Cloud,
       title: 'Cloud Infrastructure',
