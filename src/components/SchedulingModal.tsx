@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, X, User, Mail, Building, MessageSquare, CheckCircle, ArrowLeft, ArrowRight } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface TimeSlot {
   time: string;
@@ -110,38 +111,68 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose }) =>
 
   const handleSubmitBooking = async () => {
     setIsSubmitting(true);
-    
-    try {
-      // Save booking to localStorage
-      const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-      const newBooking = {
-        ...bookingData,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString(),
-        status: 'confirmed'
-      };
-      bookings.push(newBooking);
-      localStorage.setItem('bookings', JSON.stringify(bookings));
 
-      // Send email notification (using Formspree)
-      await fetch('https://formspree.io/f/xdkogkvo', {
+    try {
+      const bookingDateObj = selectedDate;
+      if (!bookingDateObj) throw new Error('No date selected');
+
+      const { data: booking, error: bookingError } = await supabase
+        .from('bookings')
+        .insert({
+          first_name: bookingData.firstName,
+          last_name: bookingData.lastName,
+          email: bookingData.email,
+          phone: bookingData.phone || null,
+          company: bookingData.company || null,
+          consultation_type: bookingData.consultationType,
+          message: bookingData.message || null,
+          booking_date: bookingDateObj.toISOString().split('T')[0],
+          booking_time: selectedTime,
+          status: 'confirmed'
+        })
+        .select()
+        .single();
+
+      if (bookingError) {
+        console.error('Failed to create booking:', bookingError);
+        throw new Error('Failed to create booking');
+      }
+
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      await fetch(`${supabaseUrl}/functions/v1/create-calendar-event`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabaseAnonKey}`,
         },
         body: JSON.stringify({
-          _replyto: bookingData.email,
-          _subject: `AI Strategy Session Booking - ${bookingData.firstName} ${bookingData.lastName}`,
-          _to: 'dschley@aiopsexpert.com',
-          booking_type: 'AI Strategy Session',
-          date: bookingData.date,
-          time: bookingData.time,
-          name: `${bookingData.firstName} ${bookingData.lastName}`,
+          bookingId: booking.id,
+          firstName: bookingData.firstName,
+          lastName: bookingData.lastName,
           email: bookingData.email,
           company: bookingData.company,
-          phone: bookingData.phone,
-          consultation_type: bookingData.consultationType,
-          message: bookingData.message
+          consultationType: bookingData.consultationType,
+          message: bookingData.message,
+          bookingDate: bookingDateObj.toISOString().split('T')[0],
+          bookingTime: selectedTime
+        })
+      });
+
+      await fetch(`${supabaseUrl}/functions/v1/send-contact-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabaseAnonKey}`,
+        },
+        body: JSON.stringify({
+          firstName: bookingData.firstName,
+          lastName: bookingData.lastName,
+          email: bookingData.email,
+          company: bookingData.company,
+          service: `Booking: ${bookingData.consultationType}`,
+          message: `Date: ${bookingData.date}\nTime: ${bookingData.time}\n\n${bookingData.message || 'No additional message'}`
         })
       });
 
