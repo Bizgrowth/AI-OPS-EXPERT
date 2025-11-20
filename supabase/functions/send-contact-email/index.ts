@@ -19,6 +19,9 @@ Deno.serve(async (req: Request) => {
   try {
     const { firstName, lastName, email, company, service, message } = await req.json();
 
+    console.log("Processing contact form submission for:", firstName, lastName);
+    console.log("RESEND_API_KEY exists:", !!RESEND_API_KEY);
+
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not set");
       return new Response(
@@ -30,17 +33,24 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const emailBody = `
-      New Contact Form Submission
-      
-      Name: ${firstName} ${lastName}
-      Email: ${email}
-      Company: ${company || 'Not provided'}
-      Service Interest: ${service || 'Not specified'}
-      
-      Message:
-      ${message}
-    `;
+    const emailBody = `New Contact Form Submission
+
+Name: ${firstName} ${lastName}
+Email: ${email}
+Company: ${company || 'Not provided'}
+Service Interest: ${service || 'Not specified'}
+
+Message:
+${message}`;
+
+    const emailPayload = {
+      from: "onboarding@resend.dev",
+      to: ["dschley@aiopsexpert.com"],
+      subject: `New Contact Form: ${firstName} ${lastName}`,
+      text: emailBody,
+    };
+
+    console.log("Sending email to Resend API...");
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -48,19 +58,18 @@ Deno.serve(async (req: Request) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
-      body: JSON.stringify({
-        from: "AI Contact Form <onboarding@resend.dev>",
-        to: ["dschley@aiopsexpert.com"],
-        subject: `New Contact Form: ${firstName} ${lastName}`,
-        text: emailBody,
-      }),
+      body: JSON.stringify(emailPayload),
     });
 
+    const responseText = await res.text();
+    console.log("Resend API response status:", res.status);
+    console.log("Resend API response:", responseText);
+
     if (!res.ok) {
-      const error = await res.text();
-      console.error("Resend API error:", error);
+      console.error("Resend API error - Status:", res.status);
+      console.error("Resend API error - Body:", responseText);
       return new Response(
-        JSON.stringify({ error: "Failed to send email" }),
+        JSON.stringify({ error: "Failed to send email", details: responseText }),
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -68,16 +77,16 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const data = await res.json();
+    const data = JSON.parse(responseText);
 
     return new Response(JSON.stringify({ success: true, data }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Unexpected error:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error.message, stack: error.stack }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
