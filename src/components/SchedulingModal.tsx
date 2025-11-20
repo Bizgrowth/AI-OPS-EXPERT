@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Calendar, X, ExternalLink } from 'lucide-react';
 
 interface SchedulingModalProps {
@@ -7,29 +7,8 @@ interface SchedulingModalProps {
 }
 
 const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose }) => {
-  useEffect(() => {
-    if (isOpen) {
-      const script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      document.body.appendChild(script);
-
-      return () => {
-        if (document.body.contains(script)) {
-          document.body.removeChild(script);
-        }
-      };
-    }
-  }, [isOpen]);
-
-  const openCalendlyPopup = () => {
-    if ((window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/dschley-aiopsexpert/30min'
-      });
-    } else {
-      window.open('https://calendly.com/dschley-aiopsexpert/30min', '_blank');
-    }
+  const openCalendly = () => {
+    window.open('https://calendly.com/dschley-aiopsexpert/30min', '_blank');
     onClose();
   };
 
@@ -92,7 +71,7 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose }) =>
             </div>
 
             <button
-              onClick={openCalendlyPopup}
+              onClick={openCalendly}
               className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all inline-flex items-center space-x-2 text-lg"
             >
               <span>Choose Your Time</span>
