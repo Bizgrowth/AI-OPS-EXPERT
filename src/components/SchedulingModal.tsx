@@ -32,7 +32,7 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose }) =>
             </div>
             <div>
               <h2 className="text-2xl font-bold text-white">Schedule AI Strategy Session</h2>
-              <p className="text-white/90">Book your free 60-minute consultation</p>
+              <p className="text-white/90">Book your free 30-minute consultation</p>
             </div>
           </div>
           <button
@@ -45,7 +45,7 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose }) =>
 
         <div
           className="calendly-inline-widget h-[600px]"
-          data-url="https://calendly.com/dschley-aiopsexpert/60min"
+          data-url="https://calendly.com/dschley-aiopsexpert/30min"
         ></div>
       </div>
     </div>
