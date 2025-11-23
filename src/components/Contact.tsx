@@ -30,7 +30,7 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      const { error } = await supabase
+      const { error: dbError } = await supabase
         .from('contact_submissions')
         .insert([
           {
@@ -43,31 +43,34 @@ const Contact = () => {
           }
         ]);
 
-      if (error) {
-        console.error('Form submission error:', error);
+      if (dbError) {
+        console.error('Database error:', dbError);
         setSubmitStatus('error');
+        setIsSubmitting(false);
         return;
       }
 
-      const emailApiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`;
+      try {
+        const emailApiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`;
 
-      fetch(emailApiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          company: formData.company,
-          service: formData.service,
-          message: formData.message,
-        }),
-      }).catch(err => {
-        console.error('Email notification failed (non-blocking):', err);
-      });
+        await fetch(emailApiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            company: formData.company,
+            service: formData.service,
+            message: formData.message,
+          }),
+        });
+      } catch (emailErr) {
+        console.error('Email notification failed (non-blocking):', emailErr);
+      }
 
       setSubmitStatus('success');
       setFormData({
@@ -78,10 +81,10 @@ const Contact = () => {
         service: '',
         message: '',
       });
+      setIsSubmitting(false);
     } catch (err) {
       console.error('Form submission error:', err);
       setSubmitStatus('error');
-    } finally {
       setIsSubmitting(false);
     }
   };
