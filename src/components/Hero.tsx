@@ -54,7 +54,7 @@ const Hero = () => {
               isHeroVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}>
               <Cpu className="w-4 h-4 mr-2" />
-              AI Operations Expert & Former COO
+              AI Operations Expert
             </span>
           </div>
           
