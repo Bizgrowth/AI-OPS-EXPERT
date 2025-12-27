@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, ArrowRight, Tag, User } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
 import SocialShareButtons from './SocialShareButtons';
+import { supabase } from '../lib/supabase';
 
 interface BlogPost {
   id: string;
@@ -21,155 +22,43 @@ const BlogSection = () => {
   const [postsRef, isPostsVisible] = useScrollAnimation(0.2);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [showScheduling, setShowScheduling] = useState(false);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const blogPosts: BlogPost[] = [
-    {
-      id: '1',
-      title: 'AI will make my business feel impersonal',
-      excerpt: 'The #1 objection from small business owners about AI - and why it\'s completely wrong. Real example: How Jennifer\'s agency gained 12 hours weekly and increased revenue 34%.',
-      content: `# AI will make my business feel impersonal
+  useEffect(() => {
+    fetchBlogPosts();
+  }, []);
 
-This is the #1 objection I hear from small business owners.
+  const fetchBlogPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('published', true)
+        .order('published_at', { ascending: false });
 
-**Here's the truth:**
+      if (error) throw error;
 
-AI doesn't replace personal relationships. It creates MORE time for them.
+      const posts: BlogPost[] = (data || []).map((post: any) => ({
+        id: post.id,
+        title: post.title,
+        excerpt: post.excerpt,
+        content: post.content,
+        author: post.author,
+        publishedAt: new Date(post.published_at),
+        readTime: post.read_time,
+        tags: post.tags || [],
+        featured: post.featured
+      }));
 
-## Real Example: Jennifer's Marketing Agency
-
-**Before AI:** 15 hrs/week on admin = stressed, overwhelmed
-
-**After AI:** 12 hrs saved = 12 MORE hours for client strategy
-
-**Result:** 34% revenue increase (took on 3 new clients)
-
----
-
-## The Bottom Line
-
-Your customers don't care HOW you deliver great service. They care THAT you deliver it.
-
-**AI handles the mundane. You handle the relationships.**
-
-That's the winning formula.
-
----
-
-## Your Turn
-
-**What administrative task is stealing time from your customers?**
-
-Hit reply and tell me. I personally respond to every email within 24 hours.
-
----
-
-💡 **Ready to implement AI without losing the human touch?**
-
-Book your free AI strategy session: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpert.com)
-
-Best regards,  
-Daniel Schley  
-AI Operations Expert`,
-      author: 'Daniel Schley',
-      publishedAt: new Date('2025-01-11T10:00:00Z'),
-      readTime: 4,
-      tags: ['AI Strategy', 'Customer Experience', 'Business Growth'],
-      featured: true
-    },
-    {
-      id: '2',
-      title: 'The 5 AI Tools Every Small Business Needs in 2025',
-      excerpt: 'Stop wasting time on manual tasks. These 5 AI tools will transform your operations and give you back 20+ hours per week.',
-      content: `# The 5 AI Tools Every Small Business Needs in 2025
-
-Stop wasting time on manual tasks. Here are the 5 AI tools that will transform your operations:
-
-## 1. AI Customer Service Chatbot
-- **What it does:** Handles 80% of customer inquiries automatically
-- **Time saved:** 15+ hours/week
-- **ROI:** 300% within 90 days
-
-## 2. AI Content Generator
-- **What it does:** Creates blog posts, social media, emails
-- **Time saved:** 10+ hours/week
-- **ROI:** 250% within 60 days
-
-## 3. AI Scheduling Assistant
-- **What it does:** Manages appointments and follow-ups
-- **Time saved:** 5+ hours/week
-- **ROI:** 200% within 30 days
-
-## 4. AI Financial Forecasting
-- **What it does:** Predicts cash flow and identifies trends
-- **Time saved:** 8+ hours/week
-- **ROI:** 400% within 120 days
-
-## 5. AI Inventory Management
-- **What it does:** Optimizes stock levels and prevents shortages
-- **Time saved:** 6+ hours/week
-- **ROI:** 350% within 90 days
-
----
-
-**Ready to implement these AI tools in your business?**
-
-Book a free consultation: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpert.com)`,
-      author: 'Daniel Schley',
-      publishedAt: new Date('2025-01-10T14:00:00Z'),
-      readTime: 6,
-      tags: ['AI Tools', 'Productivity', 'Small Business'],
-      featured: false
-    },
-    {
-      id: '3',
-      title: 'How AI Saved My Client $50K in 6 Months',
-      excerpt: 'Real case study: How intelligent automation transformed a manufacturing company\'s operations and delivered massive cost savings.',
-      content: `# How AI Saved My Client $50K in 6 Months
-
-**Client:** Mid-size manufacturing company  
-**Challenge:** Manual inventory tracking causing overstock and stockouts  
-**Solution:** AI-powered inventory optimization system  
-**Result:** $50K saved in 6 months
-
-## The Problem
-
-My client was losing money on two fronts:
-- **Overstock:** $30K tied up in slow-moving inventory
-- **Stockouts:** $25K in lost sales from popular items being out of stock
-
-## The AI Solution
-
-I implemented an intelligent inventory system that:
-- Analyzes 3 years of sales data
-- Predicts seasonal demand patterns
-- Automatically adjusts reorder points
-- Sends alerts for unusual trends
-
-## The Results (6 Months Later)
-
-- **$30K recovered** from reduced overstock
-- **$20K additional revenue** from preventing stockouts
-- **15 hours/week saved** on manual inventory management
-- **95% accuracy** in demand forecasting
-
-## The ROI
-
-- **Investment:** $8K for AI system setup
-- **Savings:** $50K in 6 months
-- **ROI:** 525% return on investment
-
----
-
-**Want similar results for your business?**
-
-Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpert.com)`,
-      author: 'Daniel Schley',
-      publishedAt: new Date('2025-01-09T16:00:00Z'),
-      readTime: 5,
-      tags: ['Case Study', 'ROI', 'Manufacturing', 'Inventory'],
-      featured: false
+      setBlogPosts(posts);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
@@ -207,11 +96,22 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
             <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> Insights Blog</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-            Real-world AI strategies, case studies, and actionable insights to transform your business operations. 
+            Real-world AI strategies, case studies, and actionable insights to transform your business operations.
             Learn from proven implementations and measurable results.
           </p>
         </div>
 
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+            <p className="text-gray-400 mt-4">Loading blog posts...</p>
+          </div>
+        ) : blogPosts.length === 0 ? (
+          <div className="text-center py-12 px-4">
+            <p className="text-gray-400 text-lg">No blog posts available yet. Check back soon!</p>
+          </div>
+        ) : (
+          <>
         {/* Featured Post */}
         {blogPosts.filter(post => post.featured).map(post => (
           <div key={post.id} className="mb-12 px-4">
@@ -327,6 +227,8 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
 
       {/* Blog Post Modal */}
