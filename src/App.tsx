@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import ServiceDetail from './components/ServiceDetail';
 import PortalPage from './pages/PortalPage';
 import BlogAdmin from './components/BlogAdmin';
+import AdminSignup from './components/AdminSignup';
 import ProtectedRoute from './components/ProtectedRoute';
 import ChatbotToggle from './components/ChatbotToggle';
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/service/:serviceId" element={<ServiceDetail />} />
           <Route path="/portal" element={<PortalPage />} />
+          <Route path="/admin-signup" element={<AdminSignup />} />
           <Route
             path="/blog-admin"
             element={
