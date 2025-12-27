@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, Clock, ArrowRight, Tag, User } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
+import SocialShareButtons from './SocialShareButtons';
 
 interface BlogPost {
   id: string;
@@ -374,13 +375,21 @@ Book your free AI assessment: [dschley@aiopsexpert.com](mailto:dschley@aiopsexpe
                 </div>
               </div>
               
-              <div className="mt-8 pt-8 border-t border-slate-600">
+              <div className="mt-8 pt-8 border-t border-slate-600 space-y-6">
+                <div>
+                  <p className="text-gray-300 mb-4 font-medium">Share this article:</p>
+                  <SocialShareButtons
+                    title={selectedPost.title}
+                    description={selectedPost.excerpt}
+                  />
+                </div>
+
                 <div className="bg-gradient-to-r from-cyan-500/10 to-purple-600/10 rounded-xl p-6 border border-cyan-500/30">
                   <h4 className="text-lg font-semibold text-white mb-3">Ready to Transform Your Business with AI?</h4>
                   <p className="text-gray-300 mb-4">
                     Get personalized AI strategies and implementation guidance tailored to your specific business needs.
                   </p>
-                  <button 
+                  <button
                     onClick={() => setShowScheduling(true)}
                     className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105">
                     Schedule Free AI Consultation

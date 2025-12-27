@@ -9,6 +9,7 @@ import Contact from '../components/Contact';
 import TechStack from '../components/TechStack';
 import Header from '../components/Header';
 import SEOHead from '../components/SEOHead';
+import SocialFooter from '../components/SocialFooter';
 
 const HomePage = () => {
   return (
@@ -28,6 +29,7 @@ const HomePage = () => {
       <TechStack />
       <BlogSection />
       <Contact />
+      <SocialFooter />
     </>
   );
 };
