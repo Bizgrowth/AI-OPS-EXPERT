@@ -1,99 +1,235 @@
 # Admin Panel Setup Guide
 
-## Quick Start
+## 🚀 Quick Start
 
-Your admin panel is located at: `/admin`
+Your admin panel has THREE main sections:
+1. **Contact Submissions** - View contact form submissions
+2. **Blog Posts** - Create and manage blog posts
+3. **Chatbot Knowledge** - Manage ARIA chatbot responses
 
-### First Time Setup
+---
 
-1. **Create Admin Account**: Visit `/admin-signup` to create your admin account
-2. **Sign In**: After signup, go to `/admin` to access the panel
+## 📍 Admin Panel Locations
 
-## Fixing "Failed to Fetch" Errors
+| Purpose | URL |
+|---------|-----|
+| **Create Admin Account** (first time only) | https://aiopsexpert.com/admin-signup |
+| **Log In to Admin Panel** | https://aiopsexpert.com/admin |
 
-If you're seeing "Failed to fetch" errors when trying to sign in, follow these steps:
+---
 
-### 1. Configure Supabase Site URL
+## 🎯 First Time Setup
 
-The most common cause is that your production URL isn't configured in Supabase:
+### Step 1: Create Your Admin Account
 
-1. Go to your [Supabase Dashboard](https://supabase.com/dashboard)
-2. Select your project
-3. Navigate to **Authentication** → **URL Configuration**
-4. Add your site URL to **Site URL**: `https://aiopsexpert.com`
-5. Add your redirect URLs:
-   - `https://aiopsexpert.com/admin`
-   - `https://aiopsexpert.com/**`
-6. Click **Save**
+1. Go to: **https://aiopsexpert.com/admin-signup**
+2. Fill in:
+   - Email address
+   - Password (minimum 6 characters)
+   - Confirm password
+3. Click **"Create Account"**
+4. You'll be automatically redirected to the admin panel
 
-### 2. Verify Environment Variables
+**Important:** Only do this once! After creating your account, use the login page.
 
-Make sure your production deployment has these environment variables set:
+---
 
-```
-VITE_SUPABASE_URL=https://bfeiramyzcmtoyyqqcqq.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
+## 🔐 How to Log In (Every Time)
 
-### 3. Check Email Confirmation Settings
+1. Go to: **https://aiopsexpert.com/admin**
+2. Enter your email and password
+3. Click **"Sign in"**
+4. You'll see the admin dashboard with three tabs
 
-If email confirmation is enabled and causing issues:
+---
 
-1. Go to **Authentication** → **Providers** → **Email**
-2. Toggle **Confirm email** to OFF (or confirm your email via the link sent)
-3. Click **Save**
+## 📝 Admin Panel Features
 
-## Features
+### 1. Contact Submissions Tab
 
-### Contact Submissions Management
+**What it does:** View and manage contact form submissions from your website
 
-- View all contact form submissions
-- Update submission status (New, Reviewing, Responded, Archived)
-- View full details of each submission
-- Real-time badge showing new submissions
+**Features:**
+- See all contact form submissions
+- Update status (New → Reviewing → Responded → Archived)
+- View full message details
+- Track which submissions need attention
 
-### Blog Post Management
+**How to use:**
+1. Click **"Contact Submissions"** tab
+2. Click on any submission to view details
+3. Use status buttons to update tracking
 
-- Create new blog posts with markdown support
-- Edit existing posts
+---
+
+### 2. Blog Posts Tab
+
+**What it does:** Create, edit, and publish blog posts
+
+**Features:**
+- Create new blog posts with Markdown formatting
 - Live preview before publishing
-- Tag management
+- Edit existing posts
 - Publish/unpublish toggle
-- Featured post designation
-- Full control over author, date, and read time
+- Mark posts as "featured"
+- Add tags and categories
+- Set publish date and author
 
-## Security
+**How to use:**
+1. Click **"Blog Posts"** tab
+2. Click **"+ New Post"** button
+3. Fill in all fields (see BLOG_POSTING_GUIDE.md for details)
+4. Click **"Preview"** to check formatting
+5. Check **"Published"** box to make live
+6. Click **"Save"**
 
-- Admin panel is protected by authentication
-- Only authenticated users can access admin features
-- Row Level Security (RLS) policies protect your data
-- Contact submissions and blog posts are secured
+**Need detailed blog posting instructions?** See `BLOG_POSTING_GUIDE.md`
 
-## Troubleshooting
+---
 
-### Can't Sign In
+### 3. Chatbot Knowledge Tab
 
-1. Verify your email is confirmed in Supabase (check `auth.users` table)
-2. Check that Site URL is configured correctly
-3. Clear browser cache and cookies
-4. Try incognito/private browsing mode
+**What it does:** Manage ARIA chatbot's knowledge base
 
-### Environment Variables Not Working
+**Features:**
+- Add new knowledge items
+- Edit existing responses
+- Organize by category
+- Add keywords for better matching
+- Set priority levels
+- Activate/deactivate items
 
-1. Restart your dev server after changing `.env`
-2. For production, redeploy after updating environment variables
-3. Verify variable names start with `VITE_`
+**How to use:**
+1. Click **"Chatbot Knowledge"** tab
+2. Click **"+ Add New"** to create knowledge item
+3. Fill in:
+   - Category (e.g., Pricing, Services)
+   - Topic
+   - Content (what ARIA will say)
+   - Keywords (for search matching)
+   - Priority (higher = shown first)
+4. Click **"Save"**
 
-### CORS Errors
+**Categories available:**
+- Business Background
+- AI Solutions
+- Pricing
+- Client Success
+- Technical Expertise
+- Consultation Process
 
-If you see CORS errors in the console:
-1. Add your domain to Supabase allowed URLs
-2. Check that your Supabase project is active
-3. Verify your API keys are correct
+---
 
-## Support
+## 🆘 Troubleshooting
 
-If you continue to have issues, check:
-- Supabase project status
-- Browser console for specific error messages
-- Network tab in developer tools for failed requests
+### Can't Access Admin Panel?
+
+**Problem:** "Failed to fetch" or connection errors
+
+**Solutions:**
+
+1. **Check Supabase Configuration:**
+   - Go to [Supabase Dashboard](https://supabase.com/dashboard)
+   - Select your project
+   - Navigate to **Authentication** → **URL Configuration**
+   - Ensure **Site URL** is set to: `https://aiopsexpert.com`
+   - Add redirect URLs:
+     - `https://aiopsexpert.com/admin`
+     - `https://aiopsexpert.com/**`
+   - Click **Save**
+
+2. **Disable Email Confirmation (if needed):**
+   - In Supabase Dashboard → **Authentication** → **Providers** → **Email**
+   - Toggle **"Confirm email"** to OFF
+   - Click **Save**
+
+3. **Clear Browser Cache:**
+   - Press Ctrl+Shift+Delete (Windows) or Cmd+Shift+Delete (Mac)
+   - Clear cookies and cached files
+   - Try logging in again
+
+4. **Try Incognito/Private Mode:**
+   - Open a private browsing window
+   - Go to admin panel
+   - Try logging in
+
+### Can't Log In?
+
+1. Double-check your email and password
+2. Make sure email confirmation is disabled (see above)
+3. Try resetting your password
+4. Create a new admin account if needed
+
+### Blog Post Not Showing?
+
+**Check:**
+1. Is **"Published"** checkbox checked?
+2. Is publish date in the past (not future)?
+3. Did you click **"Save"**?
+4. Refresh your website (Ctrl+R)
+
+### Changes Not Saving?
+
+1. Check your internet connection
+2. Look for error messages
+3. Try logging out and back in
+4. Clear browser cache
+
+---
+
+## 🔒 Security Best Practices
+
+1. **Strong Password:** Use at least 12 characters with numbers and symbols
+2. **Don't Share:** Keep your admin credentials private
+3. **Log Out:** Always log out when done, especially on shared computers
+4. **Regular Updates:** Keep your knowledge base current
+5. **Review Submissions:** Check contact submissions regularly
+
+---
+
+## 📊 Recommended Workflow
+
+### Daily
+- Check new contact submissions
+- Respond to urgent inquiries
+
+### Weekly
+- Review chatbot conversations (if analytics enabled)
+- Update chatbot knowledge if needed
+
+### Bi-Weekly
+- Post new blog content
+- Review published posts for updates
+
+### Monthly
+- Archive old contact submissions
+- Update outdated chatbot responses
+- Review blog post performance
+
+---
+
+## 🎓 Additional Resources
+
+### Detailed Guides
+- **Blog Posting:** See `BLOG_POSTING_GUIDE.md` for complete blog instructions
+- **General Help:** See `TROUBLESHOOTING.md` for technical issues
+
+### Support Links
+- [Supabase Dashboard](https://supabase.com/dashboard)
+- [Markdown Guide](https://www.markdownguide.org/basic-syntax/)
+
+---
+
+## ⚡ Quick Reference
+
+```
+Admin Signup:  https://aiopsexpert.com/admin-signup (first time only)
+Admin Login:   https://aiopsexpert.com/admin
+Your Website:  https://aiopsexpert.com
+```
+
+**Bookmark the admin login page for quick access!**
+
+---
+
+Last Updated: December 28, 2024

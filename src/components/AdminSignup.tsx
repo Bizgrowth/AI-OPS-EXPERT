@@ -38,11 +38,11 @@ const AdminSignup = () => {
       if (data.user) {
         setMessage({
           type: 'success',
-          text: 'Account created successfully! Redirecting to blog admin...'
+          text: 'Account created successfully! Redirecting to admin panel...'
         });
 
         setTimeout(() => {
-          navigate('/blog-admin');
+          navigate('/admin');
         }, 2000);
       }
     } catch (error: any) {
@@ -150,7 +150,7 @@ const AdminSignup = () => {
             <p className="text-gray-400">
               Already have an account?{' '}
               <button
-                onClick={() => navigate('/blog-admin')}
+                onClick={() => navigate('/admin')}
                 className="text-cyan-400 hover:text-cyan-300 transition-colors"
               >
                 Log in
