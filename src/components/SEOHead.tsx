@@ -14,7 +14,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   description, 
   keywords = "AI Operations, Business Automation, AI Strategy, Daniel Schley",
   canonicalUrl,
-  ogImage = "/Dan Photo.png"
+  ogImage = "/image copy copy copy copy copy copy copy copy copy copy copy copy copy copy.png"
 }) => {
   const fullTitle = `${title} | Daniel Schley - AI Operations Expert`;
   const baseUrl = "https://aiopsexpert.com";

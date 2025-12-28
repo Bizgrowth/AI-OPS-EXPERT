@@ -90,7 +90,7 @@ const Hero = () => {
                         {/* Gradient Border Container */}
                         <div className="w-full h-full rounded-full bg-gradient-to-r from-cyan-400 to-purple-600 p-1 shadow-2xl group-hover:scale-105 transition-all duration-300">
                           <img
-                            src="/Dan Photo.png"
+                            src="/image copy copy copy copy copy copy copy copy copy copy copy copy copy copy.png"
                             alt="Daniel Schley - AI Operations Expert"
                             className="w-full h-full object-cover rounded-full cursor-pointer"
                             onError={(e) => {
