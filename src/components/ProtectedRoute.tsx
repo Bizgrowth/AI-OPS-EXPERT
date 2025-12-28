@@ -10,10 +10,17 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        setError(error.message);
+      }
       setSession(session);
+      setLoading(false);
+    }).catch((err) => {
+      setError(err.message || 'Failed to connect to authentication service');
       setLoading(false);
     });
 
@@ -21,6 +28,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setError(null);
     });
 
     return () => subscription.unsubscribe();
@@ -44,6 +52,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
           <h1 className="text-2xl font-bold text-white mb-6 text-center">
             Admin Login Required
           </h1>
+          {error && (
+            <div className="mb-4 p-4 bg-red-900/50 border border-red-500 rounded-lg">
+              <p className="text-red-200 text-sm">{error}</p>
+            </div>
+          )}
           <Auth
             supabaseClient={supabase}
             appearance={{
@@ -59,7 +72,18 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
             }}
             providers={[]}
             theme="dark"
+            redirectTo={window.location.origin + '/admin'}
           />
+          <div className="mt-4 p-4 bg-slate-700 rounded-lg">
+            <p className="text-gray-300 text-sm">
+              <strong>Note:</strong> If you see "Failed to fetch" errors, please ensure:
+            </p>
+            <ul className="text-gray-400 text-sm mt-2 space-y-1 list-disc list-inside">
+              <li>Your Supabase project URL is configured correctly</li>
+              <li>Your site URL is added in Supabase Authentication settings</li>
+              <li>Email confirmation is disabled or your email is confirmed</li>
+            </ul>
+          </div>
         </div>
       </div>
     );
