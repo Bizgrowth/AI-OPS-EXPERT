@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ServiceDetail from './components/ServiceDetail';
 import PortalPage from './pages/PortalPage';
-import BlogAdmin from './components/BlogAdmin';
+import AdminPanel from './components/AdminPanel';
 import AdminSignup from './components/AdminSignup';
 import ProtectedRoute from './components/ProtectedRoute';
 import ChatbotToggle from './components/ChatbotToggle';
@@ -18,10 +18,10 @@ function App() {
           <Route path="/portal" element={<PortalPage />} />
           <Route path="/admin-signup" element={<AdminSignup />} />
           <Route
-            path="/blog-admin"
+            path="/admin"
             element={
               <ProtectedRoute>
-                <BlogAdmin />
+                <AdminPanel />
               </ProtectedRoute>
             }
           />
