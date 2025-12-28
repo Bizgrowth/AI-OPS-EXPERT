@@ -216,9 +216,9 @@ const BlogAdmin = () => {
             </div>
 
             {showPreview ? (
-              <div className="prose prose-invert max-w-none">
-                <h1>{currentPost.title}</h1>
-                <p className="text-lg text-gray-400">{currentPost.excerpt}</p>
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-200 prose-strong:text-white prose-li:text-gray-200 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:text-cyan-300 prose-blockquote:text-gray-300 prose-blockquote:border-cyan-500 prose-code:text-cyan-400 prose-pre:bg-slate-900 prose-img:rounded-lg">
+                <h1 className="text-white">{currentPost.title}</h1>
+                <p className="text-lg text-gray-300">{currentPost.excerpt}</p>
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {currentPost.content}
                 </ReactMarkdown>
