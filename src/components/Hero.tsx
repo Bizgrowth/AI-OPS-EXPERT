@@ -146,9 +146,9 @@ const Hero = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
-                  <div className="relative aspect-video rounded-lg sm:rounded-xl overflow-hidden">
+                  <div className="relative aspect-video rounded-lg sm:rounded-xl overflow-hidden bg-slate-900">
                     <video
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       controls
                       autoPlay
                       muted
