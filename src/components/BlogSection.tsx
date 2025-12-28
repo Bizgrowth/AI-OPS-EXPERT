@@ -4,6 +4,8 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SchedulingModal from './SchedulingModal';
 import SocialShareButtons from './SocialShareButtons';
 import { supabase } from '../lib/supabase';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface BlogPost {
   id: string;
@@ -271,10 +273,10 @@ const BlogSection = () => {
                 ))}
               </div>
               
-              <div className="prose prose-invert max-w-none">
-                <div className="text-gray-300 leading-relaxed whitespace-pre-line">
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-200 prose-strong:text-white prose-li:text-gray-200 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:text-cyan-300 prose-blockquote:text-gray-300 prose-blockquote:border-cyan-500 prose-code:text-cyan-400 prose-pre:bg-slate-900 prose-img:rounded-lg">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {selectedPost.content}
-                </div>
+                </ReactMarkdown>
               </div>
               
               <div className="mt-8 pt-8 border-t border-slate-600 space-y-6">
