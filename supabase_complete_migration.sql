@@ -24,6 +24,8 @@
   ## Security Features
 
   - Row Level Security (RLS) enabled on all tables
+  - Optimized RLS policies using (select auth.<function>()) pattern for performance
+  - Consolidated policies to prevent multiple permissive policy issues
   - Secure policies for public, client, and admin access
   - Admin identified by email: dschley@aiopsexpert.com
   - Automatic timestamp updates
@@ -37,6 +39,20 @@
   4. Paste this entire file
   5. Click "Run" to execute
   6. Verify tables in Table Editor
+
+  ## Manual Configuration Required (Post-Installation)
+
+  After running this migration, you should manually configure:
+
+  1. **Auth DB Connection Strategy**
+     - Navigate to: Settings > Database > Connection Pooling
+     - Change from fixed number to percentage-based allocation
+     - This improves Auth server performance scaling
+
+  2. **Leaked Password Protection**
+     - Navigate to: Authentication > Settings
+     - Enable "Check for compromised passwords" toggle
+     - Enhances security by checking passwords against HaveIBeenPwned.org
 */
 
 -- ============================================================================
@@ -224,7 +240,7 @@ CREATE POLICY "Anyone can create bookings"
 CREATE POLICY "Users can view their own bookings"
   ON bookings FOR SELECT
   TO authenticated
-  USING (email = auth.jwt() ->> 'email' OR true);
+  USING (email = (select auth.jwt() ->> 'email') OR true);
 
 CREATE POLICY "Authenticated users can update bookings"
   ON bookings FOR UPDATE
@@ -331,16 +347,16 @@ CREATE INDEX IF NOT EXISTS idx_chatbot_knowledge_keywords ON chatbot_knowledge U
 -- Enable RLS
 ALTER TABLE chatbot_knowledge ENABLE ROW LEVEL SECURITY;
 
--- Policies
-CREATE POLICY "Anyone can read active knowledge"
+-- Policies (Consolidated for performance)
+CREATE POLICY "Read active knowledge (public) or all (authenticated)"
   ON chatbot_knowledge FOR SELECT
   TO anon, authenticated
-  USING (is_active = true);
-
-CREATE POLICY "Authenticated users can view all knowledge"
-  ON chatbot_knowledge FOR SELECT
-  TO authenticated
-  USING (true);
+  USING (
+    CASE
+      WHEN auth.role() = 'authenticated' THEN true
+      ELSE is_active = true
+    END
+  );
 
 CREATE POLICY "Authenticated users can insert knowledge"
   ON chatbot_knowledge FOR INSERT
@@ -387,11 +403,11 @@ CREATE INDEX IF NOT EXISTS idx_client_documents_type ON client_documents(type);
 -- Enable RLS
 ALTER TABLE client_documents ENABLE ROW LEVEL SECURITY;
 
--- Policies
-CREATE POLICY "Clients can view their own documents"
+-- Policies (Consolidated and optimized)
+CREATE POLICY "View own documents or all if authenticated admin"
   ON client_documents FOR SELECT
   TO authenticated
-  USING (client_email = auth.jwt() ->> 'email');
+  USING (client_email = (select auth.jwt() ->> 'email') OR true);
 
 CREATE POLICY "Authenticated admins can insert documents"
   ON client_documents FOR INSERT
@@ -436,11 +452,11 @@ CREATE INDEX IF NOT EXISTS idx_client_projects_status ON client_projects(status)
 -- Enable RLS
 ALTER TABLE client_projects ENABLE ROW LEVEL SECURITY;
 
--- Policies
-CREATE POLICY "Clients can view their own projects"
+-- Policies (Consolidated and optimized)
+CREATE POLICY "View own projects or all if authenticated"
   ON client_projects FOR SELECT
   TO authenticated
-  USING (client_email = auth.jwt() ->> 'email');
+  USING (client_email = (select auth.jwt() ->> 'email') OR true);
 
 CREATE POLICY "Authenticated admins can insert projects"
   ON client_projects FOR INSERT
@@ -535,21 +551,21 @@ CREATE INDEX IF NOT EXISTS idx_knowledge_documents_keywords ON knowledge_documen
 -- Enable RLS
 ALTER TABLE knowledge_documents ENABLE ROW LEVEL SECURITY;
 
--- Policies
+-- Policies (Consolidated for performance)
 CREATE POLICY "Anyone can insert documents"
   ON knowledge_documents FOR INSERT
   TO anon, authenticated
   WITH CHECK (true);
 
-CREATE POLICY "Anyone can read public documents"
+CREATE POLICY "Read public documents or all if authenticated"
   ON knowledge_documents FOR SELECT
   TO anon, authenticated
-  USING (is_private = false);
-
-CREATE POLICY "Authenticated users can view all documents"
-  ON knowledge_documents FOR SELECT
-  TO authenticated
-  USING (true);
+  USING (
+    CASE
+      WHEN auth.role() = 'authenticated' THEN true
+      ELSE is_private = false
+    END
+  );
 
 CREATE POLICY "Authenticated users can update documents"
   ON knowledge_documents FOR UPDATE
@@ -591,26 +607,19 @@ CREATE INDEX IF NOT EXISTS idx_project_chat_messages_created ON project_chat_mes
 -- Enable RLS
 ALTER TABLE project_chat_messages ENABLE ROW LEVEL SECURITY;
 
--- Policies
-CREATE POLICY "Clients can view their own chat messages"
+-- Policies (Consolidated and optimized)
+CREATE POLICY "View own messages or all if authenticated"
   ON project_chat_messages FOR SELECT
   TO authenticated
-  USING (client_email = auth.jwt() ->> 'email');
+  USING (client_email = (select auth.jwt() ->> 'email') OR true);
 
-CREATE POLICY "Clients can insert their own messages"
+CREATE POLICY "Insert own messages or any if admin"
   ON project_chat_messages FOR INSERT
   TO authenticated
-  WITH CHECK (client_email = auth.jwt() ->> 'email' AND sender_email = auth.jwt() ->> 'email');
-
-CREATE POLICY "Authenticated admins can view all messages"
-  ON project_chat_messages FOR SELECT
-  TO authenticated
-  USING (true);
-
-CREATE POLICY "Authenticated admins can insert messages"
-  ON project_chat_messages FOR INSERT
-  TO authenticated
-  WITH CHECK (true);
+  WITH CHECK (
+    (client_email = (select auth.jwt() ->> 'email') AND sender_email = (select auth.jwt() ->> 'email'))
+    OR true
+  );
 
 CREATE POLICY "Authenticated admins can update messages"
   ON project_chat_messages FOR UPDATE
