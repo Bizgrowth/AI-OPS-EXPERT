@@ -26,7 +26,7 @@ const About = () => {
             <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"> Scaling, Optimizing & Transforming</span> Businesses
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto px-4 leading-relaxed">
-            From operational strategist to AI innovator, I combine two decades of proven operational leadership with cutting-edge AI solutions to deliver measurable growth in 90 days or less. In 20+ years of business operations, I've never witnessed anything like this—what once took months of resources and complex implementations now happens in days with minimal overhead. This isn't just another technology trend, it's a historical explosion of business optimization that's redefining what's possible.
+            I've never witnessed anything like this. What once took months of resources and complex implementations now happens in days with minimal overhead. This isn't just another technology trend, it's a historical explosion of business optimization that's redefining what's possible.
           </p>
         </div>
 
