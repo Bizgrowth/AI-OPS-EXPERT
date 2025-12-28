@@ -62,17 +62,23 @@ const BlogAdmin = () => {
         return;
       }
 
+      const postData = {
+        ...currentPost,
+        published_at: new Date(currentPost.published_at).toISOString()
+      };
+
       if (currentPost.id) {
         const { error } = await supabase
           .from('blog_posts')
-          .update(currentPost)
+          .update(postData)
           .eq('id', currentPost.id);
 
         if (error) throw error;
       } else {
+        const { id, ...newPostData } = postData;
         const { error } = await supabase
           .from('blog_posts')
-          .insert([currentPost]);
+          .insert([newPostData]);
 
         if (error) throw error;
       }
