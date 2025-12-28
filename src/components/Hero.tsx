@@ -147,11 +147,14 @@ const Hero = () => {
                     </svg>
                   </button>
                   <div className="relative aspect-video rounded-lg sm:rounded-xl overflow-hidden">
-                    <video 
+                    <video
                       className="w-full h-full object-cover"
                       controls
                       autoPlay
-                      poster="/image.png"
+                      muted
+                      playsInline
+                      preload="metadata"
+                      poster="/image copy copy copy copy copy copy copy copy copy copy copy copy copy copy.png"
                     >
                       <source src="/ai_message_-.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
