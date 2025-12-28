@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Minimize2, Zap, Heart, Star } from 'lucide-react';
-import { searchKnowledge, privateKnowledge } from '../data/privateKnowledge';
+import { searchKnowledgeBase, logConversation } from '../utils/chatbotKnowledge';
 
 interface Message {
   id: string;
@@ -16,6 +16,7 @@ interface ChatbotProps {
 }
 
 const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
+  const [sessionId] = useState(() => crypto.randomUUID());
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -55,41 +56,52 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
     setTimeout(() => setShowParticles(false), 2000);
   };
 
-  const getAIResponse = (userMessage: string): { text: string; emotion: 'happy' | 'thinking' | 'excited' | 'helpful' } => {
+  const getAIResponse = async (userMessage: string): Promise<{ text: string; emotion: 'happy' | 'thinking' | 'excited' | 'helpful'; knowledgeId?: string }> => {
     const message = userMessage.toLowerCase();
-    
-    // Search built-in knowledge first
-    const knowledgeResults = searchKnowledge(userMessage);
-    
+
+    // Search database knowledge first
+    const knowledgeResults = await searchKnowledgeBase(userMessage);
+
     if (knowledgeResults.length > 0) {
-      const relevantKnowledge = knowledgeResults[0]; // Use most relevant result
-      
-      // Extract key information from the knowledge base
+      const relevantKnowledge = knowledgeResults[0];
+
       if (relevantKnowledge.category === 'Pricing' && (message.includes('price') || message.includes('cost'))) {
         return {
           text: `💰 Here's detailed pricing information:\n\n${relevantKnowledge.content}\n\n✨ **All solutions include 90-day ROI guarantee!** Ready for a personalized quote? Let's schedule your free consultation! 🚀`,
-          emotion: 'excited'
+          emotion: 'excited',
+          knowledgeId: relevantKnowledge.id
         };
       }
-      
+
       if (relevantKnowledge.category === 'Client Success' && (message.includes('results') || message.includes('case') || message.includes('success'))) {
         return {
           text: `📊 Here are detailed client success stories:\n\n${relevantKnowledge.content}\n\n🎯 **Want similar results for your business?** Book your free AI assessment! 🚀`,
-          emotion: 'excited'
+          emotion: 'excited',
+          knowledgeId: relevantKnowledge.id
         };
       }
-      
+
       if (relevantKnowledge.category === 'Consultation Process' && (message.includes('consultation') || message.includes('session') || message.includes('expect'))) {
         return {
           text: `🎯 Here's what to expect from your AI strategy session:\n\n${relevantKnowledge.content}\n\n📧 Ready to get started? Email: dschley@aiopsexpert.com\n📞 Call: 904-955-3905 ✨`,
-          emotion: 'helpful'
+          emotion: 'helpful',
+          knowledgeId: relevantKnowledge.id
         };
       }
-      
+
       if (relevantKnowledge.category === 'AI Solutions' && (message.includes('process') || message.includes('implementation') || message.includes('how'))) {
         return {
           text: `⚡ Here's Daniel's proven AI implementation process:\n\n${relevantKnowledge.content}\n\n🚀 Ready to start your AI transformation? Let's schedule your strategy session! ✨`,
-          emotion: 'excited'
+          emotion: 'excited',
+          knowledgeId: relevantKnowledge.id
+        };
+      }
+
+      if (message.split(' ').some(word => relevantKnowledge.keywords.some(k => k.toLowerCase().includes(word)))) {
+        return {
+          text: `${relevantKnowledge.content}\n\n✨ Want to learn more? Let's chat! 📧 dschley@aiopsexpert.com | 📞 904-955-3905`,
+          emotion: 'helpful',
+          knowledgeId: relevantKnowledge.id
         };
       }
     }
@@ -197,8 +209,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
 
   const handleAIResponse = async (userInput: string) => {
     try {
-      // Use built-in knowledge
-      const response = getAIResponse(userInput);
+      const response = await getAIResponse(userInput);
 
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -211,15 +222,16 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
       setRobotEmotion(response.emotion === 'excited' ? 'excited' : 'happy');
-      
+
       if (response.emotion === 'excited') {
         triggerParticles();
       }
+
+      logConversation(sessionId, userInput, response.text, response.knowledgeId);
     } catch (error) {
       console.error('AI response error:', error);
-      
-      // Fallback to built-in response
-      const response = getAIResponse(userInput);
+
+      const response = await getAIResponse(userInput);
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         text: response.text,
@@ -231,6 +243,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onToggle }) => {
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
       setRobotEmotion(response.emotion === 'excited' ? 'excited' : 'happy');
+
+      logConversation(sessionId, userInput, response.text, response.knowledgeId);
     }
   };
 

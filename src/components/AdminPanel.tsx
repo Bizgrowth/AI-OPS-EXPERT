@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, FileText, Eye, Archive, Plus, Edit2, Trash2, Save, X, EyeOff, LogOut } from 'lucide-react';
+import { Mail, FileText, Eye, Archive, Plus, Edit2, Trash2, Save, X, EyeOff, LogOut, Brain } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import KnowledgeBaseManager from './KnowledgeBaseManager';
 
 interface ContactSubmission {
   id: string;
@@ -30,7 +31,7 @@ interface BlogPost {
   published: boolean;
 }
 
-type Tab = 'contacts' | 'blog';
+type Tab = 'contacts' | 'blog' | 'knowledge';
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -286,6 +287,17 @@ const AdminPanel = () => {
               <FileText className="w-5 h-5" />
               <span>Blog Posts</span>
             </button>
+            <button
+              onClick={() => setActiveTab('knowledge')}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                activeTab === 'knowledge'
+                  ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
+                  : 'bg-slate-700 text-gray-400 hover:bg-slate-600'
+              }`}
+            >
+              <Brain className="w-5 h-5" />
+              <span>Chatbot Knowledge</span>
+            </button>
           </div>
         </div>
       </div>
@@ -429,7 +441,7 @@ const AdminPanel = () => {
               )}
             </div>
           </div>
-        ) : (
+        ) : activeTab === 'blog' ? (
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-white">Blog Management</h2>
@@ -683,6 +695,8 @@ const AdminPanel = () => {
               </div>
             )}
           </div>
+        ) : (
+          <KnowledgeBaseManager />
         )}
       </div>
     </div>
