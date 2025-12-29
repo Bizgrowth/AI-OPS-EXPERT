@@ -221,7 +221,7 @@ const BlogSection = () => {
                 ))}
               </div>
               
-              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-200 prose-strong:text-white prose-li:text-gray-200 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:text-cyan-300 prose-blockquote:text-gray-300 prose-blockquote:border-cyan-500 prose-code:text-cyan-400 prose-pre:bg-slate-900 prose-img:rounded-lg">
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-white prose-strong:text-white prose-li:text-white prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:text-cyan-300 prose-blockquote:text-gray-300 prose-blockquote:border-cyan-500 prose-code:text-cyan-400 prose-pre:bg-slate-900 prose-img:rounded-lg">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {selectedPost.content}
                 </ReactMarkdown>
