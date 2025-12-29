@@ -328,3 +328,35 @@ html {
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
 .stagger-6 { animation-delay: 0.6s; }
+
+/* Blog Post Content Styles */
+.prose-invert p,
+.prose-invert li,
+.prose-invert td,
+.prose-invert th,
+.prose-invert span,
+.prose-invert div {
+  color: #ffffff !important;
+}
+
+.prose-invert h1,
+.prose-invert h2,
+.prose-invert h3,
+.prose-invert h4,
+.prose-invert h5,
+.prose-invert h6 {
+  color: #ffffff !important;
+}
+
+.prose-invert strong,
+.prose-invert b {
+  color: #ffffff !important;
+}
+
+.prose-invert a {
+  color: #22d3ee !important;
+}
+
+.prose-invert a:hover {
+  color: #06b6d4 !important;
+}
