@@ -97,9 +97,10 @@ const BlogAdmin = () => {
       });
       fetchPosts();
       alert('Blog post saved successfully!');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving post:', error);
-      alert('Failed to save blog post. Please try again.');
+      const errorMessage = error?.message || JSON.stringify(error);
+      alert(`Failed to save blog post: ${errorMessage}`);
     }
   };
 
