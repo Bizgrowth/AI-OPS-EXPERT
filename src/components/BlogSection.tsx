@@ -16,7 +16,6 @@ interface BlogPost {
   publishedAt: Date;
   readTime: number;
   tags: string[];
-  featured: boolean;
 }
 
 const BlogSection = () => {
@@ -49,8 +48,7 @@ const BlogSection = () => {
         author: post.author,
         publishedAt: new Date(post.published_at),
         readTime: post.read_time,
-        tags: post.tags || [],
-        featured: post.featured
+        tags: post.tags || []
       }));
 
       setBlogPosts(posts);
@@ -114,122 +112,72 @@ const BlogSection = () => {
           </div>
         ) : (
           <>
-        {/* Featured Post */}
-        {blogPosts.filter(post => post.featured).map(post => (
-          <div key={post.id} className="mb-12 px-4">
-            <div className="bg-gradient-to-br from-slate-700 to-slate-600 rounded-2xl overflow-hidden border border-slate-500 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
-              <div className="p-6 sm:p-8">
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                    FEATURED
-                  </span>
-                  <span className="text-gray-400 text-sm">Latest Post</span>
-                </div>
-                
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 hover:text-cyan-400 transition-colors cursor-pointer" onClick={() => openPost(post)}>
-                  {post.title}
-                </h3>
-                
-                <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                  {post.excerpt}
-                </p>
-                
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center space-x-4 text-sm text-gray-400">
-                    <div className="flex items-center space-x-1">
-                      <User className="w-4 h-4" />
-                      <span>{post.author}</span>
+            <div
+              ref={postsRef}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 px-4"
+            >
+              {blogPosts.map((post) => (
+                <div
+                  key={post.id}
+                  className="bg-slate-700 rounded-xl overflow-hidden border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 transform hover:-translate-y-1 cursor-pointer"
+                  onClick={() => openPost(post)}
+                >
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-white mb-3 hover:text-cyan-400 transition-colors">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-gray-300 mb-4 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.map((tag, index) => (
+                        <span key={index} className="flex items-center space-x-1 bg-slate-600 text-gray-300 px-2 py-1 rounded-full text-xs">
+                          <Tag className="w-3 h-3" />
+                          <span>{tag}</span>
+                        </span>
+                      ))}
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{formatDate(post.publishedAt)}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{post.readTime} min read</span>
+
+                    <div className="flex items-center justify-between text-sm text-gray-400">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{formatDate(post.publishedAt)}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{post.readTime} min</span>
+                        </div>
+                      </div>
+
+                      <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
-                  
-                  <button 
-                    onClick={() => openPost(post)}
-                    className="flex items-center space-x-2 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-700 transition-all hover:scale-105"
-                  >
-                    <span>Read Full Post</span>
-                    <ArrowRight className="w-4 h-4" />
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Section */}
+            <div className="mt-16 text-center px-4">
+              <div className="bg-gradient-to-r from-slate-700 to-slate-600 rounded-2xl p-6 sm:p-8 border border-slate-500">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
+                  Want AI Insights Delivered to Your Inbox?
+                </h3>
+                <p className="text-gray-300 mb-6 text-base sm:text-lg">
+                  Get exclusive AI strategies, case studies, and implementation guides delivered weekly.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button
+                    onClick={() => setShowScheduling(true)}
+                    className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
+                    Book AI Consultation
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-
-        {/* Blog Posts Grid */}
-        <div 
-          ref={postsRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 px-4"
-        >
-          {blogPosts.filter(post => !post.featured).map((post) => (
-            <div
-              key={post.id}
-              className="bg-slate-700 rounded-xl overflow-hidden border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 transform hover:-translate-y-1 cursor-pointer"
-              onClick={() => openPost(post)}
-            >
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 hover:text-cyan-400 transition-colors">
-                  {post.title}
-                </h3>
-                
-                <p className="text-gray-300 mb-4 leading-relaxed">
-                  {post.excerpt}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.map((tag, index) => (
-                    <span key={index} className="flex items-center space-x-1 bg-slate-600 text-gray-300 px-2 py-1 rounded-full text-xs">
-                      <Tag className="w-3 h-3" />
-                      <span>{tag}</span>
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex items-center justify-between text-sm text-gray-400">
-                  <div className="flex items-center space-x-3">
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{formatDate(post.publishedAt)}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{post.readTime} min</span>
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-16 text-center px-4">
-          <div className="bg-gradient-to-r from-slate-700 to-slate-600 rounded-2xl p-6 sm:p-8 border border-slate-500">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
-              Want AI Insights Delivered to Your Inbox?
-            </h3>
-            <p className="text-gray-300 mb-6 text-base sm:text-lg">
-              Get exclusive AI strategies, case studies, and implementation guides delivered weekly.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => setShowScheduling(true)}
-                className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all hover:scale-105 w-full sm:w-auto">
-                Book AI Consultation
-              </button>
-            </div>
-          </div>
-        </div>
-        </>
+          </>
         )}
       </div>
 

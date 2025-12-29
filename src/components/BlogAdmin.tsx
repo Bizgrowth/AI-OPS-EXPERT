@@ -29,7 +29,6 @@ const BlogAdmin = () => {
     published_at: new Date().toISOString().slice(0, 16),
     read_time: 5,
     tags: [],
-    featured: false,
     published: false
   });
   const [tagInput, setTagInput] = useState('');
@@ -98,7 +97,6 @@ const BlogAdmin = () => {
         published_at: new Date().toISOString().slice(0, 16),
         read_time: 5,
         tags: [],
-        featured: false,
         published: false
       });
       fetchPosts();
@@ -384,11 +382,6 @@ const BlogAdmin = () => {
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
                         <h3 className="text-xl font-bold text-white">{post.title}</h3>
-                        {post.featured && (
-                          <span className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            FEATURED
-                          </span>
-                        )}
                         {!post.published && (
                           <span className="bg-slate-600 text-gray-300 px-2 py-1 rounded text-xs font-semibold">
                             DRAFT

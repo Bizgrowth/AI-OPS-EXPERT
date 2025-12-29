@@ -27,7 +27,6 @@ interface BlogPost {
   published_at: string;
   read_time: number;
   tags: string[];
-  featured: boolean;
   published: boolean;
 }
 
@@ -52,7 +51,6 @@ const AdminPanel = () => {
     published_at: new Date().toISOString().slice(0, 16),
     read_time: 5,
     tags: [],
-    featured: false,
     published: false
   });
   const [tagInput, setTagInput] = useState('');
@@ -148,7 +146,6 @@ const AdminPanel = () => {
         published_at: new Date().toISOString().slice(0, 16),
         read_time: 5,
         tags: [],
-        featured: false,
         published: false
       });
       fetchPosts();
@@ -214,7 +211,6 @@ const AdminPanel = () => {
       published_at: new Date().toISOString().slice(0, 16),
       read_time: 5,
       tags: [],
-      featured: false,
       published: false
     });
   };
@@ -613,27 +609,15 @@ const AdminPanel = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-6">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={currentPost.featured}
-                          onChange={(e) => setCurrentPost({ ...currentPost, featured: e.target.checked })}
-                          className="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500"
-                        />
-                        <span className="text-gray-300">Featured Post</span>
-                      </label>
-
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={currentPost.published}
-                          onChange={(e) => setCurrentPost({ ...currentPost, published: e.target.checked })}
-                          className="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500"
-                        />
-                        <span className="text-gray-300">Published (visible on website)</span>
-                      </label>
-                    </div>
+                    <label className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={currentPost.published}
+                        onChange={(e) => setCurrentPost({ ...currentPost, published: e.target.checked })}
+                        className="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500"
+                      />
+                      <span className="text-gray-300">Published (visible on website)</span>
+                    </label>
                   </div>
                 )}
               </div>
@@ -653,11 +637,6 @@ const AdminPanel = () => {
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-2">
                             <h3 className="text-xl font-bold text-white">{post.title}</h3>
-                            {post.featured && (
-                              <span className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                                FEATURED
-                              </span>
-                            )}
                             {!post.published && (
                               <span className="bg-slate-600 text-gray-300 px-2 py-1 rounded text-xs font-semibold">
                                 DRAFT
