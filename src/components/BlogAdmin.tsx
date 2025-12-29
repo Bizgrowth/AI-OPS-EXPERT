@@ -70,7 +70,6 @@ const BlogAdmin = () => {
         published_at: new Date(currentPost.published_at).toISOString(),
         read_time: currentPost.read_time,
         tags: currentPost.tags,
-        featured: currentPost.featured,
         published: currentPost.published
       };
 
