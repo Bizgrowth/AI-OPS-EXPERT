@@ -51,9 +51,9 @@ const About = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                <div className="bg-gradient-to-br from-violet-900/40 to-violet-800/40 backdrop-blur-sm p-8 rounded-2xl border border-violet-700/50 hover:border-violet-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg">
                       <Award className="w-8 h-8 text-white" />
                     </div>
                     <h4 className="text-xl sm:text-2xl font-bold text-white">Executive-Level Execution</h4>
@@ -63,9 +63,9 @@ const About = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                <div className="bg-gradient-to-br from-emerald-900/40 to-emerald-800/40 backdrop-blur-sm p-8 rounded-2xl border border-emerald-700/50 hover:border-emerald-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/20">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
                       <Target className="w-8 h-8 text-white" />
                     </div>
                     <h4 className="text-xl sm:text-2xl font-bold text-white">ROI-Focused with a 90-Day Guarantee</h4>
@@ -75,9 +75,9 @@ const About = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 backdrop-blur-sm p-8 rounded-2xl border border-blue-700/50 hover:border-blue-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                <div className="bg-gradient-to-br from-orange-900/40 to-orange-800/40 backdrop-blur-sm p-8 rounded-2xl border border-orange-700/50 hover:border-orange-500/70 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/20">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
                       <Clock className="w-8 h-8 text-white" />
                     </div>
                     <h4 className="text-xl sm:text-2xl font-bold text-white">The AI Transformation Moment</h4>
