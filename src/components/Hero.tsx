@@ -151,7 +151,6 @@ const Hero = () => {
                       className="w-full h-full object-contain"
                       controls
                       autoPlay
-                      muted
                       playsInline
                       preload="metadata"
                       poster="/image copy copy copy copy copy copy copy copy copy copy copy copy copy copy.png"
