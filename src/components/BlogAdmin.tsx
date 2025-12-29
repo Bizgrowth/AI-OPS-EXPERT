@@ -63,22 +63,30 @@ const BlogAdmin = () => {
       }
 
       const postData = {
-        ...currentPost,
-        published_at: new Date(currentPost.published_at).toISOString()
+        title: currentPost.title,
+        excerpt: currentPost.excerpt,
+        content: currentPost.content,
+        author: currentPost.author,
+        published_at: new Date(currentPost.published_at).toISOString(),
+        read_time: currentPost.read_time,
+        tags: currentPost.tags,
+        featured: currentPost.featured,
+        published: currentPost.published
       };
 
       if (currentPost.id) {
         const { error } = await supabase
           .from('blog_posts')
           .update(postData)
-          .eq('id', currentPost.id);
+          .eq('id', currentPost.id)
+          .select();
 
         if (error) throw error;
       } else {
-        const { id, ...newPostData } = postData;
         const { error } = await supabase
           .from('blog_posts')
-          .insert([newPostData]);
+          .insert([postData])
+          .select();
 
         if (error) throw error;
       }
