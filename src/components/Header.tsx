@@ -92,12 +92,24 @@ const Header = () => {
             </a>
           </nav>
 
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex items-center space-x-3">
             <a
               href="/portal"
-              className="mr-4 border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
+              className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
             >
               Client Portal
+            </a>
+            <a
+              href="/subscription"
+              className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/30 text-sm xl:text-base"
+            >
+              Plans
+            </a>
+            <a
+              href="/billing"
+              className="text-gray-300 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 text-sm xl:text-base"
+            >
+              Billing
             </a>
             <button
               onClick={handleBookCall}
@@ -167,7 +179,19 @@ const Header = () => {
               >
                 Client Portal
               </a>
-              <button 
+              <a
+                href="/subscription"
+                className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors"
+              >
+                Subscription Plans
+              </a>
+              <a
+                href="/billing"
+                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                Billing
+              </a>
+              <button
                 onClick={handleBookCall}
                 className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200"
               >
