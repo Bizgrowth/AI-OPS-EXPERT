@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
-import { 
-  FileText, 
-  MessageSquare, 
-  Calendar, 
-  Target, 
-  LogOut, 
+import {
+  FileText,
+  MessageSquare,
+  Calendar,
+  Target,
+  LogOut,
   Download,
   Eye,
   Clock,
@@ -26,12 +26,16 @@ import {
   BarChart3,
   Zap,
   Award,
-  BookOpen
+  BookOpen,
+  CreditCard,
+  Package
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import ProjectDocuments from './ProjectDocuments';
 import LiveChat from './LiveChat';
 import { documentTemplates, DocumentTemplate } from './DocumentTemplates';
+import BillingPortal from '../BillingPortal';
+import SubscriptionPlans from '../SubscriptionPlans';
 
 interface Project {
   id: string;
@@ -49,7 +53,7 @@ interface DashboardProps {
 }
 
 const EnhancedDashboard: React.FC<DashboardProps> = ({ user, onLogout, isDemo = false }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'documents' | 'chat' | 'document-detail'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'documents' | 'chat' | 'document-detail' | 'billing' | 'subscription'>('overview');
   const [selectedDocument, setSelectedDocument] = useState<DocumentTemplate | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -147,6 +151,8 @@ const EnhancedDashboard: React.FC<DashboardProps> = ({ user, onLogout, isDemo = 
     { id: 'overview', label: 'Dashboard', icon: Home },
     { id: 'documents', label: 'Documents', icon: FileText },
     { id: 'chat', label: 'Project Chat', icon: MessageSquare },
+    { id: 'subscription', label: 'Subscription', icon: Package },
+    { id: 'billing', label: 'Billing', icon: CreditCard },
     { id: 'settings', label: 'Settings', icon: Settings },
     { id: 'help', label: 'Help & Support', icon: HelpCircle },
   ];
@@ -179,7 +185,7 @@ const EnhancedDashboard: React.FC<DashboardProps> = ({ user, onLogout, isDemo = 
               <button
                 key={item.id}
                 onClick={() => {
-                  if (item.id === 'overview' || item.id === 'documents' || item.id === 'chat') {
+                  if (item.id === 'overview' || item.id === 'documents' || item.id === 'chat' || item.id === 'billing' || item.id === 'subscription') {
                     setActiveTab(item.id as any);
                     setSidebarOpen(false);
                   }
@@ -239,6 +245,8 @@ const EnhancedDashboard: React.FC<DashboardProps> = ({ user, onLogout, isDemo = 
                 {activeTab === 'overview' && 'Project Dashboard'}
                 {activeTab === 'documents' && 'Project Documents'}
                 {activeTab === 'chat' && 'Project Communication'}
+                {activeTab === 'subscription' && 'Subscription Plans'}
+                {activeTab === 'billing' && 'Billing & Payments'}
                 {activeTab === 'document-detail' && selectedDocument?.title}
               </h2>
             </div>
@@ -547,11 +555,23 @@ const EnhancedDashboard: React.FC<DashboardProps> = ({ user, onLogout, isDemo = 
           )}
 
           {activeTab === 'chat' && (
-            <LiveChat 
-              userEmail={isDemo ? 'demo@aiopsexpert.com' : user.email!} 
-              userName={isDemo ? 'Demo Client' : user.email!} 
-              isDemo={isDemo} 
+            <LiveChat
+              userEmail={isDemo ? 'demo@aiopsexpert.com' : user.email!}
+              userName={isDemo ? 'Demo Client' : user.email!}
+              isDemo={isDemo}
             />
+          )}
+
+          {activeTab === 'subscription' && (
+            <div className="bg-slate-800 rounded-xl border border-slate-600 overflow-hidden">
+              <SubscriptionPlans />
+            </div>
+          )}
+
+          {activeTab === 'billing' && (
+            <div className="bg-slate-800 rounded-xl border border-slate-600 overflow-hidden">
+              <BillingPortal />
+            </div>
           )}
         </main>
       </div>
