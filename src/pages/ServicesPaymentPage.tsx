@@ -2,14 +2,18 @@ import { useState } from 'react';
 import { Check, ArrowRight, DollarSign, FileText, Zap, Headphones } from 'lucide-react';
 import Header from '../components/Header';
 import SocialFooter from '../components/SocialFooter';
+import SchedulingModal from '../components/SchedulingModal';
 
 interface Service {
   id: string;
   name: string;
-  price: number;
+  price: number | null;
+  priceLabel?: string;
   description: string;
   features: string[];
-  stripePriceId: string;
+  stripePriceId?: string;
+  buttonText: string;
+  buttonAction: 'payment' | 'schedule' | 'contact';
   icon: React.ReactNode;
   popular?: boolean;
 }
@@ -18,9 +22,11 @@ const SERVICES: Service[] = [
   {
     id: 'discovery',
     name: 'Discovery Call',
-    price: 197,
+    price: 0,
+    priceLabel: 'Free',
     description: 'Strategic AI consultation to assess your needs and opportunities',
-    stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_DISCOVERY',
+    buttonText: 'Book Free Call',
+    buttonAction: 'schedule',
     icon: <Headphones className="w-8 h-8" />,
     features: [
       '60-minute consultation',
@@ -33,9 +39,11 @@ const SERVICES: Service[] = [
   {
     id: 'audit',
     name: 'AI Audit',
-    price: 997,
+    price: 99,
     description: 'Comprehensive analysis of your AI infrastructure and opportunities',
     stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_AUDIT',
+    buttonText: 'Purchase Now',
+    buttonAction: 'payment',
     icon: <FileText className="w-8 h-8" />,
     popular: true,
     features: [
@@ -50,9 +58,11 @@ const SERVICES: Service[] = [
   {
     id: 'retainer',
     name: 'Monthly Retainer',
-    price: 4997,
+    price: null,
+    priceLabel: 'Contact for Pricing',
     description: 'Ongoing AI operations support and strategic guidance',
-    stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_RETAINER',
+    buttonText: 'Request Quote',
+    buttonAction: 'contact',
     icon: <Zap className="w-8 h-8" />,
     features: [
       'Dedicated monthly hours',
@@ -68,9 +78,16 @@ const SERVICES: Service[] = [
 
 export default function ServicesPaymentPage() {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [showScheduling, setShowScheduling] = useState(false);
 
-  const handleServicePayment = (stripePriceId: string) => {
-    window.location.href = stripePriceId;
+  const handleServiceAction = (service: Service) => {
+    if (service.buttonAction === 'payment' && service.stripePriceId) {
+      window.location.href = service.stripePriceId;
+    } else if (service.buttonAction === 'schedule') {
+      setShowScheduling(true);
+    } else if (service.buttonAction === 'contact') {
+      setShowQuoteForm(true);
+    }
   };
 
   return (
@@ -107,21 +124,29 @@ export default function ServicesPaymentPage() {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{service.name}</h3>
                   <p className="text-gray-400 mb-4">{service.description}</p>
-                  <div className="flex items-baseline">
-                    <span className="text-5xl font-bold text-white">${service.price.toLocaleString()}</span>
-                    <span className="text-gray-400 ml-2">one-time</span>
+                  <div className="flex items-baseline min-h-[4rem]">
+                    {service.price === null ? (
+                      <span className="text-3xl font-bold text-white">{service.priceLabel}</span>
+                    ) : service.price === 0 ? (
+                      <span className="text-5xl font-bold text-cyan-400">{service.priceLabel}</span>
+                    ) : (
+                      <>
+                        <span className="text-5xl font-bold text-white">${service.price.toLocaleString()}</span>
+                        <span className="text-gray-400 ml-2">one-time</span>
+                      </>
+                    )}
                   </div>
                 </div>
 
                 <button
-                  onClick={() => handleServicePayment(service.stripePriceId)}
+                  onClick={() => handleServiceAction(service)}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-all mb-6 flex items-center justify-center ${
                     service.popular
                       ? 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white shadow-lg'
                       : 'bg-slate-700 hover:bg-slate-600 text-white'
                   }`}
                 >
-                  Purchase Now
+                  {service.buttonText}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </button>
 
@@ -187,6 +212,10 @@ export default function ServicesPaymentPage() {
         </div>
       </div>
       <SocialFooter />
+      <SchedulingModal
+        isOpen={showScheduling}
+        onClose={() => setShowScheduling(false)}
+      />
     </div>
   );
 }

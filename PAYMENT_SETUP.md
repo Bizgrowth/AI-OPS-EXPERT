@@ -6,10 +6,10 @@ Your payment system has been restructured to use **fixed-price Stripe Payment Li
 
 The new payment system includes:
 
-1. **Fixed-Price Services** - Three service tiers with Stripe Payment Links
-   - Discovery Call ($197)
-   - AI Audit ($997)
-   - Monthly Retainer ($4,997)
+1. **Fixed-Price Services** - Three service tiers:
+   - Discovery Call (FREE - books directly via scheduling modal)
+   - AI Audit ($99 - one-time payment via Stripe Payment Link)
+   - Monthly Retainer (Contact for Pricing - opens quote request form)
 
 2. **Custom Quote Request Form** - For larger projects requiring custom pricing
 
@@ -19,63 +19,38 @@ The new payment system includes:
 
 ## Setup Steps
 
-### 1. Create Stripe Payment Links
+### 1. Create Stripe Payment Link
 
-You need to create Payment Links in your Stripe Dashboard for each service:
+You only need to create ONE Payment Link in your Stripe Dashboard for the AI Audit service:
 
 1. Go to [Stripe Dashboard](https://dashboard.stripe.com)
 2. Navigate to **Products** → **Payment Links**
 3. Click **New** to create a payment link
 
-#### Discovery Call Payment Link
-- **Product Name**: Discovery Call - AI Consultation
-- **Price**: $197 USD (one-time)
-- **Description**: 60-minute strategic AI consultation with comprehensive assessment
-- After creation, copy the Payment Link URL
-
 #### AI Audit Payment Link
 - **Product Name**: Comprehensive AI Audit
-- **Price**: $997 USD (one-time)
+- **Price**: $99 USD (one-time)
 - **Description**: Complete AI infrastructure analysis with detailed report
 - After creation, copy the Payment Link URL
 
-#### Monthly Retainer Payment Link
-- **Product Name**: Monthly AI Operations Retainer
-- **Price**: $4,997 USD (one-time or recurring monthly)
-- **Description**: Dedicated monthly AI operations support and strategic guidance
-- After creation, copy the Payment Link URL
+**Note:**
+- The Discovery Call is FREE and uses the existing scheduling system (no payment required)
+- The Monthly Retainer and other services use the custom quote request form (no fixed pricing)
 
-### 2. Update Payment Links in Code
+### 2. Update Payment Link in Code
 
-Open `/src/pages/ServicesPaymentPage.tsx` and update the `stripePriceId` values:
+Open `/src/pages/ServicesPaymentPage.tsx` and update the `stripePriceId` value for the AI Audit:
 
+Find this line:
 ```typescript
-const SERVICES: Service[] = [
-  {
-    id: 'discovery',
-    name: 'Discovery Call',
-    price: 197,
-    description: 'Strategic AI consultation to assess your needs and opportunities',
-    stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_DISCOVERY', // Replace this
-    // ...
-  },
-  {
-    id: 'audit',
-    name: 'AI Audit',
-    price: 997,
-    description: 'Comprehensive analysis of your AI infrastructure and opportunities',
-    stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_AUDIT', // Replace this
-    // ...
-  },
-  {
-    id: 'retainer',
-    name: 'Monthly Retainer',
-    price: 4997,
-    description: 'Ongoing AI operations support and strategic guidance',
-    stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_RETAINER', // Replace this
-    // ...
-  },
-];
+stripePriceId: 'YOUR_STRIPE_PAYMENT_LINK_FOR_AUDIT',
+```
+
+Replace `YOUR_STRIPE_PAYMENT_LINK_FOR_AUDIT` with your actual Stripe Payment Link URL from step 1.
+
+**Example:**
+```typescript
+stripePriceId: 'https://buy.stripe.com/test_xxxxxxxxxxxxxxx',
 ```
 
 ### 3. Configure Stripe Webhooks (Optional)
@@ -159,13 +134,15 @@ If you encounter issues:
 
 ## Next Steps
 
-1. ✅ Create Stripe Payment Links for each service
-2. ✅ Update `stripePriceId` values in the code
+1. ✅ Create Stripe Payment Link for AI Audit ($99)
+2. ✅ Update `stripePriceId` value in the code
 3. ✅ Test payment flow in Stripe test mode
 4. ✅ Configure webhooks (optional)
 5. ✅ Set up Stripe Invoicing for custom projects
-6. ✅ Deploy to production
-7. ✅ Test with real payments
+6. ✅ Test the free Discovery Call booking
+7. ✅ Test the custom quote request form
+8. ✅ Deploy to production
+9. ✅ Test with real payments
 
 ---
 
