@@ -74,7 +74,7 @@ const SocialFooter = () => {
           </p>
           <div className="flex gap-4 text-sm text-gray-500">
             <a href="/privacy-policy" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
+            <a href="/terms-of-service" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
