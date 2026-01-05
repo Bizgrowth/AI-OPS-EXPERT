@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Cpu } from 'lucide-react'; // Removed useLocation
+import { Menu, X, Cpu, ArrowLeft } from 'lucide-react';
 import SchedulingModal from './SchedulingModal';
 
 const Header = () => {
@@ -28,6 +28,11 @@ const Header = () => {
     setIsMenuOpen(false);
     setShowScheduling(true);
   };
+
+  const isOnSubdomain = typeof window !== 'undefined' &&
+    window.location.hostname !== 'aiopsexpert.com' &&
+    window.location.hostname !== 'localhost' &&
+    !window.location.hostname.includes('127.0.0.1');
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
@@ -93,6 +98,21 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center space-x-3">
+            {isOnSubdomain && (
+              <a
+                href="https://aiopsexpert.com"
+                className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 text-sm xl:text-base"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Main Site</span>
+              </a>
+            )}
+            <a
+              href="https://clientportal.aiopsexpert.com"
+              className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
+            >
+              Client Portal
+            </a>
             <a
               href="/services"
               className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/30 text-sm xl:text-base"
@@ -167,9 +187,24 @@ const Header = () => {
               >
                 Contact
               </a>
+              {isOnSubdomain && (
+                <a
+                  href="https://aiopsexpert.com"
+                  className="flex items-center gap-2 w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors border-t border-slate-600 mt-2 pt-4"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Main Site
+                </a>
+              )}
+              <a
+                href="https://clientportal.aiopsexpert.com"
+                className="block w-full text-left px-3 py-2 text-cyan-400 hover:text-cyan-300 transition-colors border-t border-slate-600 mt-2 pt-4"
+              >
+                Client Portal
+              </a>
               <a
                 href="/services"
-                className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors border-t border-slate-600 mt-2 pt-4"
+                className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors"
               >
                 Services & Pricing
               </a>

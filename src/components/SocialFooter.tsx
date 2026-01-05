@@ -40,6 +40,7 @@ const SocialFooter = () => {
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Resources</h3>
             <ul className="space-y-2 text-gray-400">
+              <li><a href="https://clientportal.aiopsexpert.com" className="hover:text-cyan-400 transition-colors">Client Portal</a></li>
               <li><a href="#ai-portfolio" className="hover:text-cyan-400 transition-colors">Portfolio</a></li>
               <li><a href="#tech-stack" className="hover:text-cyan-400 transition-colors">Tech Stack</a></li>
               <li><a href="/services" className="hover:text-cyan-400 transition-colors">Services</a></li>
