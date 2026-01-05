@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Cpu, ArrowLeft } from 'lucide-react';
 import SchedulingModal from './SchedulingModal';
 
@@ -107,24 +108,24 @@ const Header = () => {
                 <span>Back to Main Site</span>
               </a>
             )}
-            <a
-              href="/client-portal"
+            <Link
+              to="/client-portal"
               className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
             >
               Client Portal
-            </a>
-            <a
-              href="/services"
+            </Link>
+            <Link
+              to="/services"
               className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/30 text-sm xl:text-base"
             >
               Services
-            </a>
-            <a
-              href="/billing"
+            </Link>
+            <Link
+              to="/billing"
               className="text-gray-300 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 text-sm xl:text-base"
             >
               Billing
-            </a>
+            </Link>
             <button
               onClick={handleBookCall}
               className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 xl:px-6 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 text-sm xl:text-base hover-shine relative overflow-hidden"
@@ -196,24 +197,27 @@ const Header = () => {
                   Back to Main Site
                 </a>
               )}
-              <a
-                href="/client-portal"
+              <Link
+                to="/client-portal"
                 className="block w-full text-left px-3 py-2 text-cyan-400 hover:text-cyan-300 transition-colors border-t border-slate-600 mt-2 pt-4"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Client Portal
-              </a>
-              <a
-                href="/services"
+              </Link>
+              <Link
+                to="/services"
                 className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Services & Pricing
-              </a>
-              <a
-                href="/billing"
+              </Link>
+              <Link
+                to="/billing"
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Billing
-              </a>
+              </Link>
               <button
                 onClick={handleBookCall}
                 className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200"
