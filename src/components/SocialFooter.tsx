@@ -70,10 +70,10 @@ const SocialFooter = () => {
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © 2024 Daniel Schley - AI Operations Expert. All rights reserved.
+            © 2026 Daniel Schley - AI Operations Expert. All rights reserved.
           </p>
           <div className="flex gap-4 text-sm text-gray-500">
-            <a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+            <a href="/privacy-policy" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
           </div>
         </div>

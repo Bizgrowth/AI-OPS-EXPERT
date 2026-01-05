@@ -5,6 +5,7 @@ import ServiceDetail from './components/ServiceDetail';
 import PortalPage from './pages/PortalPage';
 import SubscriptionPage from './pages/SubscriptionPage';
 import BillingPage from './pages/BillingPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import AdminPanel from './components/AdminPanel';
 import AdminSignup from './components/AdminSignup';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -20,6 +21,7 @@ function App() {
           <Route path="/portal" element={<PortalPage />} />
           <Route path="/subscription" element={<SubscriptionPage />} />
           <Route path="/billing" element={<BillingPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/admin-signup" element={<AdminSignup />} />
           <Route
             path="/admin"
