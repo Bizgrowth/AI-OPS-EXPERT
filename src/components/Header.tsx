@@ -94,12 +94,6 @@ const Header = () => {
 
           <div className="hidden lg:flex items-center space-x-3">
             <a
-              href="/portal"
-              className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
-            >
-              Client Portal
-            </a>
-            <a
               href="/services"
               className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/30 text-sm xl:text-base"
             >
@@ -174,14 +168,8 @@ const Header = () => {
                 Contact
               </a>
               <a
-                href="/portal"
-                className="block w-full text-left px-3 py-2 text-cyan-400 hover:text-cyan-300 transition-colors border-t border-slate-600 mt-2 pt-4"
-              >
-                Client Portal
-              </a>
-              <a
                 href="/services"
-                className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors"
+                className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors border-t border-slate-600 mt-2 pt-4"
               >
                 Services & Pricing
               </a>

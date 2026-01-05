@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ServiceDetail from './components/ServiceDetail';
-import PortalPage from './pages/PortalPage';
 import ServicesPaymentPage from './pages/ServicesPaymentPage';
 import BillingPage from './pages/BillingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
@@ -19,7 +18,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/service/:serviceId" element={<ServiceDetail />} />
-          <Route path="/portal" element={<PortalPage />} />
           <Route path="/services" element={<ServicesPaymentPage />} />
           <Route path="/billing" element={<BillingPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
