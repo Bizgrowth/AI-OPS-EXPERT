@@ -86,6 +86,24 @@ export default function ClientRegisterPage() {
           console.error('Notification preferences error:', prefsError);
         }
 
+        try {
+          const emailApiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-welcome-email`;
+          await fetch(emailApiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              fullName: formData.fullName,
+              companyName: formData.companyName,
+            }),
+          });
+        } catch (emailErr) {
+          console.error('Welcome email failed (non-blocking):', emailErr);
+        }
+
         setSuccess(true);
         setTimeout(() => {
           navigate('/client-login');

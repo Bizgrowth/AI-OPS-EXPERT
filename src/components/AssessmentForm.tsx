@@ -32,6 +32,28 @@ const AssessmentForm: React.FC<AssessmentFormProps> = ({ assessmentType, onClose
 
       if (error) throw error;
 
+      try {
+        const emailApiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-assessment-email`;
+        await fetch(emailApiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            assessmentType,
+            contactName: formData.contact_name,
+            contactEmail: formData.contact_email,
+            contactPhone: formData.contact_phone,
+            companyName: formData.company_name,
+            industry: formData.industry,
+            responses: formData,
+          }),
+        });
+      } catch (emailErr) {
+        console.error('Assessment email notification failed (non-blocking):', emailErr);
+      }
+
       setIsSuccess(true);
       setTimeout(() => {
         onClose();

@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase';
+import ClientChat from '@/components/ClientChat';
 
 interface ClientProfile {
   full_name: string;
@@ -366,11 +367,7 @@ export default function ClientPortalPage() {
             </TabsContent>
 
             <TabsContent value="messages">
-              <Card className="p-6">
-                <p className={`text-base ${darkMode ? 'text-slate-400' : 'text-gray-600'}`}>
-                  No messages yet. Check back later for updates from your project team.
-                </p>
-              </Card>
+              <ClientChat />
             </TabsContent>
 
             <TabsContent value="settings">
