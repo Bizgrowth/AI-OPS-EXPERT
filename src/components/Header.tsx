@@ -91,12 +91,14 @@ const Header = () => {
             >
               Admin
             </Link>
-            <Link
-              to="/client-portal"
+            <a
+              href="YOUR_REPLIT_URL_HERE"
+              target="_blank"
+              rel="noopener noreferrer"
               className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               Client Portal
-            </Link>
+            </a>
           </nav>
 
           <div className="hidden lg:flex items-center space-x-3">
@@ -164,13 +166,14 @@ const Header = () => {
               >
                 Admin
               </Link>
-              <Link
-                to="/client-portal"
+              <a
+                href="YOUR_REPLIT_URL_HERE"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors border-t border-slate-600 mt-2 pt-4"
-                onClick={() => setIsMenuOpen(false)}
               >
                 Client Portal
-              </Link>
+              </a>
               {isOnSubdomain && (
                 <a
                   href="https://aiopsexpert.com"
