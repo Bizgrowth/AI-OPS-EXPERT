@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Cpu, ArrowLeft } from 'lucide-react';
 import SchedulingModal from './SchedulingModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScheduling, setShowScheduling] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    
-    // Smooth scroll to section
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerHeight = 64; // Height of fixed header
-      const elementPosition = element.offsetTop - headerHeight;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
+
+    if (location.pathname === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerHeight = 64;
+        const elementPosition = element.offsetTop - headerHeight;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      navigate('/', { state: { scrollTo: sectionId } });
     }
   };
 
@@ -54,6 +59,18 @@ const Header = () => {
           </div>
           
           <nav className="hidden lg:flex space-x-6 xl:space-x-8">
+            <Link
+              to="/"
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
+            >
+              Home
+            </Link>
+            <Link
+              to="/services"
+              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
+            >
+              Services
+            </Link>
             <a
               href="#about"
               onClick={(e) => handleNavClick(e, 'about')}
@@ -62,40 +79,24 @@ const Header = () => {
               About
             </a>
             <a
-              href="#services"
-              onClick={(e) => handleNavClick(e, 'services')}
-              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
-            >
-              AI Solutions
-            </a>
-            <a
-              href="#ai-portfolio"
-              onClick={(e) => handleNavClick(e, 'ai-portfolio')}
-              className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
-            >
-              Portfolio
-            </a>
-            <a
               href="#blog"
               onClick={(e) => handleNavClick(e, 'blog')}
               className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
               Blog
             </a>
-            <a
-              href="#tech-stack"
-              onClick={(e) => handleNavClick(e, 'tech-stack')}
+            <Link
+              to="/admin"
               className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
-              Tech Stack
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, 'contact')}
+              Admin
+            </Link>
+            <Link
+              to="/client-portal"
               className="transition-all duration-300 text-sm xl:text-base text-gray-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-0.5 inline-block"
             >
-              Contact
-            </a>
+              Client Portal
+            </Link>
           </nav>
 
           <div className="hidden lg:flex items-center space-x-3">
@@ -108,27 +109,9 @@ const Header = () => {
                 <span>Back to Main Site</span>
               </a>
             )}
-            <Link
-              to="/client-portal"
-              className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/30 text-sm xl:text-base"
-            >
-              Client Portal
-            </Link>
-            <Link
-              to="/services"
-              className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/30 text-sm xl:text-base"
-            >
-              Services
-            </Link>
-            <Link
-              to="/billing"
-              className="text-gray-300 hover:text-white px-4 xl:px-6 py-2 rounded-lg font-semibold transition-all duration-300 text-sm xl:text-base"
-            >
-              Billing
-            </Link>
             <button
               onClick={handleBookCall}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 xl:px-6 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 text-sm xl:text-base hover-shine relative overflow-hidden"
+              className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 xl:px-6 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-lg hover:shadow-cyan-500/50 text-sm xl:text-base hover-shine relative overflow-hidden"
             >
               <span className="hidden xl:inline">Book AI Consultation</span>
               <span className="xl:hidden">Book Call</span>
@@ -146,6 +129,20 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800 rounded-lg mt-2 mx-2">
+              <Link
+                to="/"
+                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                to="/services"
+                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </Link>
               <a
                 href="#about"
                 onClick={(e) => handleNavClick(e, 'about')}
@@ -154,40 +151,26 @@ const Header = () => {
                 About
               </a>
               <a
-                href="#services"
-                onClick={(e) => handleNavClick(e, 'services')}
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
-              >
-                AI Solutions
-              </a>
-              <a
-                href="#ai-portfolio"
-                onClick={(e) => handleNavClick(e, 'ai-portfolio')}
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
-              >
-                Portfolio
-              </a>
-              <a
                 href="#blog"
                 onClick={(e) => handleNavClick(e, 'blog')}
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Blog
               </a>
-              <a
-                href="#tech-stack"
-                onClick={(e) => handleNavClick(e, 'tech-stack')}
+              <Link
+                to="/admin"
                 className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
-                Tech Stack
-              </a>
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, 'contact')}
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
+                Admin
+              </Link>
+              <Link
+                to="/client-portal"
+                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors border-t border-slate-600 mt-2 pt-4"
+                onClick={() => setIsMenuOpen(false)}
               >
-                Contact
-              </a>
+                Client Portal
+              </Link>
               {isOnSubdomain && (
                 <a
                   href="https://aiopsexpert.com"
@@ -197,30 +180,9 @@ const Header = () => {
                   Back to Main Site
                 </a>
               )}
-              <Link
-                to="/client-portal"
-                className="block w-full text-left px-3 py-2 text-cyan-400 hover:text-cyan-300 transition-colors border-t border-slate-600 mt-2 pt-4"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Client Portal
-              </Link>
-              <Link
-                to="/services"
-                className="block w-full text-left px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Services & Pricing
-              </Link>
-              <Link
-                to="/billing"
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Billing
-              </Link>
               <button
                 onClick={handleBookCall}
-                className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-200"
+                className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-700 transition-all duration-200"
               >
                 Book AI Consultation
               </button>
