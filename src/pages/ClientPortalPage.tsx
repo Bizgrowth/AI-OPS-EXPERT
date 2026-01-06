@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BarChart3, CheckCircle, Clock, TrendingUp, FileText, MessageSquare, Settings, Menu, Sun, Moon, Home } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { BarChart3, CheckCircle, Clock, TrendingUp, FileText, MessageSquare, Settings, Menu, Sun, Moon, Home, LogOut } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -9,72 +9,138 @@ import { ProjectCard } from '@/components/client-portal/ProjectCard';
 import { MetricCard } from '@/components/client-portal/MetricCard';
 import { ActivityFeed } from '@/components/client-portal/ActivityFeed';
 import { Project, Activity } from '@/types/client-portal';
-import AssessmentForm from '@/components/AssessmentForm';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
+import { supabase } from '@/lib/supabase';
 
-const mockProjects: Project[] = [
-  {
-    id: '1',
-    name: 'Website Redesign',
-    description: 'Complete redesign of company website with modern UI/UX',
-    status: 'in_progress',
-    progress: 75,
-    startDate: '2026-01-01',
-    clientId: 'client-1',
-    createdAt: '2026-01-01T00:00:00Z',
-    updatedAt: '2026-01-05T00:00:00Z',
-  },
-  {
-    id: '2',
-    name: 'AI Integration',
-    description: 'Implementation of AI-powered features and automation',
-    status: 'planning',
-    progress: 30,
-    startDate: '2026-01-10',
-    clientId: 'client-1',
-    createdAt: '2026-01-02T00:00:00Z',
-    updatedAt: '2026-01-05T00:00:00Z',
-  },
-  {
-    id: '3',
-    name: 'Mobile App Development',
-    description: 'Native mobile application for iOS and Android',
-    status: 'planning',
-    progress: 10,
-    startDate: '2026-02-01',
-    clientId: 'client-1',
-    createdAt: '2026-01-03T00:00:00Z',
-    updatedAt: '2026-01-05T00:00:00Z',
-  },
-];
+interface ClientProfile {
+  full_name: string;
+  company_name?: string;
+  phone?: string;
+  industry?: string;
+  avatar_url?: string;
+}
 
-const mockActivities: Activity[] = [
-  {
-    id: '1',
-    projectId: '1',
-    type: 'milestone',
-    title: 'Project milestone completed',
-    description: 'Website Redesign',
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-    userId: 'user-1',
-  },
-  {
-    id: '2',
-    projectId: '2',
-    type: 'task',
-    title: 'New task assigned',
-    description: 'AI Integration',
-    timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
-    userId: 'user-1',
-  },
-];
+interface ClientProject {
+  id: string;
+  name: string;
+  status: string;
+  progress: number;
+  created_at: string;
+  updated_at: string;
+}
+
+interface ProjectUpdate {
+  id: string;
+  project_id: string;
+  update_type: string;
+  title: string;
+  description: string;
+  created_at: string;
+}
 
 export default function ClientPortalPage() {
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState<ClientProfile | null>(null);
+  const [projects, setProjects] = useState<ClientProject[]>([]);
+  const [updates, setUpdates] = useState<ProjectUpdate[]>([]);
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    loadClientData();
+  }, []);
+
+  const loadClientData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/client-login');
+        return;
+      }
+
+      setUserEmail(user.email || '');
+
+      const { data: profileData } = await supabase
+        .from('clients_profile')
+        .select('*')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (profileData) {
+        setProfile(profileData);
+      }
+
+      const { data: projectsData } = await supabase
+        .from('client_projects')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (projectsData) {
+        setProjects(projectsData);
+      }
+
+      if (projectsData && projectsData.length > 0) {
+        const projectIds = projectsData.map(p => p.id);
+        const { data: updatesData } = await supabase
+          .from('project_updates')
+          .select('*')
+          .in('project_id', projectIds)
+          .order('created_at', { ascending: false })
+          .limit(10);
+
+        if (updatesData) {
+          setUpdates(updatesData);
+        }
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading client data:', error);
+      setLoading(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/client-login');
+  };
+
+  const getInitials = () => {
+    if (!profile?.full_name) return 'CL';
+    return profile.full_name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const activities: Activity[] = updates.map(update => ({
+    id: update.id,
+    projectId: update.project_id,
+    type: update.update_type,
+    title: update.title,
+    description: update.description,
+    timestamp: update.created_at,
+    userId: 'admin',
+  }));
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-950">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+          <p className="text-gray-400 mt-4">Loading your portal...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-slate-950 text-white' : 'bg-gray-50 text-gray-900'}`}>
@@ -168,15 +234,24 @@ export default function ClientPortalPage() {
             </Button>
           </Link>
 
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-red-400 hover:text-red-300 hover:bg-red-900/20"
+            onClick={handleSignOut}
+          >
+            <LogOut className="w-5 h-5 mr-3" />
+            Sign Out
+          </Button>
+
           <Separator className="my-4" />
 
           <div className="flex items-center gap-3">
             <Avatar>
-              <AvatarFallback>CL</AvatarFallback>
+              <AvatarFallback>{getInitials()}</AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium truncate">Client User</p>
-              <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-gray-500'} truncate`}>client@example.com</p>
+              <p className="text-sm font-medium truncate">{profile?.full_name || 'Client User'}</p>
+              <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-gray-500'} truncate`}>{userEmail}</p>
             </div>
           </div>
         </aside>
@@ -220,46 +295,74 @@ export default function ClientPortalPage() {
                 <MetricCard
                   icon={BarChart3}
                   title="Active Projects"
-                  value={3}
-                  change="+1 this month"
-                  changeType="positive"
+                  value={projects.length}
+                  change={projects.length === 0 ? "No projects yet" : `${projects.filter(p => p.status === 'in-progress').length} in progress`}
+                  changeType={projects.length > 0 ? "positive" : "neutral"}
                 />
                 <MetricCard
                   icon={CheckCircle}
-                  title="Tasks Completed"
-                  value={24}
-                  change="85% completion rate"
+                  title="Completed Projects"
+                  value={projects.filter(p => p.status === 'completed').length}
+                  change={`${projects.length} total projects`}
                   changeType="neutral"
                 />
                 <MetricCard
                   icon={Clock}
-                  title="Upcoming Deadlines"
-                  value={5}
-                  change="Next: Dec 15"
+                  title="Recent Updates"
+                  value={updates.length}
+                  change={updates.length > 0 ? "View all below" : "No updates yet"}
                   changeType="neutral"
                 />
                 <MetricCard
                   icon={TrendingUp}
-                  title="Engagement Score"
-                  value="92%"
-                  change="+5% from last month"
-                  changeType="positive"
+                  title="Avg Progress"
+                  value={projects.length > 0 ? `${Math.round(projects.reduce((acc, p) => acc + p.progress, 0) / projects.length)}%` : "0%"}
+                  change={projects.length > 0 ? "Across all projects" : "No data"}
+                  changeType="neutral"
                 />
               </div>
 
-              <ActivityFeed activities={mockActivities} />
+              <ActivityFeed activities={activities} />
             </TabsContent>
 
             <TabsContent value="form">
-              <AssessmentForm />
+              <Card className="p-8 bg-slate-800/50 border-slate-700 text-center">
+                <h3 className="text-xl font-semibold text-white mb-2">Assessment Forms</h3>
+                <p className="text-gray-400">
+                  Assessment forms are available on the main website. Please visit our services page to submit assessments.
+                </p>
+              </Card>
             </TabsContent>
 
             <TabsContent value="projects" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {mockProjects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
-              </div>
+              {projects.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {projects.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={{
+                        id: project.id,
+                        name: project.name,
+                        description: '',
+                        status: project.status as any,
+                        progress: project.progress,
+                        startDate: project.created_at,
+                        clientId: '',
+                        createdAt: project.created_at,
+                        updatedAt: project.updated_at,
+                      }}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <Card className="p-8 bg-slate-800/50 border-slate-700 text-center">
+                  <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-white mb-2">No Projects Yet</h3>
+                  <p className="text-gray-400">
+                    Your projects will appear here once they're set up by our team.
+                  </p>
+                </Card>
+              )}
             </TabsContent>
 
             <TabsContent value="messages">
@@ -271,30 +374,45 @@ export default function ClientPortalPage() {
             </TabsContent>
 
             <TabsContent value="settings">
-              <Card className="p-6">
+              <Card className="p-6 bg-slate-800/50 border-slate-700">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Account Settings</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-white">Account Information</h3>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email" className="text-gray-300">Email</Label>
                         <Input
                           id="email"
                           type="email"
-                          defaultValue="client@example.com"
-                          className="mt-2"
+                          value={userEmail}
+                          disabled
+                          className="mt-2 bg-slate-700 border-slate-600 text-gray-400"
                         />
+                        <p className="text-xs text-gray-400 mt-1">Email cannot be changed</p>
                       </div>
                       <div>
-                        <Label htmlFor="name">Full Name</Label>
+                        <Label htmlFor="name" className="text-gray-300">Full Name</Label>
                         <Input
                           id="name"
                           type="text"
-                          defaultValue="Client User"
-                          className="mt-2"
+                          value={profile?.full_name || ''}
+                          disabled
+                          className="mt-2 bg-slate-700 border-slate-600 text-white"
                         />
                       </div>
-                      <Button>Save Changes</Button>
+                      <div>
+                        <Label htmlFor="company" className="text-gray-300">Company</Label>
+                        <Input
+                          id="company"
+                          type="text"
+                          value={profile?.company_name || ''}
+                          disabled
+                          className="mt-2 bg-slate-700 border-slate-600 text-white"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-400">
+                        To update your account information, please contact our team.
+                      </p>
                     </div>
                   </div>
                 </div>
