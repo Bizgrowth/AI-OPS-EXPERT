@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live AI Automation Demos | AIOPSEXPERT.COM</title>
+    <meta name="description"
+        content="See AI automation in action. Interactive demos of the chatbots, dashboards, and automation workflows Daniel Schley builds for SMBs." />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">AIOPS<span>EXPERT</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="case-studies.html">Results</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="demos.html" style="color:var(--primary);">Live Demos</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="book.html" class="btn btn-outline btn-sm">📅 Book a Call</a>
+                <a href="ai-readiness.html" class="btn btn-primary btn-sm">Get AI Score →</a>
+            </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html#services">Services</a>
+        <a href="case-studies.html">Results</a>
+        <a href="about.html">About</a>
+        <a href="book.html" class="btn btn-primary" style="margin-top:.5rem;justify-content:center;">📅 Book Free
+            Call</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="container">
+            <div class="label">⚡ LIVE DEMOS</div>
+            <h1 class="heading-lg reveal">
+                Built by an Operator.<br />
+                <span class="text-gradient">Powered by AI.</span>
+            </h1>
+            <p class="reveal">Automation that improves how your business actually runs.</p>
+
+        </div>
+    </section>
+
+    <!-- Demos -->
+    <section class="section">
+        <div class="container">
+            <div class="grid-2" style="gap:2rem;">
+
+                <!-- Demo 1: Chatbot -->
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="font-size:2rem;">🤖</div>
+                        <div>
+                            <div class="badge badge-success" style="margin-bottom:0.4rem;display:inline-flex;">● Live
+                            </div>
+                            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;">AI Lead
+                                Qualification Chatbot</h3>
+                        </div>
+                    </div>
+                    <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.25rem;">
+                        The same chatbot running on this website — built with Claude AI. Qualifies leads, answers FAQs,
+                        books calls, and captures contact info. Zero human involvement required.
+                    </p>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;">
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>Lead capture with name, email, phone</li>
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>FAQ handling with dynamic responses</li>
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>Booking flow integration</li>
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>24/7 availability · No staff required</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width:100%;justify-content:center;"
+                        onclick="document.getElementById('chat-bubble').click()">
+                        Try It Now → (Bottom Right)
+                    </button>
+                </div>
+
+                <!-- Demo 2: ROI Calculator -->
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="font-size:2rem;">💰</div>
+                        <div>
+                            <div class="badge badge-primary" style="margin-bottom:0.4rem;display:inline-flex;">
+                                Interactive</div>
+                            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;">ROI Savings
+                                Calculator</h3>
+                        </div>
+                    </div>
+                    <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.25rem;">
+                        A real-time calculator that computes automation ROI from inputs. I build these as custom tools
+                        for clients — embedded in their internal dashboards or as client-facing tools.
+                    </p>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;">
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>Real-time calculation engine</li>
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>Multi-variable input sliders</li>
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>Industry-adjusted multipliers</li>
+                        <li style="font-size:0.8rem;color:var(--text-secondary);display:flex;gap:0.5rem;"><span
+                                style="color:var(--success);">✓</span>Annual ROI projection</li>
+                    </ul>
+                    <a href="index.html#roi-calculator" class="btn btn-outline"
+                        style="width:100%;justify-content:center;">Try ROI Calculator →</a>
+                </div>
+
+                <!-- Demo 3: n8n Workflow Diagram -->
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="font-size:2rem;">🔗</div>
+                        <div>
+                            <div class="badge"
+                                style="background:rgba(0,212,255,0.1);color:var(--cyan);border-color:rgba(0,212,255,0.3);margin-bottom:0.4rem;display:inline-flex;">
+                                Blueprint</div>
+                            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;">Lead Nurture
+                                Automation Flow</h3>
+                        </div>
+                    </div>
+                    <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.25rem;">
+                        A real automation I've built for clients — connecting HubSpot, Gmail, Slack, and an AI scoring
+                        model to automate the entire lead follow-up process.
+                    </p>
+                    <!-- Workflow diagram mockup -->
+                    <div
+                        style="background:rgba(0,212,255,0.03);border:1px solid rgba(0,212,255,0.15);border-radius:var(--radius-md);padding:1.5rem;margin-bottom:1.5rem;">
+                        <div
+                            style="display:flex;align-items:center;gap:0.5rem;justify-content:center;flex-wrap:wrap;font-size:0.75rem;color:var(--text-secondary);">
+                            <div
+                                style="padding:0.4rem 0.75rem;background:rgba(79,127,255,0.1);border:1px solid rgba(79,127,255,0.3);border-radius:6px;white-space:nowrap;">
+                                📧 New Lead</div>
+                            <span style="color:var(--primary);">→</span>
+                            <div
+                                style="padding:0.4rem 0.75rem;background:rgba(79,127,255,0.1);border:1px solid rgba(79,127,255,0.3);border-radius:6px;white-space:nowrap;">
+                                🤖 AI Score</div>
+                            <span style="color:var(--primary);">→</span>
+                            <div
+                                style="padding:0.4rem 0.75rem;background:rgba(79,127,255,0.1);border:1px solid rgba(79,127,255,0.3);border-radius:6px;white-space:nowrap;">
+                                📊 HubSpot</div>
+                            <span style="color:var(--primary);">→</span>
+                            <div
+                                style="padding:0.4rem 0.75rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:6px;white-space:nowrap;">
+                                📬 Email Seq.</div>
+                            <span style="color:var(--accent);">→</span>
+                            <div
+                                style="padding:0.4rem 0.75rem;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:6px;white-space:nowrap;">
+                                💬 Slack Alert</div>
+                        </div>
+                    </div>
+                    <a href="book.html" class="btn btn-ghost" style="width:100%;justify-content:center;">Get This Built
+                        for Me →</a>
+                </div>
+
+                <!-- Demo 4: Social Media Automation -->
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="font-size:2rem;">📱</div>
+                        <div>
+                            <div class="badge badge-accent" style="margin-bottom:0.4rem;display:inline-flex;">Preview
+                            </div>
+                            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;">AI Social
+                                Content Engine</h3>
+                        </div>
+                    </div>
+                    <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.25rem;">
+                        An AI system that generates, edits, and schedules social media content across Instagram,
+                        Facebook, and LinkedIn — using your brand voice and business context.
+                    </p>
+                    <!-- Sample posts preview -->
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem;">
+                        <div
+                            style="padding:0.75rem 1rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);border-left:3px solid var(--primary);">
+                            <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem;">📸 Instagram ·
+                                Today 9:00AM · Auto-scheduled</div>
+                            <div style="font-size:0.82rem;color:var(--text-secondary);">"3 signs your business is ready
+                                for AI automation (and one that means you're not)... 🤖 #SMBAi #BusinessTips"</div>
+                        </div>
+                        <div
+                            style="padding:0.75rem 1rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);border-left:3px solid var(--accent);">
+                            <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem;">💼 LinkedIn ·
+                                Tomorrow 7:30AM · Auto-scheduled</div>
+                            <div style="font-size:0.82rem;color:var(--text-secondary);">"Most SMBs waste their first 6
+                                months on AI because they skip this step. Here's what to do instead..."</div>
+                        </div>
+                    </div>
+                    <a href="ai-social.html" class="btn btn-ghost" style="width:100%;justify-content:center;">Learn More
+                        About AI Social →</a>
+                </div>
+                <!-- Demo 5: Composio AI Agent Workflow -->
+                <div class="card" style="grid-column:1/-1;">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+                        <div style="font-size:2rem;">🔌</div>
+                        <div>
+                            <div class="badge badge-success" style="margin-bottom:0.4rem;display:inline-flex;">● AI
+                                Agent</div>
+                            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;">Composio
+                                Multi-App AI Agent Workflow</h3>
+                        </div>
+                        <div
+                            style="margin-left:auto;font-size:0.75rem;color:var(--text-muted);background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);padding:0.4rem 0.75rem;border-radius:6px;">
+                            Powered by Claude + Composio MCP
+                        </div>
+                    </div>
+                    <p
+                        style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;max-width:700px;">
+                        Unlike Make.com (rule-based triggers), <strong style="color:var(--text-primary);">Composio gives
+                            an AI agent hands</strong> — it reasons about what needs to happen and calls the right apps
+                        in the right order. No rigid flowcharts. Just tell it the goal.
+                    </p>
+
+                    <!-- Workflow Visualizer -->
+                    <div
+                        style="background:rgba(0,0,0,0.3);border:1px solid rgba(79,127,255,0.2);border-radius:var(--radius-md);padding:2rem;margin-bottom:1.5rem;">
+                        <div
+                            style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:1.25rem;">
+                            📋 Example: "Follow up with all leads from this week who didn't reply"</div>
+
+                        <!-- Flow Steps -->
+                        <div
+                            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;align-items:start;">
+                            <div style="text-align:center;">
+                                <div
+                                    style="width:48px;height:48px;border-radius:50%;background:rgba(79,127,255,0.15);border:1px solid rgba(79,127,255,0.4);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin:0 auto 0.5rem;">
+                                    🧠</div>
+                                <div
+                                    style="font-size:0.75rem;font-weight:600;color:var(--text-primary);margin-bottom:0.25rem;">
+                                    AI Reasons</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">Claude understands the goal</div>
+                            </div>
+                            <div style="text-align:center;padding-top:0.75rem;color:var(--primary);font-size:1.25rem;">→
+                            </div>
+                            <div style="text-align:center;">
+                                <div
+                                    style="width:48px;height:48px;border-radius:50%;background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin:0 auto 0.5rem;">
+                                    📊</div>
+                                <div
+                                    style="font-size:0.75rem;font-weight:600;color:var(--text-primary);margin-bottom:0.25rem;">
+                                    HubSpot CRM</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">Pulls open leads (no reply 3+
+                                    days)</div>
+                            </div>
+                            <div style="text-align:center;padding-top:0.75rem;color:var(--primary);font-size:1.25rem;">→
+                            </div>
+                            <div style="text-align:center;">
+                                <div
+                                    style="width:48px;height:48px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin:0 auto 0.5rem;">
+                                    ✉️</div>
+                                <div
+                                    style="font-size:0.75rem;font-weight:600;color:var(--text-primary);margin-bottom:0.25rem;">
+                                    Gmail</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">Sends personalized follow-up per
+                                    lead</div>
+                            </div>
+                            <div style="text-align:center;padding-top:0.75rem;color:var(--primary);font-size:1.25rem;">→
+                            </div>
+                            <div style="text-align:center;">
+                                <div
+                                    style="width:48px;height:48px;border-radius:50%;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin:0 auto 0.5rem;">
+                                    💬</div>
+                                <div
+                                    style="font-size:0.75rem;font-weight:600;color:var(--text-primary);margin-bottom:0.25rem;">
+                                    Slack</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">Posts summary report to your
+                                    channel</div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="margin-top:1.5rem;padding:0.75rem 1rem;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius-sm);font-size:0.8rem;color:var(--text-secondary);">
+                            ✅ <strong style="color:var(--success);">Result:</strong> 12 personalized follow-up emails
+                            sent, CRM updated, Slack summary posted — in 90 seconds. No human touched it.
+                        </div>
+                    </div>
+
+                    <!-- Apps Grid -->
+                    <div style="margin-bottom:1.5rem;">
+                        <div
+                            style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:0.75rem;">
+                            250+ Apps Available via Composio MCP</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">📩
+                                Gmail</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">🗂
+                                HubSpot</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">💬
+                                Slack</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">📋
+                                Notion</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">🐙
+                                GitHub</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">📊
+                                Airtable</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">🗓
+                                Google Cal</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">💼
+                                Salesforce</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">📣
+                                LinkedIn</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(79,127,255,0.08);border:1px solid rgba(79,127,255,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-secondary);">🧾
+                                QuickBooks</span>
+                            <span
+                                style="padding:0.3rem 0.65rem;background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:5px;font-size:0.72rem;color:var(--text-muted);">+
+                                240 more</span>
+                        </div>
+                    </div>
+                    <a href="book.html" class="btn btn-primary" style="width:100%;justify-content:center;">Get a
+                        Composio Agent Built for My Business →</a>
+                </div>
+
+            </div>
+
+            <!-- MCP Setup Guide Section -->
+            <div class="reveal" style="margin-top:5rem;">
+                <div style="text-align:center;margin-bottom:3rem;">
+                    <div class="label">🔌 MCP SETUP GUIDE</div>
+                    <h2 class="heading-md" style="margin-bottom:1rem;">How to Connect AI Agents to <span
+                            class="text-gradient">Any Tool</span></h2>
+                    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">MCP (Model Context Protocol)
+                        is the universal plug-in standard for AI. Here's everything you need to know to set it up — and
+                        which AI models support it.</p>
+                </div>
+
+                <!-- Do All Models Support MCP? -->
+                <div class="card" style="margin-bottom:2rem;">
+                    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:1rem;">🤖
+                        Which AI Models Can Use MCPs?</h3>
+                    <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:1.25rem;">MCP was created by
+                        Anthropic and donated to the Linux Foundation in Dec 2025, making it an open standard. All major
+                        AI platforms now support it:</p>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+                        <div
+                            style="padding:1rem;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius-sm);">
+                            <div style="font-weight:600;font-size:0.875rem;color:var(--success);margin-bottom:0.5rem;">✅
+                                Claude (Anthropic)</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);">Native MCP support. First-class
+                                integration in Claude Desktop, Claude Code, and Antigravity.</div>
+                        </div>
+                        <div
+                            style="padding:1rem;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius-sm);">
+                            <div style="font-weight:600;font-size:0.875rem;color:var(--success);margin-bottom:0.5rem;">✅
+                                GPT-4 / ChatGPT (OpenAI)</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);">OpenAI adopted MCP in early 2025.
+                                Supported in Cursor, Windsurf, and API integrations.</div>
+                        </div>
+                        <div
+                            style="padding:1rem;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius-sm);">
+                            <div style="font-weight:600;font-size:0.875rem;color:var(--success);margin-bottom:0.5rem;">✅
+                                Gemini (Google)</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);">Google DeepMind adopted MCP in 2025.
+                                Supported via Gemini API and agent frameworks.</div>
+                        </div>
+                        <div
+                            style="padding:1rem;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius-sm);">
+                            <div style="font-weight:600;font-size:0.875rem;color:var(--success);margin-bottom:0.5rem;">✅
+                                Open Source Models</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);">Llama, Mistral, and others support
+                                MCP via frameworks like LangChain, LlamaIndex, and n8n.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step by Step Setup -->
+                <div class="card">
+                    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:0.5rem;">
+                        ⚙️ How to Set Up an MCP — Step by Step</h3>
+                    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;">Works with Claude Desktop,
+                        Cursor, Windsurf, VS Code + Copilot, and more.</p>
+                    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+                        <div style="display:flex;gap:1rem;align-items:flex-start;">
+                            <div
+                                style="min-width:32px;height:32px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;">
+                                1</div>
+                            <div>
+                                <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.25rem;">Choose Your MCP
+                                    Server</div>
+                                <div style="font-size:0.8rem;color:var(--text-muted);">Browse the <a
+                                        href="https://modelcontextprotocol.io/examples" target="_blank"
+                                        style="color:var(--primary);">official MCP registry</a>, <a
+                                        href="https://glama.ai/mcp/servers" target="_blank"
+                                        style="color:var(--primary);">Glama marketplace</a>, or search GitHub for the
+                                    tool you want to connect (Composio, Firecrawl, Playwright, etc.).</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:flex-start;">
+                            <div
+                                style="min-width:32px;height:32px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;">
+                                2</div>
+                            <div>
+                                <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.25rem;">Get an API Key
+                                </div>
+                                <div style="font-size:0.8rem;color:var(--text-muted);">Most MCPs require an API key from
+                                    the service (e.g., Composio dashboard, Firecrawl.dev). Store it as an environment
+                                    variable — never hardcode it in your config.</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:flex-start;">
+                            <div
+                                style="min-width:32px;height:32px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;">
+                                3</div>
+                            <div>
+                                <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.25rem;">Add to Your AI
+                                    Client Config</div>
+                                <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem;">Every
+                                    MCP-compatible client uses the same JSON format. Add this to your config file:</div>
+                                <div
+                                    style="background:var(--bg-secondary);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:1rem;font-family:monospace;font-size:0.75rem;color:var(--cyan);line-height:1.6;overflow-x:auto;">
+                                    {<br>
+                                    &nbsp;&nbsp;"mcpServers": {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;"composio": {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "npx",<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"args": ["-y", "@composio/mcp@latest"],<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"env": {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"COMPOSIO_API_KEY":
+                                    "YOUR_KEY_HERE"<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;}<br>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:flex-start;">
+                            <div
+                                style="min-width:32px;height:32px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;">
+                                4</div>
+                            <div>
+                                <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.25rem;">Config File
+                                    Locations by Client</div>
+                                <div
+                                    style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem;margin-top:0.5rem;">
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);padding:0.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:5px;">
+                                        <strong style="color:var(--text-secondary);">Claude Desktop</strong><br><span
+                                            style="color:var(--cyan);">~/AppData/Roaming/Claude/claude_desktop_config.json</span>
+                                    </div>
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);padding:0.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:5px;">
+                                        <strong style="color:var(--text-secondary);">Cursor</strong><br><span
+                                            style="color:var(--cyan);">~/.cursor/mcp.json</span>
+                                    </div>
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);padding:0.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:5px;">
+                                        <strong style="color:var(--text-secondary);">VS Code + Copilot</strong><br><span
+                                            style="color:var(--cyan);">.vscode/mcp.json</span>
+                                    </div>
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);padding:0.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:5px;">
+                                        <strong style="color:var(--text-secondary);">Windsurf</strong><br><span
+                                            style="color:var(--cyan);">~/.codeium/windsurf/mcp_config.json</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:flex-start;">
+                            <div
+                                style="min-width:32px;height:32px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;">
+                                5</div>
+                            <div>
+                                <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.25rem;">Restart & Use It
+                                </div>
+                                <div style="font-size:0.8rem;color:var(--text-muted);">Restart your AI client. The new
+                                    tools will appear. Start with read-only access, test with simple prompts, then
+                                    expand permissions as you gain confidence in the agent's behavior.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="margin-top:1.5rem;padding:1rem;background:rgba(79,127,255,0.05);border:1px solid rgba(79,127,255,0.2);border-left:3px solid var(--primary);border-radius:var(--radius-sm);">
+                        <div style="font-size:0.8rem;color:var(--text-secondary);">💡 <strong
+                                style="color:var(--text-primary);">Pro Tip:</strong> Daniel sets up and manages MCP
+                            infrastructure for SMB clients — from Composio multi-app agents to Playwright browser
+                            automation. <a href="book.html" style="color:var(--primary);">Book a call to get yours
+                                configured →</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="guarantee-block reveal" style="margin-top:4rem;">
+                <div class="guarantee-icon">🚀</div>
+                <div class="guarantee-title" style="color:var(--primary);">Want This Built for Your Business?</div>
+                <p
+                    style="font-size:1rem;color:var(--text-secondary);max-width:500px;margin:0 auto 1.5rem;line-height:1.7;">
+                    Every demo you see here is a real tool I've deployed for an SMB client. Book a call to discuss what
+                    would make the biggest difference for your business.</p>
+                <a href="book.html" class="btn btn-primary btn-lg">📅 Book a Free Demo Call →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom"
+                style="justify-content:center;flex-direction:column;gap:0.5rem;text-align:center;">
+                <a href="index.html" class="nav-logo">AIOPS<span>EXPERT</span></a>
+                <span style="color:var(--text-muted);font-size:0.8rem;">© 2026 Daniel Schley · AI Operations
+                    Consulting</span>
+            </div>
+        </div>
+    </footer>
+
+    <div id="chatbot-widget">
+        <div class="chat-panel" id="chat-panel">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
+                <div class="chat-header-info">
+                    <div class="name">Daniel's AI Assistant</div>
+                    <div class="status">● Online</div>
+                </div><button class="chat-close" id="chat-close">✕</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-options" id="chat-options"></div>
+            <div class="chat-input-row"><input type="text" id="chat-input" placeholder="Ask a question..." /><button
+                    class="chat-send" id="chat-send"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg></button></div>
+        </div>
+        <div class="chat-bubble" id="chat-bubble"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg></div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

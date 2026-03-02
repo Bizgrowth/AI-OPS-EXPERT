@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI & Automation Resources for SMBs | AIOPSEXPERT.COM</title>
+    <meta name="description"
+        content="Free AI automation guides, checklists, and articles for small business owners. Get the SMB AI Readiness Checklist plus expert insights from Daniel Schley." />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">AIOPS<span>EXPERT</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="case-studies.html">Results</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="resources.html" style="color:var(--primary);">Resources</a></li>
+                <li><a href="demos.html">Live Demos</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="book.html" class="btn btn-outline btn-sm">📅 Book a Call</a>
+                <a href="ai-readiness.html" class="btn btn-primary btn-sm">Get AI Score →</a>
+            </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html#services">Services</a>
+        <a href="case-studies.html">Results</a>
+        <a href="about.html">About</a>
+        <a href="book.html" class="btn btn-primary" style="margin-top:.5rem;justify-content:center;">📅 Book Free
+            Call</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="container">
+            <div class="label">📚 RESOURCES</div>
+            <h1 class="heading-lg reveal">Free Guides &amp; Insights<br /><span class="text-gradient">For SMB
+                    Owners</span></h1>
+            <p class="reveal">Practical AI automation knowledge — no hype, no jargon. Just what works in the real world.
+            </p>
+        </div>
+    </section>
+
+    <!-- Lead Magnet Featured -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-block reveal" style="margin-bottom:4rem;">
+                <div>
+                    <div class="badge badge-primary" style="margin-bottom:1rem;display:inline-flex;">⭐ MOST POPULAR
+                        RESOURCE</div>
+                    <h2 class="heading-md" style="margin-bottom:1rem;">Get the <span class="text-gradient">SMB AI
+                            Readiness Checklist</span></h2>
+                    <p style="color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.7;">25 questions to
+                        determine if your business is ready for AI automation — and exactly which processes to automate
+                        first. 500+ SMB owners have used this to make smarter AI decisions.</p>
+                    <div class="email-form" id="res-form">
+                        <input type="email" id="res-email" placeholder="your@email.com" />
+                        <button type="button" class="btn btn-primary" onclick="submitResLead()">Get Free Checklist
+                            →</button>
+                    </div>
+                    <ul style="list-style:none;display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;">
+                        <li
+                            style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:0.4rem;align-items:center;">
+                            <span style="color:var(--success);">✓</span> Instant PDF delivery</li>
+                        <li
+                            style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:0.4rem;align-items:center;">
+                            <span style="color:var(--success);">✓</span> No spam</li>
+                        <li
+                            style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:0.4rem;align-items:center;">
+                            <span style="color:var(--success);">✓</span> Unsubscribe anytime</li>
+                    </ul>
+                </div>
+                <div style="text-align:center;">
+                    <div style="font-size:5rem;">📋</div>
+                    <div style="font-weight:700;font-size:1.1rem;margin-top:0.75rem;">25-Point Checklist</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Instant PDF · Free</div>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="section-header" style="margin-top:0;">
+                <div class="label">ARTICLES & GUIDES</div>
+                <h2 class="heading-md">Latest Insights</h2>
+            </div>
+            <div class="grid-3 stagger">
+                <article class="card" style="cursor:pointer;" onclick="">
+                    <div class="badge badge-primary" style="margin-bottom:1rem;display:inline-flex;">Guide</div>
+                    <h3
+                        style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.75rem;line-height:1.4;">
+                        The 5 AI Tools Every SMB Should Deploy in 2026 (And How Much They Cost)</h3>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">From
+                        Claude to n8n — a no-BS breakdown of what actually moves the needle for small businesses under
+                        100 employees.</p>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">⏱ 8 min read · February 2026</div>
+                </article>
+                <article class="card" style="cursor:pointer;">
+                    <div class="badge badge-accent" style="margin-bottom:1rem;display:inline-flex;">Case Study</div>
+                    <h3
+                        style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.75rem;line-height:1.4;">
+                        How a 12-Person Construction Company Saved 22 Hours/Week with AI</h3>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">Full
+                        breakdown of the automations deployed, tools selected, implementation timeline, and ROI achieved
+                        in 45 days.</p>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">⏱ 12 min read · January 2026</div>
+                </article>
+                <article class="card" style="cursor:pointer;">
+                    <div class="badge badge-success" style="margin-bottom:1rem;display:inline-flex;">Tutorial</div>
+                    <h3
+                        style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.75rem;line-height:1.4;">
+                        Build Your First n8n Automation Without Touching Code (Step-by-Step)</h3>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">A
+                        beginner-friendly walkthrough showing how to connect HubSpot, Gmail, and Slack for an automated
+                        lead nurture sequence.</p>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">⏱ 15 min read · January 2026</div>
+                </article>
+                <article class="card" style="cursor:pointer;">
+                    <div class="badge badge-primary" style="margin-bottom:1rem;display:inline-flex;">Guide</div>
+                    <h3
+                        style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.75rem;line-height:1.4;">
+                        AI vs. Automation: What's the Difference and Why It Matters for Your Budget</h3>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">Most
+                        SMB owners confuse AI with automation. Understanding the difference saves you thousands and
+                        months of wasted effort.</p>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">⏱ 6 min read · December 2025</div>
+                </article>
+                <article class="card" style="cursor:pointer;">
+                    <div class="badge"
+                        style="background:rgba(0,212,255,0.1);color:var(--cyan);border-color:rgba(0,212,255,0.3);margin-bottom:1rem;display:inline-flex;">
+                        Checklist</div>
+                    <h3
+                        style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.75rem;line-height:1.4;">
+                        10 Signs Your Business is Ready for AI (And 5 Signs It Isn't)</h3>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">Before
+                        you spend a dollar on AI tools, answer these 15 brutally honest questions about your current
+                        operational maturity.</p>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">⏱ 5 min read · December 2025</div>
+                </article>
+                <article class="card" style="cursor:pointer;">
+                    <div class="badge badge-accent" style="margin-bottom:1rem;display:inline-flex;">Deep Dive</div>
+                    <h3
+                        style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.75rem;line-height:1.4;">
+                        The COO's Guide to AI Governance: Keeping Your Business Safe While Scaling Fast</h3>
+                    <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">Data
+                        privacy, vendor risk, AI bias — what SMB owners need to know about governance before they scale
+                        their AI stack.</p>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">⏱ 18 min read · November 2025</div>
+                </article>
+            </div>
+
+            <div style="text-align:center;margin-top:2.5rem;">
+                <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:1rem;">Subscribe to get new guides
+                    delivered to your inbox monthly.</p>
+                <div class="email-form" style="max-width:420px;margin:0 auto;" id="sub-form">
+                    <input type="email" id="sub-email" placeholder="your@email.com" />
+                    <button type="button" class="btn btn-outline" onclick="submitSub()">Subscribe →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom"
+                style="justify-content:center;flex-direction:column;gap:0.5rem;text-align:center;">
+                <a href="index.html" class="nav-logo">AIOPS<span>EXPERT</span></a>
+                <span style="color:var(--text-muted);font-size:0.8rem;">© 2026 Daniel Schley · AI Operations
+                    Consulting</span>
+            </div>
+        </div>
+    </footer>
+
+    <div id="chatbot-widget">
+        <div class="chat-panel" id="chat-panel">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
+                <div class="chat-header-info">
+                    <div class="name">Daniel's AI Assistant</div>
+                    <div class="status">● Online</div>
+                </div><button class="chat-close" id="chat-close">✕</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-options" id="chat-options"></div>
+            <div class="chat-input-row"><input type="text" id="chat-input" placeholder="Ask a question..." /><button
+                    class="chat-send" id="chat-send"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg></button></div>
+        </div>
+        <div class="chat-bubble" id="chat-bubble"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg></div>
+    </div>
+    <script>
+        function submitResLead() {
+            const email = document.getElementById('res-email').value;
+            if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+            document.getElementById('res-form').innerHTML = '<div style="text-align:center;padding:1rem;"><span style="color:var(--success);font-size:1.5rem;">✅</span> <strong style="display:block;margin:.5rem 0;">Checklist Sent!</strong><span style="font-size:.85rem;color:var(--text-secondary);">Check your inbox.</span></div>';
+        }
+        function submitSub() {
+            const email = document.getElementById('sub-email').value;
+            if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+            document.getElementById('sub-form').innerHTML = '<p style="text-align:center;color:var(--success);">✅ Subscribed! You\'ll hear from me monthly.</p>';
+        }
+    </script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIOPSEXPERT.COM — AI Automation Consultant for SMBs | Daniel Schley</title>
+  <meta name="description"
+    content="I help small businesses automate operations and cut overhead 30%+ in 90 days—or you don't pay. Book a free AI Readiness Assessment with Daniel Schley, COO-turned-AI consultant." />
+  <meta property="og:title" content="AIOPSEXPERT.COM — AI Consultant for SMBs" />
+  <meta property="og:description"
+    content="20-year COO turned AI expert. 90-day ROI guarantee. Book a free assessment." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://aiopsexpert.com/og-image.jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="main-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AIOPS<span>EXPERT</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="case-studies.html">Results</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="demos.html">Live Demos</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="book.html" class="btn btn-outline btn-sm">📅 Book a Call</a>
+        <a href="ai-readiness.html" class="btn btn-primary btn-sm">Get AI Score →</a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="case-studies.html">Results</a>
+    <a href="about.html">About</a>
+    <a href="resources.html">Resources</a>
+    <a href="demos.html">Live Demos</a>
+    <a href="book.html" class="btn btn-primary" style="margin-top:.5rem;justify-content:center;">📅 Book Free Call</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-section">
+    <!-- Fullscreen background video -->
+    <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
+      <source src="hero-video.mp4.mp4" type="video/mp4" />
+    </video>
+    <!-- Dark gradient overlay so text stays readable -->
+    <div class="hero-video-overlay"></div>
+    <!-- Neural canvas particles float on top of video -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Background blobs -->
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+
+    <div class="container z-1" style="position:relative;padding-top:5rem;padding-bottom:5rem;">
+      <div style="text-align:center;max-width:900px;margin:0 auto;">
+
+        <div class="label" style="margin-bottom:2rem;">
+          ✦ 20-Year COO · AI Operations Expert · Jacksonville, FL
+        </div>
+
+        <h1 class="heading-xl" style="margin-bottom:1.5rem;">
+          I Help SMBs<br />
+          <span class="text-gradient">Automate Operations</span><br />
+          &amp; Cut Overhead <span style="color:var(--cyan);">30%+</span><br />
+          in 90 Days
+        </h1>
+
+        <p style="font-size:1.2rem;color:var(--text-secondary);max-width:600px;margin:0 auto 1rem;">
+          — or you don't pay.
+        </p>
+
+        <p style="font-size:1rem;color:var(--text-muted);max-width:580px;margin:0 auto 2.5rem;line-height:1.7;">
+          I'm not a tech person who learned business. I'm a 20-year business executive who mastered AI.
+          I know what ROI actually means because I've had to hit it.
+        </p>
+
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;">
+          <a href="ai-readiness.html" class="btn btn-primary btn-lg">
+            🎯 Get Your Free AI Readiness Score
+          </a>
+          <a href="book.html" class="btn btn-outline btn-lg">
+            📅 Book a 15-Min Call
+          </a>
+        </div>
+
+        <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text-secondary);">
+            <span style="color:var(--success);">✓</span> 90-Day ROI Guarantee
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text-secondary);">
+            <span style="color:var(--success);">✓</span> $265M+ Scaled Operations
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text-secondary);">
+            <span style="color:var(--success);">✓</span> Free Discovery Call
+          </div>
+        </div>
+
+        <!-- ===== CIRCULAR VIDEO TRIGGER ===== -->
+        <div style="margin-top:3rem;">
+          <button class="video-trigger-btn" id="video-trigger" aria-label="Play personal message from Daniel">
+            <div class="video-trigger-ring">
+              <img src="background.png" alt="Daniel Schley" class="video-trigger-photo" />
+              <div class="video-play-icon">▶</div>
+            </div>
+            <div class="video-trigger-label">
+              <span class="video-trigger-title">Personal Message from Daniel</span>
+              <span class="video-trigger-sub">See how businesses are transforming with AI</span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO MODAL ===== -->
+  <div class="video-modal-overlay" id="video-modal" role="dialog" aria-modal="true"
+    aria-label="Daniel's personal message video">
+    <div class="video-modal-inner">
+      <button class="video-modal-close" id="video-modal-close" aria-label="Close video">✕</button>
+      <video class="video-modal-player" id="personal-video" controls playsinline>
+        <source src="Pro (4).mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+
+
+  <!-- ===== TOOL MARQUEE ===== -->
+  <section class="section-sm"
+    style="padding:3rem 0;border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);">
+    <div class="container" style="margin-bottom:1.5rem;">
+      <p
+        style="text-align:center;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);font-weight:600;">
+        TOOLS I DEPLOY FOR CLIENTS
+      </p>
+    </div>
+    <div class="marquee-wrapper">
+      <div class="marquee-track">
+        <!-- Claude AI -->
+        <div class="logo-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg"
+            alt="Claude AI" /><span>Claude AI</span></div>
+        <!-- ChatGPT / OpenAI -->
+        <div class="logo-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+            alt="ChatGPT" /><span>ChatGPT</span></div>
+        <!-- Google Gemini -->
+        <div class="logo-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"
+            alt="Gemini" /><span>Gemini</span></div>
+        <!-- n8n -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n" /><span>n8n</span></div>
+        <!-- Make / Integromat -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/make/6D00CC" alt="Make.com" /><span>Make.com</span>
+        </div>
+        <!-- Zapier -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/zapier/FF4A00" alt="Zapier" /><span>Zapier</span>
+        </div>
+        <!-- HubSpot -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/hubspot/FF7A59"
+            alt="HubSpot" /><span>HubSpot</span></div>
+        <!-- Airtable -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/airtable/18BFFF"
+            alt="Airtable" /><span>Airtable</span></div>
+        <!-- Notion -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" /><span>Notion</span>
+        </div>
+        <!-- Slack -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/slack/4A154B" alt="Slack" /><span>Slack</span>
+        </div>
+        <!-- Microsoft Copilot -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/microsoft/00A4EF"
+            alt="Microsoft Copilot" /><span>MS Copilot</span></div>
+        <!-- Google Workspace -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/google/4285F4"
+            alt="Google Workspace" /><span>Google Workspace</span></div>
+        <!-- Shopify -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/shopify/96BF48"
+            alt="Shopify" /><span>Shopify</span></div>
+        <!-- QuickBooks -->
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/intuit/2CA01C"
+            alt="QuickBooks" /><span>QuickBooks</span></div>
+
+        <!-- === DUPLICATE FOR SEAMLESS LOOP === -->
+        <div class="logo-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg"
+            alt="Claude AI" /><span>Claude AI</span></div>
+        <div class="logo-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+            alt="ChatGPT" /><span>ChatGPT</span></div>
+        <div class="logo-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"
+            alt="Gemini" /><span>Gemini</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n" /><span>n8n</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/make/6D00CC" alt="Make.com" /><span>Make.com</span>
+        </div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/zapier/FF4A00" alt="Zapier" /><span>Zapier</span>
+        </div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/hubspot/FF7A59"
+            alt="HubSpot" /><span>HubSpot</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/airtable/18BFFF"
+            alt="Airtable" /><span>Airtable</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" /><span>Notion</span>
+        </div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/slack/4A154B" alt="Slack" /><span>Slack</span>
+        </div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/microsoft/00A4EF"
+            alt="Microsoft Copilot" /><span>MS Copilot</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/google/4285F4"
+            alt="Google Workspace" /><span>Google Workspace</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/shopify/96BF48"
+            alt="Shopify" /><span>Shopify</span></div>
+        <div class="logo-chip"><img src="https://cdn.simpleicons.org/intuit/2CA01C"
+            alt="QuickBooks" /><span>QuickBooks</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROOF METRICS ===== -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="metrics-strip">
+        <div class="metric-item">
+          <div class="metric-number" data-counter="30" data-suffix="%+" id="m1">0%</div>
+          <div class="metric-label">Average overhead cost reduction</div>
+        </div>
+        <div class="metric-item"
+          style="border-left:2px solid var(--glass-border);border-right:2px solid var(--glass-border);">
+          <div class="metric-number" data-counter="35" data-suffix="+ hrs" id="m2">0 hrs</div>
+          <div class="metric-label">Saved per week per client</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-number" data-counter="90" data-suffix="%" id="m3">0%</div>
+          <div class="metric-label">Error reduction via automation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">SERVICES</div>
+        <h2 class="heading-lg">Stop Managing. <span class="text-gradient">Start Scaling.</span></h2>
+        <p>Five focused services. Each one designed to deliver measurable ROI in 90 days or less.</p>
+      </div>
+      <div class="grid-3 stagger" id="services-grid">
+        <!-- Card 1 -->
+        <a href="ai-readiness.html" class="card" style="text-decoration:none;cursor:default;">
+          <div style="font-size:2rem;margin-bottom:1rem;">🎯</div>
+          <h3 class="heading-sm" style="margin-bottom:0.75rem;">AI Readiness Assessment</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;">
+            10-page custom report revealing exactly where AI can save you time and money. The roadmap every SMB needs
+            before investing a dollar in AI.
+          </p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:700;">$500</span>
+            <span class="badge badge-primary">Most Popular</span>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="ai-development.html" class="card" style="text-decoration:none;cursor:default;">
+          <div style="font-size:2rem;margin-bottom:1rem;">⚙️</div>
+          <h3 class="heading-sm" style="margin-bottom:0.75rem;">AI Development &amp; Custom Builds</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;">
+            Custom AI tools, chatbots, and automation pipelines built specifically for your business — not cookie-cutter
+            off-the-shelf software.
+          </p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:700;">$2,500</span>
+            <span class="badge badge-accent">High ROI</span>
+          </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="automation.html" class="card" style="text-decoration:none;cursor:default;">
+          <div style="font-size:2rem;margin-bottom:1rem;">🔗</div>
+          <h3 class="heading-sm" style="margin-bottom:0.75rem;">Automation Integration</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;">
+            Connect your tech stack using n8n, Make, and Zapier. Eliminate manual handoffs. Build workflows that run
+            24/7 without your team lifting a finger.
+          </p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:700;">$2,500+</span>
+            <span class="badge badge-success">Fast Results</span>
+          </div>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="ai-ops.html" class="card" style="text-decoration:none;cursor:default;">
+          <div style="font-size:2rem;margin-bottom:1rem;">🏭</div>
+          <h3 class="heading-sm" style="margin-bottom:0.75rem;">AI Operations</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;">
+            End-to-end AI deployment across your entire business. KPI dashboards, SOPs, AI governance, team training.
+            Full operational transformation.
+          </p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:700;">$5K–$10K</span>
+            <span class="badge badge-primary">Premium</span>
+          </div>
+        </a>
+
+        <!-- Card 5 -->
+        <a href="ai-social.html" class="card" style="text-decoration:none;cursor:default;">
+          <div style="font-size:2rem;margin-bottom:1rem;">📱</div>
+          <h3 class="heading-sm" style="margin-bottom:0.75rem;">AI Social Media Management</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;">
+            Content engine + scheduling + engagement — all automated. Stop spending 15 hours a week on social. Let AI
+            run your brand presence.
+          </p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:700;">$1,500/mo</span>
+            <span class="badge badge-accent">Retainer</span>
+          </div>
+        </a>
+
+        <!-- Card 6 - Calendly CTA -->
+        <div class="card"
+          style="background:linear-gradient(135deg,rgba(79,127,255,0.1),rgba(124,58,237,0.1));border-color:rgba(79,127,255,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem;">
+          <div style="font-size:2.5rem;">🚀</div>
+          <h3 class="heading-sm">Not Sure Where to Start?</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);">Let's talk for 15 minutes. No pitch, just a real
+            conversation about your biggest bottleneck.</p>
+          <a href="book.html" class="btn btn-primary">Book Free Discovery Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ROI CALCULATOR ===== -->
+  <section class="section" id="roi-calculator">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">💰 ROI CALCULATOR</div>
+        <h2 class="heading-lg">How Much Can You Save?</h2>
+        <p>Input your numbers and see your personalized AI automation savings estimate.</p>
+      </div>
+      <div class="calc-container reveal">
+        <form id="roi-calc">
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label>Number of Employees</label>
+              <input type="range" id="calc-employees" min="1" max="100" value="10" step="1" />
+              <div class="flex justify-between" style="font-size:0.8rem;color:var(--text-muted);">
+                <span>1</span>
+                <span class="range-value"><span id="emp-slider-val">10</span> employees</span>
+                <span>100</span>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Hours/Week on Manual Tasks</label>
+              <input type="range" id="calc-hours-manual" min="2" max="80" value="20" step="1" />
+              <div class="flex justify-between" style="font-size:0.8rem;color:var(--text-muted);">
+                <span>2</span>
+                <span class="range-value"><span id="hrs-slider-val">20</span> hrs/week</span>
+                <span>80</span>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Average Hourly Labor Rate</label>
+              <input type="range" id="calc-rate" min="10" max="150" value="25" step="5" />
+              <div class="flex justify-between" style="font-size:0.8rem;color:var(--text-muted);">
+                <span>$10</span>
+                <span class="range-value"><span id="rate-slider-val">$25</span>/hr</span>
+                <span>$150</span>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Industry</label>
+              <select id="calc-industry">
+                <option value="retail">Retail / E-Commerce</option>
+                <option value="services">Professional Services</option>
+                <option value="healthcare">Healthcare / Wellness</option>
+                <option value="restaurants">Restaurants / F&amp;B</option>
+                <option value="construction">Construction / Trades</option>
+                <option value="realestate">Real Estate</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-result reveal-scale">
+            <div class="result-box">
+              <div class="result-num" id="calc-savings">$0</div>
+              <p>Estimated Monthly Savings</p>
+            </div>
+            <div class="result-box">
+              <div class="result-num" id="calc-hours">0 hrs</div>
+              <p>Hours Saved Per Week</p>
+            </div>
+          </div>
+          <div
+            style="margin-top:1rem;padding:1rem;background:rgba(79,127,255,0.06);border-radius:var(--radius-md);border-left:3px solid var(--primary);">
+            <p style="font-size:0.85rem;color:var(--text-secondary);">
+              📊 <strong style="color:var(--text-primary);">Annual ROI Potential: <span id="calc-roi"
+                  style="color:var(--primary);">$0</span></strong> — based on 70% automation coverage of manual tasks at
+              your specified rate.
+            </p>
+          </div>
+        </form>
+        <div style="text-align:center;margin-top:2rem;">
+          <a href="book.html" class="btn btn-primary btn-lg">🎯 Get My Personalized ROI Report →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">MY PROCESS</div>
+        <h2 class="heading-lg">From Assessment to <span class="text-gradient">Automation in 90 Days</span></h2>
+      </div>
+      <div class="process-steps reveal">
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <div class="step-title">AI Readiness Audit</div>
+          <div class="step-desc">I map your entire operation — workflow by workflow — to identify where AI can save the
+            most time and money first.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <div class="step-title">Custom Roadmap</div>
+          <div class="step-desc">You receive a 10-page report with a prioritized, implementation-ready AI roadmap.
+            Specific tools, timelines, and projected ROI.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <div class="step-title">Build &amp; Deploy</div>
+          <div class="step-desc">I handle the entire implementation — automations, AI tools, integrations, dashboards.
+            Your team just shows up on training day.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">04</div>
+          <div class="step-title">Optimize &amp; Scale</div>
+          <div class="step-desc">Track KPIs, identify new opportunities, and continuously improve. Ongoing retainer
+            options available for maximum results.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section" id="results">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">CLIENT RESULTS</div>
+        <h2 class="heading-lg">Businesses <span class="text-gradient">Transformed</span></h2>
+        <p>Real before/after outcomes from SMBs just like yours.</p>
+      </div>
+      <div class="grid-3 stagger">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-quote">"Before working with Daniel, we spent 18 hours/week on manual reporting across
+            three locations. Now it's 45 minutes — completely automated. We're also saving $14,000/month in labor costs
+            we didn't even realize we had."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JR</div>
+            <div>
+              <div class="author-name">James R.</div>
+              <div class="author-role">CEO, Multi-Location Retail Chain · Jacksonville, FL</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-quote">"I was skeptical AI could work for a 12-person construction company. Daniel
+            proved me wrong in week 3. Our scheduling is automated, invoicing runs itself, and we landed 2 new contracts
+            because our team has time to actually sell."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,#00d4ff,#7c3aed);">MC</div>
+            <div>
+              <div class="author-name">Mike C.</div>
+              <div class="author-role">Owner, Precision Construction Group · Orlando, FL</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-quote">"Our social media was killing us — 20 hours a week of our team's time with
+            mediocre results. Daniel's AI social system now creates, schedules, and posts for us. Engagement is up 340%
+            and we haven't touched it in 6 weeks."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,#d946ef,#4f7fff);">SR</div>
+            <div>
+              <div class="author-name">Sarah R.</div>
+              <div class="author-role">Founder, Bloom Wellness Spa Chain · Tampa, FL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href="case-studies.html" class="btn btn-ghost">View All Case Studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">TRANSPARENT PRICING</div>
+        <h2 class="heading-lg">No Ambiguity. No Surprises.</h2>
+        <p>SMBs hate hidden costs. Every package has clear deliverables, timelines, and pricing.</p>
+      </div>
+      <div class="pricing-grid reveal">
+        <div class="pricing-card">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-price">$500</div>
+          <div class="pricing-desc">AI Readiness Assessment — the essential first step</div>
+          <ul class="pricing-features">
+            <li>Full operational audit</li>
+            <li>10-page custom report</li>
+            <li>AI implementation roadmap</li>
+            <li>90-min strategy session</li>
+            <li>Tool stack recommendation</li>
+          </ul>
+          <a href="ai-readiness.html" class="btn btn-outline w-full" style="justify-content:center;">Start Here →</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge">⭐ Most Popular</div>
+          <div class="pricing-name">Builder</div>
+          <div class="pricing-price">$2,500</div>
+          <div class="pricing-desc">1 complete automation build + team training</div>
+          <ul class="pricing-features">
+            <li>Everything in Starter</li>
+            <li>1 custom automation built</li>
+            <li>Tool integration (n8n/Make)</li>
+            <li>Team training session</li>
+            <li>30-day post-launch support</li>
+          </ul>
+          <a href="ai-development.html" class="btn btn-primary w-full" style="justify-content:center;">Get Started →</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">Operator</div>
+          <div class="pricing-price">$5K–$10K</div>
+          <div class="pricing-desc">Full AI operations deployment across your business</div>
+          <ul class="pricing-features">
+            <li>End-to-end AI deployment</li>
+            <li>3–5 automations built</li>
+            <li>KPI dashboard + reporting</li>
+            <li>AI governance framework</li>
+            <li>Full team training</li>
+          </ul>
+          <a href="ai-ops.html" class="btn btn-outline w-full" style="justify-content:center;">Learn More →</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">Retainer</div>
+          <div class="pricing-price">$1,500<span
+              style="font-size:1rem;color:var(--text-secondary);font-weight:400;">/mo</span></div>
+          <div class="pricing-desc">Ongoing AI management + optimization</div>
+          <ul class="pricing-features">
+            <li>Monthly strategy session</li>
+            <li>Continuous optimization</li>
+            <li>Priority support</li>
+            <li>New automation builds</li>
+            <li>Performance reporting</li>
+          </ul>
+          <a href="book.html" class="btn btn-outline w-full" style="justify-content:center;">Book a Call →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GUARANTEE ===== -->
+  <section class="section-sm" id="guarantee">
+    <div class="container">
+      <div class="guarantee-block reveal-scale">
+        <div class="guarantee-icon">🛡️</div>
+        <div class="guarantee-title">90-Day ROI Guarantee</div>
+        <p style="font-size:1.1rem;color:var(--text-secondary);max-width:600px;margin:0 auto 1.5rem;line-height:1.7;">
+          If we don't deliver measurable ROI within 90 days of implementation — <strong
+            style="color:var(--text-primary);">you don't pay.</strong> No fine print. No exceptions. I stand behind
+          every engagement with a full money-back guarantee.
+        </p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">
+          Because I know what it takes to hit numbers. That's 20 years of operational accountability talking.
+        </p>
+        <a href="book.html" class="btn btn-primary btn-lg">Book with Confidence →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOOL STACK ===== -->
+  <section class="section" id="stack">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">TOOL STACK</div>
+        <h2 class="heading-md">The Platforms I Deploy</h2>
+        <p>Fluent in the tools that actually run SMB businesses in 2026.</p>
+      </div>
+      <div class="tool-stack-grid reveal">
+        <div class="tool-badge">🤖 Claude AI</div>
+        <div class="tool-badge">💬 ChatGPT</div>
+        <div class="tool-badge">✨ Gemini</div>
+        <div class="tool-badge">🔵 Microsoft Copilot</div>
+        <div class="tool-badge">🔗 n8n</div>
+        <div class="tool-badge">⚙️ Make (Integromat)</div>
+        <div class="tool-badge">⚡ Zapier</div>
+        <div class="tool-badge">🟠 HubSpot</div>
+        <div class="tool-badge">🟦 Airtable</div>
+        <div class="tool-badge">💬 Slack</div>
+        <div class="tool-badge">📓 Notion</div>
+        <div class="tool-badge">🔷 Google Workspace</div>
+        <div class="tool-badge">🟣 Microsoft 365</div>
+        <div class="tool-badge">💻 Replit</div>
+        <div class="tool-badge">⚡ Bolt.new</div>
+        <div class="tool-badge">🌐 Netlify</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEAD MAGNET ===== -->
+  <section class="section" id="resources">
+    <div class="container">
+      <div class="cta-block reveal">
+        <div>
+          <div class="label" style="margin-bottom:1.25rem;">FREE RESOURCE</div>
+          <h2 class="heading-md" style="margin-bottom:1rem;">
+            Get the <span class="text-gradient">SMB AI Readiness Checklist</span>
+          </h2>
+          <p style="color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.7;">
+            25 questions to determine if your business is ready for AI automation — and exactly which processes to
+            automate first. Used by 500+ SMB owners.
+          </p>
+          <div class="email-form" id="lead-form">
+            <input type="email" id="lead-email" placeholder="your@email.com" />
+            <button type="button" class="btn btn-primary" onclick="submitLead()">Get Free Checklist →</button>
+          </div>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;">No spam. Unsubscribe anytime.
+            Delivered instantly.</p>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:6rem;line-height:1;">📋</div>
+          <div
+            style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.25rem;margin-top:1rem;color:var(--text-primary);">
+            25-Point Checklist</div>
+          <div style="font-size:0.85rem;color:var(--text-secondary);">Instant PDF Download</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="label">FAQ</div>
+        <h2 class="heading-lg">Common Questions</h2>
+      </div>
+      <div style="max-width:780px;margin:0 auto;" class="reveal">
+        <div class="faq-item">
+          <div class="faq-question">
+            What makes you different from other AI consultants?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Most AI consultants have a tech background and learned business later. I'm the opposite — 20 years as a
+              COO scaling companies to $265M+, then I mastered AI tools because I needed them to do my job better. I
+              understand P&L, operational constraints, and what it means to actually hit a ROI target. I don't just
+              advise — I build and deploy.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How does the 90-day guarantee work?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Simple: if your AI implementations don't produce measurable ROI within 90 days of going live — whether
+              that's time saved, costs reduced, or revenue generated — I refund 100% of my fee. We define success
+              metrics together upfront, so there's no ambiguity. I've never had to issue a refund.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Do I need to be tech-savvy to work with you?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Absolutely not. I've built AI systems for restaurant owners, contractors, spa managers — none of them were
+              technical. I handle every technical aspect from start to finish. You just need to understand your business
+              well (which you already do) and be willing to adopt new workflows.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How long does a typical engagement take?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The AI Readiness Assessment takes 1–2 weeks. A full automation build is typically 2–4 weeks. Full AI
+              Operations deployment runs 6–10 weeks. Everything is planned upfront with clear milestones so you always
+              know exactly where we stand.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Can you work with my existing software (QuickBooks, Shopify, etc.)?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes — almost certainly. I specialize in connecting disparate software systems using integration platforms
+              like n8n, Make, and Zapier. Whether you're on QuickBooks, Shopify, Square, Mindbody, or industry-specific
+              software, there's almost always a way to automate the handoffs and eliminate manual data entry.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Do you offer ongoing support after implementation?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. All project engagements include 30 days of post-launch support. For clients who want ongoing
+              optimization, monitoring, and new automation builds, I offer a monthly retainer at $1,500/month that
+              includes a strategy session, performance reporting, and priority access to my team.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="section"
+    style="background:linear-gradient(135deg,rgba(79,127,255,0.05),rgba(124,58,237,0.05));border-top:1px solid var(--glass-border);">
+    <div class="container" style="text-align:center;">
+      <div class="reveal">
+        <div class="label" style="margin-bottom:1.5rem;">READY TO START?</div>
+        <h2 class="heading-lg" style="margin-bottom:1rem;">
+          Let's Build Something <span class="text-gradient">Intelligent Together</span>
+        </h2>
+        <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 2.5rem;line-height:1.7;">
+          15 minutes. No pitch. Just a real conversation about what's slowing your business down — and what AI can do
+          about it.
+        </p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="book.html" class="btn btn-primary btn-lg">📅 Book My Free Call →</a>
+          <a href="ai-readiness.html" class="btn btn-ghost btn-lg">Get AI Readiness Score</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">AIOPS<span>EXPERT</span></a>
+          <p>AI operations consulting for small and medium businesses. 20-year COO background. 90-day ROI guarantee.
+            Based in Jacksonville, FL — serving clients nationwide.</p>
+          <div class="footer-social">
+            <a href="https://linkedin.com" class="social-link" title="LinkedIn">in</a>
+            <a href="https://twitter.com" class="social-link" title="Twitter/X">𝕏</a>
+            <a href="https://upwork.com" class="social-link" title="Upwork">U</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="ai-readiness.html">AI Readiness Assessment</a></li>
+            <li><a href="ai-development.html">AI Development</a></li>
+            <li><a href="automation.html">Automation Integration</a></li>
+            <li><a href="ai-ops.html">AI Operations</a></li>
+            <li><a href="ai-social.html">AI Social Media</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Daniel</a></li>
+            <li><a href="case-studies.html">Case Studies</a></li>
+            <li><a href="demos.html">Live Demos</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="book.html">Book a Call</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="book.html">📅 Book Free Call</a></li>
+            <li><a href="ai-readiness.html">🎯 Get AI Score</a></li>
+            <li><a href="#resources">📋 Free Checklist</a></li>
+            <li><a href="mailto:daniel@aiopsexpert.com">✉️ Email Daniel</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 AIOPSEXPERT.COM — Daniel Schley. All rights reserved.</span>
+        <span>Jacksonville, FL · Serving SMBs Nationwide</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT WIDGET ===== -->
+  <div id="chatbot-widget">
+    <div class="chat-panel" id="chat-panel">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info">
+          <div class="name">Daniel's AI Assistant</div>
+          <div class="status">● Online — typically replies instantly</div>
+        </div>
+        <button class="chat-close" id="chat-close">✕</button>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-options" id="chat-options"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Type a question..." />
+        <button class="chat-send" id="chat-send">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="chat-bubble" id="chat-bubble" title="Chat with Daniel's AI Assistant">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    function submitLead() {
+      const email = document.getElementById('lead-email').value;
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      document.getElementById('lead-form').innerHTML = `
+    <div style="text-align:center;padding:1.5rem;">
+      <div style="font-size:2rem;margin-bottom:0.75rem;">✅</div>
+      <div style="font-weight:700;color:var(--success);margin-bottom:0.5rem;">Checklist Sent!</div>
+      <div style="font-size:0.85rem;color:var(--text-secondary);">Check your inbox for the SMB AI Readiness Checklist.</div>
+    </div>
+  `;
+    }
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
