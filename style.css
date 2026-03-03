@@ -759,7 +759,7 @@ h6 {
 .marquee-track {
   display: flex;
   gap: 3rem;
-  animation: marquee 25s linear infinite;
+  animation: marquee 50s linear infinite;
   width: max-content;
 }
 
