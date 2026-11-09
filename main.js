@@ -1,5 +1,5 @@
 /* ============================================
-   AIOPSEXPERT.COM — Main JavaScript
+   MAXAIPROS.COM — Main JavaScript
    ============================================ */
 
 // ---- Custom Cursor ----
